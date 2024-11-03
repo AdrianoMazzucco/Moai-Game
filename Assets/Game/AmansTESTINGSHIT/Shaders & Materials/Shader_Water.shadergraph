@@ -676,7 +676,7 @@
     "m_ObjectId": "215415943d02410d8d1c07d66ac8e492",
     "m_Title": "UnderWater",
     "m_Position": {
-        "x": -1350.0,
+        "x": -1350.0001220703125,
         "y": 414.0
     }
 }
@@ -1001,8 +1001,8 @@
     "m_ObjectId": "4469c97ec80b482db6fa05cd3ab0300f",
     "m_Title": "Horizon",
     "m_Position": {
-        "x": -2394.0,
-        "y": 77.0
+        "x": -2394.000244140625,
+        "y": 76.99996948242188
     }
 }
 
@@ -1256,7 +1256,7 @@
     "m_SlotType": 0,
     "m_Hidden": false,
     "m_ShaderOutputName": "_RefractionScale",
-    "m_StageCapability": 3,
+    "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
@@ -1806,8 +1806,8 @@
     "m_ObjectId": "78f9fffa82ac4947847dbe4419ae14fc",
     "m_Title": "Depth Color",
     "m_Position": {
-        "x": -2077.0,
-        "y": -658.0
+        "x": -2077.000244140625,
+        "y": -658.0000610351563
     }
 }
 
@@ -2582,7 +2582,7 @@
     "m_SlotType": 0,
     "m_Hidden": false,
     "m_ShaderOutputName": "_RefractionStrength",
-    "m_StageCapability": 3,
+    "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
@@ -2696,7 +2696,7 @@
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "OutVector4",
-    "m_StageCapability": 3,
+    "m_StageCapability": 2,
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -2721,7 +2721,7 @@
     "m_SlotType": 0,
     "m_Hidden": false,
     "m_ShaderOutputName": "_RefractionSpeed",
-    "m_StageCapability": 3,
+    "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
