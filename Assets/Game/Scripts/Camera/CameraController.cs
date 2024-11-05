@@ -8,6 +8,10 @@ public class FreeLookCameraController : MonoBehaviour
     public CinemachineFreeLook[] freeLookCameras; // Assign the 4 Cinemachine FreeLook cameras in the Inspector
     public float yAxisScrollSpeed = 0.1f; // Speed at which to adjust the Y Axis
 
+    [Header("Camera Targets")]
+    public Transform followTarget; // The target the cameras should follow
+    public Transform lookAtTarget; // The target the cameras should look at
+
     private int currentCameraIndex = 0;
     private InputAction lookAction;
 
@@ -25,6 +29,16 @@ public class FreeLookCameraController : MonoBehaviour
         else
         {
             Debug.LogError("Look action not found in the Player action map.");
+        }
+
+        // Assign Follow and LookAt targets to each FreeLook camera
+        foreach (var camera in freeLookCameras)
+        {
+            if (camera != null)
+            {
+                camera.Follow = followTarget;
+                camera.LookAt = lookAtTarget;
+            }
         }
 
         // Initialize by setting the first camera as active
