@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BoxHealth : MonoBehaviour
+public class DestructableRockStats : MonoBehaviour
 {
     public int currentHealth = 100;
     public int maxHealth = 100;
@@ -28,6 +28,8 @@ public class BoxHealth : MonoBehaviour
             }
         }
     }
+
+    
 
     public void TakeDamage(int amount)
     {
