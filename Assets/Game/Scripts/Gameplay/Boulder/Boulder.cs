@@ -13,7 +13,7 @@ public class Boulder : MonoBehaviour
 
     private int _currentHealth;
 
-    private Enums.Attacktype lastAttacktype;
+    private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
     #endregion
 
@@ -71,4 +71,17 @@ public class Boulder : MonoBehaviour
     
         
     #endregion
+    
+    
+    //TODO: REMOVE THIS
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("YES");
+        if (collision.gameObject == GameManager.Instance.playerGameObject)
+        {
+            Debug.Log("YES");
+            Shatter();
+        }
+    }
 }

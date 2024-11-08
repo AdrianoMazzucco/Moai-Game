@@ -150,6 +150,10 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            
+            //TODO: I ADDED THIS
+
+            GameManager.Instance.playerGameObject = this.gameObject;
         }
 
         private void Update()
