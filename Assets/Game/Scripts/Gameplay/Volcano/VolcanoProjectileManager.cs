@@ -9,7 +9,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables
 
-   
+    [SerializeField] private float BurstCount = 2f;
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float projectileAirTime;
     [SerializeField] private float innerRadius = 75f;
@@ -39,7 +39,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     #endregion
 
-    #region Coroutines
+    #region Coroutines and Invokes
 
     IEnumerator FirePojectile()
     {
@@ -49,19 +49,25 @@ public class VolcanoProjectileManager : MonoBehaviour
         while (true)
         {
             yield return waitTime;
-            Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
-            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
-            endPos = new Vector3(direction.x + transform.position.x,
-                0,
-                direction.y + transform.position.z);
-            endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
-            
-            projectile.transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime);
 
+            for (int i = 0; i < BurstCount; i++)
+            {
+                 
+                Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
+                projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+                endPos = new Vector3(direction.x + transform.position.x,
+                    0,
+                    direction.y + transform.position.z);
+                endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+
+                projectile.transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime);
+                GameObject g =  GameManager.Instance.DecalPool.GetObject(endPos);
+                StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
+            }
+           
             
 
         }
     }
-
     #endregion
 }

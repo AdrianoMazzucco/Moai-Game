@@ -14,7 +14,9 @@ public class Boulder : MonoBehaviour
     private int _currentHealth;
     private Collider _collider;
     private Rigidbody _rigidbody;
-
+    
+    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private BoxCollider _triggerCollider;
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
     #endregion
@@ -47,6 +49,11 @@ public class Boulder : MonoBehaviour
     
     
     #region Unity
+
+    private void OnEnable()
+    {
+        _triggerCollider.enabled = true;
+    }
 
     private void Start()
     {
@@ -86,6 +93,16 @@ public class Boulder : MonoBehaviour
         {
             Debug.Log("YES");
             Shatter();
+        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            _triggerCollider.enabled = false;
+            _particleSystem.Play();
         }
     }
 }

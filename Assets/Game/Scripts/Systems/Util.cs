@@ -1,3 +1,5 @@
+using System.Collections;
+using QFSW.MOP2;
 using UnityEngine;
 
 public static class Util
@@ -17,4 +19,12 @@ public static class Util
     {
         return Random.insideUnitCircle.normalized * Random.Range(InnerRadius, OuterRadius);
     }
+
+    public static IEnumerator ReleaseAfterDelay(ObjectPool pool, GameObject gameObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        pool.Release(gameObject);
+    }
+    
+    
 }
