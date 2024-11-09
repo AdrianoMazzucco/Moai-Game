@@ -69,7 +69,6 @@ public class Boulder : MonoBehaviour
     //What happens when HP hits 0
     private void Shatter()
     {
-        _collider.enabled = false;
         _pieceManager.Break(lastAttacktype);
     }
 

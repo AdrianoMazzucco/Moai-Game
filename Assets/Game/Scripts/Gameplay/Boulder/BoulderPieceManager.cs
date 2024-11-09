@@ -82,7 +82,7 @@ public class BoulderPieceManager : MonoBehaviour
             piece.SetActive(false);
             yield return null;
         }
-        
+        GameManager.Instance.BoulderPool.Release(_boulder.gameObject);
     }
 
     #endregion
