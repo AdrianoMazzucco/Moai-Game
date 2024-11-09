@@ -12,6 +12,8 @@ public class Boulder : MonoBehaviour
     [SerializeField] private int hpThreshold = 10;
 
     private int _currentHealth;
+    private Collider _collider;
+    private Rigidbody _rigidbody;
 
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
@@ -49,6 +51,8 @@ public class Boulder : MonoBehaviour
     private void Start()
     {
         _pieceManager = this.GetComponent<BoulderPieceManager>();
+        _collider = this.GetComponent<Collider>();
+        _rigidbody = this.GetComponent<Rigidbody>();
         _currentHealth = maxHp;
     }
 
@@ -65,6 +69,7 @@ public class Boulder : MonoBehaviour
     //What happens when HP hits 0
     private void Shatter()
     {
+        _collider.enabled = false;
         _pieceManager.Break(lastAttacktype);
     }
 

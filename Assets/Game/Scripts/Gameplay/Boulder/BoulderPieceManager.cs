@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,16 +9,28 @@ public class BoulderPieceManager : MonoBehaviour
     [SerializeField] private GameObject[] Pieces;
     [SerializeField] private GameObject UnFracturedGameobject;
 
-    [Header("Destruction")] [SerializeField]
-    private float ExplosiveForce = 4f;
-    private float ExplosiveRadius = 0.5f;
-    private float PieceDisappearDelay = 1.5f;
+    private Boulder _boulder;
+    
+    [Header("Destruction")] 
+    [SerializeField] private float ExplosiveForce = 4f;
+    [SerializeField] private float ExplosiveRadius = 0.5f;
+    [SerializeField] private float PieceDisappearDelay = 1.5f;
     #endregion
 
     #region Events
 
     #endregion
 
+    #region UnityEvents
+
+    private void OnEnable()
+    {
+        _boulder = this.GetComponent<Boulder>();
+    }
+
+    #endregion
+    
+    
 
     #region Methods
 
