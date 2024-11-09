@@ -73,8 +73,10 @@ MonoBehaviour:
   - {fileID: 2095949960512784526}
   - {fileID: 5321106340213017055}
   - {fileID: 2896788315313031701}
-  UnFracturedGameobject: {fileID: 0}
+  UnFracturedGameobject: {fileID: 4142366602881706543}
   ExplosiveForce: 4
+  ExplosiveRadius: 0.5
+  PieceDisappearDelay: 4
 --- !u!65 &2610578182892114970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94,8 +96,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4768853, y: 2.9001606, z: 6.258847}
-  m_Center: {x: 0.7384429, y: 0.9500803, z: -0.321815}
+  m_Size: {x: 3.5277236, y: 2.9001606, z: 6.258847}
+  m_Center: {x: 1.263862, y: 0.9500803, z: -0.321815}
 --- !u!54 &1142445455943206755
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,7 +121,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -206,7 +208,7 @@ PrefabInstance:
     - target: {fileID: -5976775563885516101, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: -5771775702169988923, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -222,7 +224,7 @@ PrefabInstance:
     - target: {fileID: -4969749136252475458, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: -4906978144932614280, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -246,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 96408778374456322, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 919132149155446097, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_Name
       value: Boulder_With_Shatter
@@ -262,19 +264,19 @@ PrefabInstance:
     - target: {fileID: 3079895427210853902, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 3224710968982699700, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 4156787231252281393, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 4322566559265220488, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 4517458020208746801, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -286,15 +288,15 @@ PrefabInstance:
     - target: {fileID: 4543392531124170427, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 4626882173881680807, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 5783863613094812368, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8a9e557b901568a4c8634fbda05deb47, type: 2}
+      objectReference: {fileID: 5629084884208175553, guid: 426a2785f8a940049aac2c246661cf09, type: 3}
     - target: {fileID: 5898530348829535999, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_LocalScale.x
       value: 100.880005
@@ -424,10 +426,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -478,10 +480,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -532,10 +534,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -586,10 +588,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -640,10 +642,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -694,10 +696,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -748,10 +750,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -783,6 +785,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1734256b42855a44484f0020481002e6, type: 3}
   m_PrefabInstance: {fileID: 3670653557355747403}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4142366602881706543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 1734256b42855a44484f0020481002e6, type: 3}
+  m_PrefabInstance: {fileID: 3670653557355747403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5058138671735339012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8413526355547119695, guid: 1734256b42855a44484f0020481002e6, type: 3}
@@ -807,10 +814,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -861,10 +868,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -915,10 +922,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
