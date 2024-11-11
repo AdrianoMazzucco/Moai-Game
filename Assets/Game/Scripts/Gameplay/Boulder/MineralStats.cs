@@ -37,7 +37,7 @@ public class MineralStats : MonoBehaviour
             }
 
             // Debug log the current velocity (force)
-            Debug.Log("Current Velocity: " + rb.linearVelocity);
+            //Debug.Log("Current Velocity: " + rb.linearVelocity);
 
             // Check if deceleration should start (velocity has dropped below half of initial velocity)
             if (velocityRegistered && !isDecelerating && rb.linearVelocity.magnitude <= initialVelocity.magnitude / 2f)

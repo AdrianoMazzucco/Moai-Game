@@ -66,7 +66,7 @@ public class MineralSpawn : MonoBehaviour
         if (rb != null)
         {
             rb.AddForce(spawnOffset.normalized * forceAmount, ForceMode.Impulse);
-            Debug.Log($"Spawned Object: {spawnedObject.name}, Force Direction: {spawnOffset.normalized}, Force Magnitude: {forceAmount}");
+            //Debug.Log($"Spawned Object: {spawnedObject.name}, Force Direction: {spawnOffset.normalized}, Force Magnitude: {forceAmount}");
         }
     }
 
