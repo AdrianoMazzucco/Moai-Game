@@ -71,16 +71,22 @@ public class ActivePhysicsState : MineralBaseState
             Quaternion newRotation = Quaternion.Slerp(Context.Rigidbody.rotation, upwardRotation, rotationSpeed * Time.deltaTime);
 
             // Apply the rotation to the Rigidbody using MoveRotation
-            Context.Rigidbody.MoveRotation(newRotation);   
+            Context.Rigidbody.MoveRotation(newRotation);
+
+            if (Vector3.Dot(currentRotation, Vector3.up) > 0.99f)
+            {
+                upright = true;
+            }
         }
     }
     public override MineralStateMachine.EStateMineral GetNextState() 
     {
-        if (Vector3.Dot(currentRotation, Vector3.up) > 0.99f)
+        if (upright)
         {
             speedRegistered = false;
             Context.Rigidbody.isKinematic = true;
             Context.Rigidbody.linearDamping = startDrag;
+            upright = false;
 
 
             return MineralStateMachine.EStateMineral.IsKinetic;
