@@ -16,6 +16,7 @@ public class VolcanoProjectileManager : MonoBehaviour
     [SerializeField] private float outerRadius = 250f;
     [SerializeField] private float verticalJumpHeight = 30f;
     [SerializeField] private GameObject projectileGameObject;
+    [SerializeField] private Ease projectileEase;
     #endregion
 
     #region Unity
@@ -60,7 +61,7 @@ public class VolcanoProjectileManager : MonoBehaviour
                     direction.y + transform.position.z);
                 endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
 
-                projectile.transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime);
+                projectile.transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime).SetEase(projectileEase);
                 GameObject g =  GameManager.Instance.DecalPool.GetObject(endPos);
                 StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
             }
