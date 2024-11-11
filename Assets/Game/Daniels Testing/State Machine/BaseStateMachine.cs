@@ -55,16 +55,16 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
     {
         CurrentState.OnTriggerExit(other);
     }
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
-        
+        CurrentState.OnCollisionEnter(other);
     }
-    void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision other)
     {
-        
+        CurrentState.OnCollisionStay(other);
     }
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision other)
     {
-        
+        CurrentState.OnCollisionExit(other);
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1523811026983611714}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: -0, z: -0, w: -0.00000031292436}
-  m_LocalPosition: {x: 0, y: -0.071, z: 0}
+  m_LocalPosition: {x: 0, y: -0.07, z: 0}
   m_LocalScale: {x: 0.88, y: 0.88, z: 0.88}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 12
+  m_VersionIndex: 48
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -571,6 +571,59 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &1742428883582202053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6054556730538040074}
+  - component: {fileID: 8548256164590538169}
+  m_Layer: 7
+  m_Name: TriggerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6054556730538040074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742428883582202053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4505617714668995550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8548256164590538169
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742428883582202053}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7046991975177724950
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +638,7 @@ GameObject:
   - component: {fileID: 5982352831642897064}
   - component: {fileID: 1120353372537273099}
   - component: {fileID: 2861230618172168578}
+  - component: {fileID: 1139049689295724176}
   m_Layer: 7
   m_Name: MineralTESTV2
   m_TagString: Untagged
@@ -600,14 +654,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7046991975177724950}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32131585, y: 0.16222054, z: -0.036048457, w: 0.93227744}
-  m_LocalPosition: {x: 502.27, y: 4.35, z: 514.85}
+  m_LocalRotation: {x: 0.25000006, y: -0.06698733, z: 0.25000006, w: 0.9330127}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3892620545884328200}
+  - {fileID: 6054556730538040074}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 37.648, y: 20.656, z: 2.681}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 30}
 --- !u!33 &3384117617952756567
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -724,10 +779,31 @@ MonoBehaviour:
   _rigidbody: {fileID: 1120353372537273099}
   _rootCollider: {fileID: 5982352831642897064}
   _transform: {fileID: 4505617714668995550}
+  _animation: {fileID: 1139049689295724176}
   _slowDownSpeed: 1
-  _stopSpeed: 0.2
-  _startDrag: 0
-  _dragIncrement: 0.2
+  _stopSpeed: 0.5
+  _startDrag: 1
+  _dragIncrement: 0.25
+  _timeToTransition: 3
+  _isKineticTransitionCooldown: 0
   _isSucked: 0
-  _upright: 0
+  _isGrounded: 0
+  _isUpright: 0
   _mineralIdle: {fileID: 7400000, guid: 17d6c21b03046794f95e4092efd79316, type: 2}
+--- !u!111 &1139049689295724176
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046991975177724950}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 17d6c21b03046794f95e4092efd79316, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 1
+  m_CullingType: 0

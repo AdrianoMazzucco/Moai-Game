@@ -16,20 +16,25 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Collider _rootCollider;
     [SerializeField] private Transform _transform;
+    [SerializeField] private Animation _animation;
     [SerializeField] private float _slowDownSpeed;
     [SerializeField] private float _stopSpeed;
     [SerializeField] private float _startDrag;
     [SerializeField] private float _dragIncrement;
+    [SerializeField] private float _timeToTransition;
+    [SerializeField] private bool _isKineticTransitionCooldown;
     [SerializeField] private bool _isSucked;
-    [SerializeField] private bool _upright;
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _isUpright;
     [SerializeField] private AnimationClip _mineralIdle;
     //[SerializeField] private AddMoreComponentsHere _addMoreComponentsHere;
 
     void Awake()
     {
         ValidateConstraints();
-        _context = new MineralStateMachineContext(_rigidbody, _rootCollider, _transform, 
-            _slowDownSpeed, _stopSpeed, _startDrag, _dragIncrement, _isSucked, _upright, _mineralIdle);
+        _context = new MineralStateMachineContext(_rigidbody, _rootCollider, _transform, _animation,
+            _slowDownSpeed, _stopSpeed, _startDrag, _dragIncrement, _timeToTransition, _isKineticTransitionCooldown,
+            _isSucked, _isUpright, _isGrounded, _mineralIdle);
         //*Pass all private member variables above through _context
 
         InitializeStates();
@@ -38,8 +43,9 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
     private void ValidateConstraints()
     {
         Assert.IsNotNull(_rigidbody, "Rigidbody is not assigned.");
-        Assert.IsNotNull(_rootCollider, "Root Collider is not null.");
-        Assert.IsNotNull(_transform, "Transform is not null.");
+        Assert.IsNotNull(_rootCollider, "Root Collider is not assigned.");
+        Assert.IsNotNull(_transform, "Transform is not assigned.");
+        Assert.IsNotNull(_animation, "Animation is not assigned");
         Assert.IsNotNull(_mineralIdle, "No Idle Animation on mineral");
         //Assert.IsNotNull(_slowDownVelocity, "XXX is not null.");
         //Assert.IsNotNull(_stopVelocity, "XXX is not null.");
