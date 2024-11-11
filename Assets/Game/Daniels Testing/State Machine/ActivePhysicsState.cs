@@ -12,7 +12,7 @@ public class ActivePhysicsState : MineralBaseState
 
     public Vector3 currentRotation;
     public Quaternion upwardRotation;
-    public float rotationSpeed = 1.0f;
+    public float rotationSpeed = 50.0f;
 
     private bool speedRegistered = false;
     private bool upright = false;
@@ -36,6 +36,7 @@ public class ActivePhysicsState : MineralBaseState
         if (!speedRegistered && Context.Rigidbody.linearVelocity.magnitude > 0)
         {
             speedRegistered = true; // Mark that the velocity has been registered
+            //Debug.Log("Speed Was Registered");
         }
         else
         {
@@ -51,11 +52,10 @@ public class ActivePhysicsState : MineralBaseState
             {
                 //sets higher drag on mineral when slowing down
                 Context.Rigidbody.linearDamping += Context.DragIncrement * Time.deltaTime;
+                Debug.Log("We enter slowing down");
             }
           
         }
-
-       
 
         
     }
@@ -73,9 +73,10 @@ public class ActivePhysicsState : MineralBaseState
             // Apply the rotation to the Rigidbody using MoveRotation
             Context.Rigidbody.MoveRotation(newRotation);
 
-            if (Vector3.Dot(currentRotation, Vector3.up) > 0.99f)
+            if (Vector3.Dot(currentRotation, Vector3.up) > 0.9f)
             {
                 upright = true;
+                Debug.Log("We are upright");
             }
         }
     }
