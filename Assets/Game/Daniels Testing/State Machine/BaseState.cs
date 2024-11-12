@@ -17,5 +17,8 @@ public abstract class BaseState<EState> where EState : Enum
     public abstract void OnTriggerEnter(Collider other);
     public abstract void OnTriggerStay(Collider other);
     public abstract void OnTriggerExit(Collider other);
+    public abstract void OnCollisionEnter(Collision other);
+    public abstract void OnCollisionStay(Collision other);
+    public abstract void OnCollisionExit(Collision other);
 
 }

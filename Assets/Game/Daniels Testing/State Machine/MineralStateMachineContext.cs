@@ -6,14 +6,18 @@ public class MineralStateMachineContext
     private Rigidbody _rigidbody;
     private Collider _rootCollider;
     private Transform _transform;
+    private Animation _animation;
 
     private float _slowDownSpeed;
     private float _stopSpeed;
     private float _startDrag;
     private float _dragIncrement;
+    private float _timeToTransition;
 
+    private bool _isKineticTransitionCooldown;
     private bool _isSucked;
-    private bool _upright;
+    private bool _isUpright;
+    private bool _isGrounded;
 
     private AnimationClip _mineralIdle;
 
@@ -23,19 +27,25 @@ public class MineralStateMachineContext
 
     //Constructor - Adds values to all above member variables
     //*Pass all member variables above into StateMachineContext below
-    public MineralStateMachineContext(Rigidbody rigidbody, Collider rootCollider, Transform transform, float slowDownSpeed,
-        float stopSpeed, float slowDownDrag, float dragIncrement, bool isSucked, bool upright, AnimationClip mineralIdle)
+    public MineralStateMachineContext(Rigidbody rigidbody, Collider rootCollider, Transform transform, Animation animation, 
+        float slowDownSpeed, float stopSpeed, float slowDownDrag, float dragIncrement, float timeToTransition,
+        bool isKineticTransitionCooldown, bool isSucked, bool isUpright, bool isGrounded,
+        AnimationClip mineralIdle)
     {
         //Assigns all variables to the context
         _rigidbody = rigidbody; 
         _rootCollider = rootCollider;
         _transform = transform;
+        _animation = animation;
         _slowDownSpeed = slowDownSpeed;
         _stopSpeed = stopSpeed;
         _startDrag = slowDownDrag;
         _dragIncrement = dragIncrement;
+        _timeToTransition = timeToTransition;
+        _isKineticTransitionCooldown = isKineticTransitionCooldown;
         _isSucked = isSucked;
-        _upright = upright;
+        _isUpright = isUpright;
+        _isGrounded = isGrounded;
         _mineralIdle = mineralIdle;
         //*Add all passed through variables here that are in the Base State
 
@@ -44,11 +54,15 @@ public class MineralStateMachineContext
     public Rigidbody Rigidbody => _rigidbody;
     public Collider RootCollider => _rootCollider;
     public Transform Transform => _transform;
+    public Animation Animation => _animation;
     public float SlowDownSpeed => _slowDownSpeed;
     public float StopSpeed => _stopSpeed;
     public float StartDrag => _startDrag;
     public float DragIncrement => _dragIncrement;
+    public float TimeToTransition => _timeToTransition;
+    public bool IsKineticTransitionCooldown => _isKineticTransitionCooldown;
     public bool IsSucked => _isSucked;
-    public bool Upright => _upright;
+    public bool IsUpright => _isUpright;
+    public bool IsGrounded => _isGrounded;
     public AnimationClip MineralIdle => _mineralIdle;
 }

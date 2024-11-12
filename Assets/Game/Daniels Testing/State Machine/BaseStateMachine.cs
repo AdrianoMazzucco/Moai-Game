@@ -25,6 +25,15 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
             TransitionToState(nextStateKey);
         }
     }
+    void FixedUpdate(){
+        EState nextStateKey = CurrentState.GetNextState();
+
+        if (!IsTransitioningState && nextStateKey.Equals(CurrentState.StateKey)) {
+            CurrentState.FixedUpdateState();
+        } else if (!IsTransitioningState) {
+            TransitionToState(nextStateKey);
+        }
+    }
     public void TransitionToState(EState stateKey)
     {
         IsTransitioningState = true;
@@ -46,16 +55,16 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
     {
         CurrentState.OnTriggerExit(other);
     }
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
-        
+        CurrentState.OnCollisionEnter(other);
     }
-    void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision other)
     {
-        
+        CurrentState.OnCollisionStay(other);
     }
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision other)
     {
-        
+        CurrentState.OnCollisionExit(other);
     }
 }
