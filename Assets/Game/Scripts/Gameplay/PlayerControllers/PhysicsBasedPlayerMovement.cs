@@ -3,6 +3,11 @@ using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum MovementState
+{
+    walking, charging, flying 
+}
+
 public class PhysicsBasedPlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
@@ -10,8 +15,13 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private InputAction chargeAttack;
 
     private Rigidbody playerRB;
-    private bool charging = false;
     private float chargeAmount = 0;
+    private MovementState currentState = MovementState.walking;
+    private float flightTime = 0;
+    [SerializeField] private float flightDuration = 3;
+    [SerializeField] private float movementForceMultiplier = 30;
+    [SerializeField] private float chargeForcecMultiplier = 50;
+    [SerializeField] private float tiltBackAngle = 45;
 
     [SerializeField] private GameObject currentCamera;
 
@@ -39,14 +49,22 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Movement();
-        ChargeUpdate();
+        switch(currentState)
+        {
+            case MovementState.walking:
+                Movement();
+                break;
+            case MovementState.charging:
+                ChargeUpdate();
+                break; 
+            case MovementState.flying:
+                Flight();
+                break;
+        }
     }
 
     private void Movement()
     {
-        if (charging) return;
-
         Vector2 inputDirection = movement.ReadValue<Vector2>();
         if (inputDirection != Vector2.zero)
         {
@@ -60,7 +78,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
             Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
             directionTotal.Normalize();
-            directionTotal *= 30;
+            directionTotal *= movementForceMultiplier;
 
             playerRB.AddForce(directionTotal);
 
@@ -70,29 +88,42 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         }
     }
 
+    private void Flight()
+    {
+        transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
+        flightTime += Time.deltaTime;
+        if( flightTime > flightDuration ) 
+        {
+            flightTime = 0;
+            currentState = MovementState.walking;
+        }
+    }
+
     private void ChargeUpdate()
     {
-        if (!charging) return;
-
         if(chargeAmount < 1)
             chargeAmount += Time.deltaTime;
 
         Vector3 euler = transform.localEulerAngles;
-        euler.x = Mathf.Lerp(0, -45, chargeAmount);
+        euler.x = Mathf.Lerp(0, -tiltBackAngle, chargeAmount);
         transform.localEulerAngles = euler;
     }
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        charging = true;
+        if (currentState == MovementState.walking)
+        {
+            currentState = MovementState.charging;
+        }
     }
 
     private void ChargeAttack(InputAction.CallbackContext obj) 
     {
-        charging = false;
+        if (currentState != MovementState.charging) return;
+
+        currentState = MovementState.flying;
         chargeAmount = 0;
-        playerRB.freezeRotation = false;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
-        playerRB.AddForceAtPosition(transform.forward * 50, transform.position + transform.up * 1.5f, ForceMode.Impulse);
+        playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
     }
 }
