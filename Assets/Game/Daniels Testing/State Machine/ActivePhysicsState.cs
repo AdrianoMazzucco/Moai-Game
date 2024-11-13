@@ -20,6 +20,7 @@ public class ActivePhysicsState : MineralBaseState
     private bool speedRegistered = false;
     private bool isUpright = false;
     private bool isGrounded;
+    private bool isSucked;
 
 
     public ActivePhysicsState(MineralStateMachineContext context, MineralStateMachine.EStateMineral 
@@ -68,7 +69,7 @@ public class ActivePhysicsState : MineralBaseState
     {
         //Debug.Log(currentSpeed);
 
-        if (speedRegistered)
+        if (speedRegistered || isSucked)
         {
             Debug.Log("accessed timer");
             //calculates current velocity, sets new previous velocity
@@ -119,7 +120,7 @@ public class ActivePhysicsState : MineralBaseState
         //Debug.Log(isUpright);
         
 
-        if (isKineticTransitionCooldown && isUpright && isGrounded)
+        if (isKineticTransitionCooldown && isUpright && isGrounded && !isSucked)
         {
             speedRegistered = false;
             Context.Rigidbody.isKinematic = true;
@@ -137,15 +138,30 @@ public class ActivePhysicsState : MineralBaseState
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
-            Debug.Log(isGrounded);
+            Debug.Log("isGrounded " + isGrounded);
         }
 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = true;
+            Debug.Log("isSucked is " + isSucked);
+        }
 
     }
     public override void OnTriggerStay(Collider other) 
     {
-        //if player uses suck action, set IsSucked = true
-
+        /*
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = true;
+            Debug.Log("isSucked is " + isSucked);
+        }
+        else 
+        {
+            isSucked = false;
+            Debug.Log("isSucked is " + isSucked);
+        }
+        */
 
     }
     public override void OnTriggerExit(Collider other) 
@@ -154,6 +170,12 @@ public class ActivePhysicsState : MineralBaseState
         {
             isGrounded = false;
         }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = false;
+            Debug.Log("isSucked is " + isSucked);
+        }
+
     }
     public override void OnCollisionEnter(Collision other) { }
     public override void OnCollisionStay(Collision other) { }
