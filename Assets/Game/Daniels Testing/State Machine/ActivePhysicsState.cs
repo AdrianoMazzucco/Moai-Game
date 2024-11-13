@@ -51,6 +51,12 @@ public class ActivePhysicsState : MineralBaseState
         
         
 
+        
+
+        
+    }
+    public override void FixedUpdateState() 
+    {
         //if we are slower than the slow down speed, but faster than the stop speed, adds increase drag
         if (speedRegistered && currentSpeed <= Context.SlowDownSpeed && currentSpeed >= Context.StopSpeed)
         {
@@ -60,14 +66,8 @@ public class ActivePhysicsState : MineralBaseState
                 Context.Rigidbody.linearDamping += Context.DragIncrement * Time.deltaTime;
                 //Debug.Log("We enter slowing down");
             }
-          
-        }
 
-        
-    }
-    public override void FixedUpdateState() 
-    {
-        //Debug.Log(currentSpeed);
+        }
 
         if (speedRegistered || isSucked)
         {
