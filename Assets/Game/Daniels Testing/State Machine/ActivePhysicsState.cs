@@ -12,10 +12,16 @@ public class ActivePhysicsState : MineralBaseState
 
     public Vector3 currentRotation;
     public Quaternion upwardRotation;
-    public float rotationSpeed = 1.0f;
+    public float rotationSpeed = 10.0f;
+    private float timeToTransition;
 
+    private bool transitionTimerActive = false;
+    private bool isKineticTransitionCooldown = false;
     private bool speedRegistered = false;
-    private bool upright = false;
+    private bool isUpright = false;
+    private bool isGrounded;
+    private bool isSucked;
+
 
     public ActivePhysicsState(MineralStateMachineContext context, MineralStateMachine.EStateMineral 
         estate) : base (context, estate)
@@ -26,8 +32,10 @@ public class ActivePhysicsState : MineralBaseState
     {
         startDrag = Context.Rigidbody.linearDamping;
 
-        // Define the target rotation to be upright, preserving only the Y rotation
-        upwardRotation = Quaternion.Euler(0, currentRotation.y, 0);
+        timeToTransition = Context.TimeToTransition;
+        transitionTimerActive = true;
+
+        isGrounded = Context.IsGrounded;
     }
     public override void ExitState() { }
     public override void UpdateState() 
@@ -36,14 +44,19 @@ public class ActivePhysicsState : MineralBaseState
         if (!speedRegistered && Context.Rigidbody.linearVelocity.magnitude > 0)
         {
             speedRegistered = true; // Mark that the velocity has been registered
-        }
-        else
-        {
-            //calculates current velocity, sets new previous velocity
-            currentSpeed = ((Context.Transform.position - previous).magnitude) / Time.deltaTime;
-            previous = Context.Transform.position;
-        }
+            //Debug.Log("Speed Was Registered");
 
+            
+        }
+        
+        
+
+        
+
+        
+    }
+    public override void FixedUpdateState() 
+    {
         //if we are slower than the slow down speed, but faster than the stop speed, adds increase drag
         if (speedRegistered && currentSpeed <= Context.SlowDownSpeed && currentSpeed >= Context.StopSpeed)
         {
@@ -51,16 +64,33 @@ public class ActivePhysicsState : MineralBaseState
             {
                 //sets higher drag on mineral when slowing down
                 Context.Rigidbody.linearDamping += Context.DragIncrement * Time.deltaTime;
+                //Debug.Log("We enter slowing down");
             }
-          
+
         }
 
-       
+        if (speedRegistered || isSucked)
+        {
+            Debug.Log("accessed timer");
+            //calculates current velocity, sets new previous velocity
+            currentSpeed = ((Context.Transform.position - previous).magnitude) / Time.deltaTime;
+            previous = Context.Transform.position;
 
-        
-    }
-    public override void FixedUpdateState() 
-    {
+            if (transitionTimerActive && timeToTransition > 0)
+            {
+                Debug.Log(timeToTransition);
+                timeToTransition -= Time.deltaTime;
+
+                if (timeToTransition <= 0)
+                {
+                    timeToTransition = 0;
+                    transitionTimerActive = false;
+                    isKineticTransitionCooldown = true;
+                    Debug.Log("Timer Done");
+                }
+            }
+        }
+
         if (speedRegistered && currentSpeed <= Context.StopSpeed)
         {
 
@@ -73,33 +103,98 @@ public class ActivePhysicsState : MineralBaseState
             // Apply the rotation to the Rigidbody using MoveRotation
             Context.Rigidbody.MoveRotation(newRotation);
 
-            if (Vector3.Dot(currentRotation, Vector3.up) > 0.99f)
+
+            if (Vector3.Dot(Context.Transform.up, Vector3.up) > 0.99f)
             {
-                upright = true;
+                isUpright = true;
+                Debug.Log("We are upright");
+            }
+            else
+            {
+                isUpright = false;
             }
         }
     }
     public override MineralStateMachine.EStateMineral GetNextState() 
     {
-        if (upright)
+        //Debug.Log(isUpright);
+        
+
+        if (isKineticTransitionCooldown && isUpright && isGrounded && !isSucked)
         {
             speedRegistered = false;
             Context.Rigidbody.isKinematic = true;
             Context.Rigidbody.linearDamping = startDrag;
-            upright = false;
+            isUpright = false;
+            isKineticTransitionCooldown = false;
 
-
+            Debug.Log("We transitioning to next state");
             return MineralStateMachine.EStateMineral.IsKinetic;
         }        
         return StateKey; 
     }
-    public override void OnTriggerEnter(Collider other) { }
+    public override void OnTriggerEnter(Collider other) 
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+            Debug.Log("isGrounded " + isGrounded);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = true;
+            Debug.Log("isSucked is " + isSucked);
+        }
+
+    }
     public override void OnTriggerStay(Collider other) 
     {
-        //if player uses suck action, set IsSucked = true
-    }
-    public override void OnTriggerExit(Collider other) { }
+        /*
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = true;
+            Debug.Log("isSucked is " + isSucked);
+        }
+        else 
+        {
+            isSucked = false;
+            Debug.Log("isSucked is " + isSucked);
+        }
+        */
 
+    }
+    public override void OnTriggerExit(Collider other) 
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
+        {
+            isSucked = false;
+            Debug.Log("isSucked is " + isSucked);
+        }
+
+    }
+    public override void OnCollisionEnter(Collision other) { }
+    public override void OnCollisionStay(Collision other) { }
+    public override void OnCollisionExit(Collision other) { }
+
+    public void TransitionStateCooldownTimer()
+    {
+        if (transitionTimerActive && timeToTransition > 0)
+        {
+            timeToTransition -= Time.deltaTime;
+            if (timeToTransition <= 0)
+            {
+                timeToTransition = 0;
+                transitionTimerActive = false;
+                isKineticTransitionCooldown = true;
+                Debug.Log(timeToTransition);
+            }
+        }
+    }
 }
 
 /*
