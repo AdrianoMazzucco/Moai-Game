@@ -8,6 +8,7 @@ public class BoulderPieceManager : MonoBehaviour
 
     [SerializeField] private GameObject[] Pieces;
     [SerializeField] private GameObject UnFracturedGameobject;
+    
 
     private Boulder _boulder;
     
@@ -37,6 +38,7 @@ public class BoulderPieceManager : MonoBehaviour
     public void Break(Enums.Attacktype attacktype)
     {
         UnFracturedGameobject.SetActive(false);
+        GameManager.Instance.DestructionFXPool.GetObject(this.transform.position);
         foreach (var piece in Pieces)
         {
             piece.SetActive(true);
