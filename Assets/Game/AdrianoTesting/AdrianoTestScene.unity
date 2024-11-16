@@ -4129,6 +4129,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: maximumJumpForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: minimumJumpForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: chargeForcecMultiplier
       value: 150
       objectReference: {fileID: 0}

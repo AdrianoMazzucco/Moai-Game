@@ -13,6 +13,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
     private InputAction movement;
     private InputAction chargeAttack;
+    private InputAction jumpInput;
 
     private Rigidbody playerRB;
     private float chargeAmount = 0;
@@ -23,6 +24,13 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float chargeForcecMultiplier = 50;
     [SerializeField] private float tiltBackAngle = 45;
 
+    bool jumpCharging = false;
+    float jumpChargeForce = 0;
+    float jumpChargeTime = 0;
+    [SerializeField] private float time4FullJumpCharge = 1.5f;
+    [SerializeField] private float minimumJumpForce = 10;
+    [SerializeField] private float maximumJumpForce = 50;
+
     [SerializeField] private GameObject currentCamera;
 
 
@@ -30,11 +38,18 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     {
         chargeAttack.performed += StartCharge;
         chargeAttack.canceled += ChargeAttack;
+
+        jumpInput.performed += StartJump;
+        jumpInput.canceled += Jump;
     }
 
     private void OnDisable()
     {
         chargeAttack.performed -= StartCharge;
+        chargeAttack.canceled -= ChargeAttack;
+
+        jumpInput.performed -= StartJump;
+        jumpInput.canceled -= Jump;
     }
 
     private void Awake()
@@ -45,6 +60,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         movement = playerActionMap?.FindAction("Move");
         chargeAttack = playerActionMap?.FindAction("Fire");
+        jumpInput = playerActionMap?.FindAction("Jump");
     }
 
     private void Update()
@@ -60,6 +76,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             case MovementState.flying:
                 Flight();
                 break;
+        }
+
+        if(jumpCharging) 
+        {
+            jumpChargeTime += Time.deltaTime;
+            if(jumpChargeTime >  time4FullJumpCharge) { jumpChargeTime = time4FullJumpCharge; }
+            jumpChargeForce = minimumJumpForce + (maximumJumpForce - minimumJumpForce) * (jumpChargeTime / time4FullJumpCharge);
+            Debug.Log(jumpChargeForce);
         }
     }
 
@@ -79,6 +103,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
             directionTotal.Normalize();
             directionTotal *= movementForceMultiplier;
+            if (jumpCharging) { directionTotal *= 0.5f; }
 
             playerRB.AddForce(directionTotal);
 
@@ -125,5 +150,17 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
+    }
+
+    private void StartJump(InputAction.CallbackContext obj)
+    {
+        jumpCharging = true;
+    }
+
+    private void Jump(InputAction.CallbackContext obj) 
+    {
+        jumpCharging = false;
+        jumpChargeTime = 0;
+        playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
     }
 }
