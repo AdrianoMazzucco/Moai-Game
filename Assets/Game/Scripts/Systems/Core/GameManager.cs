@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     public ObjectPool BoulderPool;
     public ObjectPool DecalPool;
+    public ObjectPool DestructionFXPool;
 
     #endregion
  
@@ -24,11 +25,13 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject boulderGameObject;
     [SerializeField] private GameObject decalGameObject;
+    [SerializeField] private GameObject destructionFXObject;
 
     #endregion
     private void Start()
     {
         BoulderPool = ObjectPool.Create(boulderGameObject);
         DecalPool = ObjectPool.Create(decalGameObject);
+        DestructionFXPool = ObjectPool.Create(destructionFXObject);
     }
 }
