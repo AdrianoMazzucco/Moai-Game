@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public enum MovementState
 {
-    walking, charging, flying 
+    walking, charging, flying, sucking 
 }
 
 public class PhysicsBasedPlayerMovement : MonoBehaviour
@@ -14,6 +14,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private InputAction movement;
     private InputAction chargeAttack;
     private InputAction jumpInput;
+    private InputAction suckAbility;
 
     private Rigidbody playerRB;
     private float chargeAmount = 0;
@@ -41,6 +42,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         jumpInput.performed += StartJump;
         jumpInput.canceled += Jump;
+
+        suckAbility.performed += StartSuck;
+        suckAbility.canceled += EndSuck;
     }
 
     private void OnDisable()
@@ -50,6 +54,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         jumpInput.performed -= StartJump;
         jumpInput.canceled -= Jump;
+
+        suckAbility.performed -= StartSuck;
+        suckAbility.canceled -= EndSuck;
     }
 
     private void Awake()
@@ -61,6 +68,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         movement = playerActionMap?.FindAction("Move");
         chargeAttack = playerActionMap?.FindAction("Fire");
         jumpInput = playerActionMap?.FindAction("Jump");
+
+        suckAbility = playerActionMap?.FindAction("Suck");
     }
 
     private void Update()
@@ -75,6 +84,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 break; 
             case MovementState.flying:
                 Flight();
+                break;
+            case MovementState.sucking:
+                SuckUpdate();
                 break;
         }
 
@@ -162,5 +174,29 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         jumpCharging = false;
         jumpChargeTime = 0;
         playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
+    }
+
+    private void StartSuck(InputAction.CallbackContext obj)
+    {
+        currentState = MovementState.sucking;
+    }
+
+    private void EndSuck(InputAction.CallbackContext obj)
+    {
+       currentState = MovementState.walking;
+    }
+
+    private void SuckUpdate()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+
+        foreach(var hitCollider in hitColliders) 
+        {
+            if(hitCollider.gameObject.GetComponent < MineralStateMachine > () )
+            {
+                Vector3 direction = transform.position - hitCollider.transform.position;
+                hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
+            }
+        }
     }
 }
