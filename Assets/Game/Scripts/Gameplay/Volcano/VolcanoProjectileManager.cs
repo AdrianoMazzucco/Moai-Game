@@ -40,6 +40,31 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     #endregion
 
+    #region Functions
+
+    public void FireVolcano(int _burstCount,Vector3 center,float inner,float outer,float _duration)
+    {
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
+        GameObject projectile;
+        Vector3 endPos;
+        for (int i = 0; i < _burstCount; i++)
+        {
+                 
+            Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
+            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+            endPos = new Vector3(direction.x + center.x,
+                0,
+                direction.y + center.z);
+            endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+
+            projectile.transform.DOJump(endPos, verticalJumpHeight, 1, _duration).SetEase(projectileEase);
+            GameObject g =  GameManager.Instance.DecalPool.GetObject(endPos);
+            StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
+        }
+    }
+    
+    #endregion
+
     #region Coroutines and Invokes
 
     IEnumerator FirePojectile()
