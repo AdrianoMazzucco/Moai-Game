@@ -1,6 +1,8 @@
 using System;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class Boulder : MonoBehaviour
@@ -10,8 +12,13 @@ public class Boulder : MonoBehaviour
     [Space]
     [SerializeField] private int maxHp = 100;
     [SerializeField] private int hpThreshold = 10;
-
     private int _currentHealth;
+    
+    [Header("Connections")] [Space] 
+    [SerializeField] private GameObject shatterModel;
+    [SerializeField] private GameObject projectileModel;
+    [SerializeField] private GameObject VFX;
+    [Space]
     private Collider _collider;
     private Rigidbody _rigidbody;
     
@@ -22,7 +29,7 @@ public class Boulder : MonoBehaviour
     #endregion
 
     #region Properties
-
+    
     public int CurrentHealth
     {
         get
@@ -45,6 +52,12 @@ public class Boulder : MonoBehaviour
 
  
     #endregion
+
+    #region Events
+
+    private UnityEvent OnLanded = new UnityEvent();
+
+    #endregion
     
     
     
@@ -53,6 +66,13 @@ public class Boulder : MonoBehaviour
     private void OnEnable()
     {
         _triggerCollider.enabled = true;
+        OnLanded.AddListener(SwapModels);
+        SwapModels();
+    }
+
+    private void OnDisable()
+    {
+        OnLanded.RemoveListener(SwapModels);
     }
 
     private void Start()
@@ -60,6 +80,9 @@ public class Boulder : MonoBehaviour
         _pieceManager = this.GetComponent<BoulderPieceManager>();
         _collider = this.GetComponent<Collider>();
         _rigidbody = this.GetComponent<Rigidbody>();
+        
+       
+        
         _currentHealth = maxHp;
     }
 
@@ -79,7 +102,29 @@ public class Boulder : MonoBehaviour
         _pieceManager.Break(lastAttacktype);
     }
 
-    
+    private void SwapModels()
+    {
+
+        if (projectileModel.activeSelf == false)
+        {
+            shatterModel.SetActive(false);
+            projectileModel.SetActive(true);
+            VFX.SetActive(true);
+        }
+        else
+        {
+            shatterModel.SetActive(true);
+            projectileModel.SetActive(false);
+            VFX.SetActive(false);
+        }
+      
+        
+    }
+
+    public void FireProjectile(Vector3 endPos,float verticalJumpHeight, float projectileAirTime,Ease projectileEase)
+    {
+        transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime).SetEase(projectileEase).OnComplete( OnLanded.Invoke);
+    }
         
     #endregion
     
