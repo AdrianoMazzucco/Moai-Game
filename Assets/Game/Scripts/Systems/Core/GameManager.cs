@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using QFSW.MOP2;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -27,6 +28,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject decalGameObject;
     [SerializeField] private GameObject destructionFXObject;
 
+
+
+    [Header("MMFs")] [SerializeField] 
+    private MMF_Player Camera_Shake_MMF;
+    
+    
     #endregion
     private void Start()
     {
@@ -34,4 +41,13 @@ public class GameManager : Singleton<GameManager>
         DecalPool = ObjectPool.Create(decalGameObject);
         DestructionFXPool = ObjectPool.Create(destructionFXObject);
     }
+
+    #region Methods
+
+    public void ShakeCamera()
+    {
+        Camera_Shake_MMF.PlayFeedbacks();
+    }
+
+    #endregion
 }
