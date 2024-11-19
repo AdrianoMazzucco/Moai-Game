@@ -5011,6 +5011,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6916994545860259266, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 492.1935
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570318550050928338, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 8373688172349746990}
+    - target: {fileID: 7570318550050928338, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: currentMineralCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8924352402367633118, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5032,6 +5044,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6297452340817706182, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
   m_PrefabInstance: {fileID: 8373688172349746988}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8373688172349746990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+  m_PrefabInstance: {fileID: 8373688172349746988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70039e7d45dde88408be668559412a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
