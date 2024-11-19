@@ -10,20 +10,36 @@ public class TriggerCanvasFade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject == GameManager.Instance.playerGameObject) 
+        {
+            // Start fading in
+            StartFade(1);
+
+        } 
+       /* 
         if (other.CompareTag(playerTag))
         {
             // Start fading in
             StartFade(1);
         }
+       */
     }
 
     private void OnTriggerExit(Collider other)
     {
+
+        if (other.gameObject == GameManager.Instance.playerGameObject)
+        {
+            // Start fading out
+            StartFade(0);
+        }
+        /*
         if (other.CompareTag(playerTag))
         {
             // Start fading out
             StartFade(0);
         }
+        */
     }
 
     private void StartFade(float targetAlpha)

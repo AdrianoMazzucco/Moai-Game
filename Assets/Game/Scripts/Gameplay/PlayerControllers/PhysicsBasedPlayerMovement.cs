@@ -24,6 +24,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float movementForceMultiplier = 30;
     [SerializeField] private float chargeForcecMultiplier = 50;
     [SerializeField] private float tiltBackAngle = 45;
+    [SerializeField] private float maxSpeed = 10;
 
     bool jumpCharging = false;
     float jumpChargeForce = 0;
@@ -118,7 +119,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             if (jumpCharging) { directionTotal *= 0.5f; }
 
             playerRB.AddForce(directionTotal);
-
+            
+            if (playerRB.linearVelocity.magnitude > maxSpeed)
+            {
+                playerRB.linearVelocity = playerRB.linearVelocity.normalized * maxSpeed;
+            }
             Vector3 turnAngle = new Vector3(directionTotal.x, directionTotal.z, directionTotal.y);
             Quaternion deltaRotation = Quaternion.Euler(turnAngle * Time.fixedDeltaTime);
             transform.forward = Vector3.Lerp(transform.forward, directionTotal, 0.005f);
