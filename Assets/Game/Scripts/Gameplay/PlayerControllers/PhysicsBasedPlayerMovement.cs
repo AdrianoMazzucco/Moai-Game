@@ -28,10 +28,21 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float time4FullJumpCharge = 1.5f;
     [SerializeField] private float tiltBackAngle = 45;
 
+    #region Player Stats
     [ReadOnly, SerializeField] private float movementForceMultiplier = 30;
     [SerializeField] private float multiplierMovementForceMultiplier = 1;
     [SerializeField] private float minimumMovementForceMultiplier = 30;
     [SerializeField] private float maximumMovementForceMultiplier = 60;
+
+    [ReadOnly, SerializeField] private float airMovementForceMultiplier = 15;
+    [SerializeField] private float multiplierAirMovementForceMultiplier = 1;
+    [SerializeField] private float minimumAirMovementForceMultiplier = 15;
+    [SerializeField] private float maximumAirMovementForceMultiplier = 30;
+
+    [ReadOnly, SerializeField] private float currentDrag = 0;
+    [SerializeField] private float multiplierDrag = 1;
+    [SerializeField] private float minimumDrag = 0;
+    [SerializeField] private float maximumDrag = 5;
 
     [ReadOnly, SerializeField] private float chargeForcecMultiplier = 50;
     [SerializeField] private float multiplierChargeForcecMultiplier = 1;
@@ -63,6 +74,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float minimumScale = 1;
     [SerializeField] private float maximumScale = 10;
 
+    #endregion
+    
     [SerializeField] private GameObject currentCamera;
 
 
@@ -145,10 +158,17 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
             Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
             directionTotal.Normalize();
-            directionTotal *= movementForceMultiplier;
+            if (CheckGrounded())
+            {
+                directionTotal *= movementForceMultiplier;
+            }
+            else
+            {
+                directionTotal *= airMovementForceMultiplier;
+            }
             if (jumpCharging) { directionTotal *= 0.5f; }
 
-            playerRB.AddForce(directionTotal);
+            playerRB.AddForce(directionTotal, ForceMode.Acceleration);
             
             if (playerRB.linearVelocity.magnitude > maxSpeed)
             {
@@ -201,11 +221,15 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        jumpCharging = true;
+        if (CheckGrounded())
+        {
+            jumpCharging = true;
+        }
     }
 
     private void Jump(InputAction.CallbackContext obj) 
     {
+        if(!jumpCharging) { return; }
         jumpCharging = false;
         jumpChargeTime = 0;
         playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
@@ -240,6 +264,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         movementForceMultiplier = minimumMovementForceMultiplier + multiplierMovementForceMultiplier * _mineralCount;
         if (movementForceMultiplier > maximumMovementForceMultiplier) { movementForceMultiplier = maximumMovementForceMultiplier; }
 
+        airMovementForceMultiplier = minimumAirMovementForceMultiplier + multiplierAirMovementForceMultiplier * _mineralCount;
+        if (airMovementForceMultiplier > maximumAirMovementForceMultiplier) { airMovementForceMultiplier = maximumAirMovementForceMultiplier; }
+
         chargeForcecMultiplier = minimumChargeForcecMultiplier + multiplierChargeForcecMultiplier * _mineralCount;
         if (chargeForcecMultiplier > maximumChargeForcecMultiplier) { chargeForcecMultiplier = maximumChargeForcecMultiplier; }
 
@@ -259,5 +286,13 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if(currentScale > maximumScale) {  currentScale = maximumScale; }
         transform.localScale= new Vector3(currentScale, currentScale, currentScale);
 
+        currentDrag = minimumDrag + multiplierDrag * _mineralCount;
+        if (currentDrag > maximumDrag) { currentDrag = maximumDrag; }
+        playerRB.linearDamping  = currentDrag;
+    }
+
+    private bool CheckGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, currentScale);
     }
 }
