@@ -21,17 +21,47 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private MovementState currentState = MovementState.walking;
     private float flightTime = 0;
     [SerializeField] private float flightDuration = 3;
-    [SerializeField] private float movementForceMultiplier = 30;
-    [SerializeField] private float chargeForcecMultiplier = 50;
-    [SerializeField] private float tiltBackAngle = 45;
-    [SerializeField] private float maxSpeed = 10;
 
     bool jumpCharging = false;
     float jumpChargeForce = 0;
     float jumpChargeTime = 0;
     [SerializeField] private float time4FullJumpCharge = 1.5f;
-    [SerializeField] private float minimumJumpForce = 10;
-    [SerializeField] private float maximumJumpForce = 50;
+    [SerializeField] private float tiltBackAngle = 45;
+
+    [ReadOnly, SerializeField] private float movementForceMultiplier = 30;
+    [SerializeField] private float multiplierMovementForceMultiplier = 1;
+    [SerializeField] private float minimumMovementForceMultiplier = 30;
+    [SerializeField] private float maximumMovementForceMultiplier = 60;
+
+    [ReadOnly, SerializeField] private float chargeForcecMultiplier = 50;
+    [SerializeField] private float multiplierChargeForcecMultiplier = 1;
+    [SerializeField] private float minimumChargeForcecMultiplier = 50;
+    [SerializeField] private float maximumChargeForcecMultiplier = 100;
+
+    [ReadOnly, SerializeField] private float maxSpeed = 10;
+    [SerializeField] private float multiplierMaxSpeed = 1;
+    [SerializeField] private float minimumMaxSpeed = 10;
+    [SerializeField] private float maximumMaxSpeed = 20;
+
+    [ReadOnly, SerializeField] private float suckRadius = 10;
+    [SerializeField] private float multiplierSuckRadius = 1;
+    [SerializeField] private float minimumSuckRadius = 10;
+    [SerializeField] private float maximumSuckRadius = 20;
+
+    [ReadOnly, SerializeField] private float minimumJumpForce = 10;
+    [SerializeField] private float multiplierMinimumJumpForce = 1;
+    [SerializeField] private float minimumMinimumJumpForce = 10;
+    [SerializeField] private float maximumMinimumJumpForce = 20;
+
+    [ReadOnly, SerializeField] private float maximumJumpForce = 50;
+    [SerializeField] private float multiplierMaximumJumpForce = 1;
+    [SerializeField] private float minimumMaximumJumpForce = 50;
+    [SerializeField] private float maximumMaximumJumpForce = 100;
+
+    [ReadOnly, SerializeField] private float currentScale = 1;
+    [SerializeField] private float multiplierScale = 0.25f;
+    [SerializeField] private float minimumScale = 1;
+    [SerializeField] private float maximumScale = 10;
 
     [SerializeField] private GameObject currentCamera;
 
@@ -193,7 +223,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void SuckUpdate()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, suckRadius);
 
         foreach(var hitCollider in hitColliders) 
         {
@@ -203,5 +233,31 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
             }
         }
+    }
+
+    public void UpdateStats(int _mineralCount)
+    {
+        movementForceMultiplier = minimumMovementForceMultiplier + multiplierMovementForceMultiplier * _mineralCount;
+        if (movementForceMultiplier > maximumMovementForceMultiplier) { movementForceMultiplier = maximumMovementForceMultiplier; }
+
+        chargeForcecMultiplier = minimumChargeForcecMultiplier + multiplierChargeForcecMultiplier * _mineralCount;
+        if (chargeForcecMultiplier > maximumChargeForcecMultiplier) { chargeForcecMultiplier = maximumChargeForcecMultiplier; }
+
+        maxSpeed = minimumMaxSpeed + multiplierMaxSpeed * _mineralCount;
+        if (maxSpeed > maximumMaxSpeed) { maxSpeed = maximumMaxSpeed; }
+
+        minimumJumpForce = minimumMinimumJumpForce + multiplierMinimumJumpForce * _mineralCount;
+        if (minimumJumpForce > maximumJumpForce) { minimumJumpForce = maximumJumpForce; }
+
+        maximumJumpForce = minimumMaximumJumpForce + multiplierMaximumJumpForce * _mineralCount;
+        if (maximumJumpForce > maximumMaximumJumpForce) { maximumJumpForce = maximumMaximumJumpForce; }
+
+        suckRadius = minimumSuckRadius + multiplierSuckRadius * _mineralCount;
+        if (suckRadius > maximumSuckRadius) { suckRadius = maximumSuckRadius; }
+
+        currentScale = minimumScale + multiplierScale * _mineralCount;
+        if(currentScale > maximumScale) {  currentScale = maximumScale; }
+        transform.localScale= new Vector3(currentScale, currentScale, currentScale);
+
     }
 }
