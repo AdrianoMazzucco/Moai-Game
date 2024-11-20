@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 419418}
   - component: {fileID: 6426442}
+  - component: {fileID: -2359946460514616681}
   m_Layer: 0
   m_Name: PalmTreeDualBendedTwoSided
   m_TagString: Untagged
@@ -56,6 +57,36 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+--- !u!205 &-2359946460514616681
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119418}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2300002, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+    - renderer: {fileID: 2300004, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2300002, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+    - renderer: {fileID: 2300004, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+  - screenRelativeHeight: 0.005
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2300002, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+    - renderer: {fileID: 2300004, guid: 31e0cf65c1498bb459ad7f1c13ad1abc, type: 3}
+  m_Enabled: 1
 --- !u!1 &119420
 GameObject:
   m_ObjectHideFlags: 0

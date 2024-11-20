@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 424274}
   - component: {fileID: 6459010}
   - component: {fileID: 9524274}
+  - component: {fileID: 8762512698546534532}
   m_Layer: 0
   m_Name: PalmTreeSingleStraightOneSided
   m_TagString: Untagged
@@ -79,6 +80,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!205 &8762512698546534532
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124274}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.016151428, y: 7.416574, z: 0.05142045}
+  m_Size: 16.03315
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324276}
+    - renderer: {fileID: 2324274}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324274}
+    - renderer: {fileID: 2324276}
+  - screenRelativeHeight: 0.005
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324274}
+    - renderer: {fileID: 2324276}
+  m_Enabled: 1
 --- !u!1 &124276
 GameObject:
   m_ObjectHideFlags: 0
