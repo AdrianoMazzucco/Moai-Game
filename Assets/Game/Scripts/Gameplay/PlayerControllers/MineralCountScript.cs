@@ -11,6 +11,10 @@ public class MineralCountScript : MonoBehaviour
     private void Start()
     {
         UpdateMineralCount();
+        if(playerController == null) 
+        {
+            playerController = GetComponent<PhysicsBasedPlayerMovement>();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
