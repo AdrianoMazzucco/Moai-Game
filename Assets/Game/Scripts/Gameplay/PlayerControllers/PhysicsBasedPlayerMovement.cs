@@ -117,7 +117,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         switch(currentState)
         {
             case MovementState.walking:
@@ -139,8 +139,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             jumpChargeTime += Time.deltaTime;
             if(jumpChargeTime >  time4FullJumpCharge) { jumpChargeTime = time4FullJumpCharge; }
             jumpChargeForce = minimumJumpForce + (maximumJumpForce - minimumJumpForce) * (jumpChargeTime / time4FullJumpCharge);
-            Debug.Log(jumpChargeForce);
+            //Debug.Log(jumpChargeForce);
         }
+
+        Debug.Log(movementForceMultiplier);
     }
 
     private void Movement()
