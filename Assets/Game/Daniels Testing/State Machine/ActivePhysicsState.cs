@@ -71,14 +71,14 @@ public class ActivePhysicsState : MineralBaseState
 
         if (speedRegistered || isSucked)
         {
-            Debug.Log("accessed timer");
+            //Debug.Log("accessed timer");
             //calculates current velocity, sets new previous velocity
             currentSpeed = ((Context.Transform.position - previous).magnitude) / Time.deltaTime;
             previous = Context.Transform.position;
 
             if (transitionTimerActive && timeToTransition > 0)
             {
-                Debug.Log(timeToTransition);
+                //Debug.Log(timeToTransition);
                 timeToTransition -= Time.deltaTime;
 
                 if (timeToTransition <= 0)
@@ -86,7 +86,7 @@ public class ActivePhysicsState : MineralBaseState
                     timeToTransition = 0;
                     transitionTimerActive = false;
                     isKineticTransitionCooldown = true;
-                    Debug.Log("Timer Done");
+                    //Debug.Log("Timer Done");
                 }
             }
         }
@@ -107,7 +107,7 @@ public class ActivePhysicsState : MineralBaseState
             if (Vector3.Dot(Context.Transform.up, Vector3.up) > 0.99f)
             {
                 isUpright = true;
-                Debug.Log("We are upright");
+                //Debug.Log("We are upright");
             }
             else
             {
@@ -117,8 +117,11 @@ public class ActivePhysicsState : MineralBaseState
     }
     public override MineralStateMachine.EStateMineral GetNextState() 
     {
+        //Debug.Log(isKineticTransitionCooldown);
         //Debug.Log(isUpright);
-        
+        //Debug.Log(isGrounded);
+        //Debug.Log(isSucked);
+
 
         if (isKineticTransitionCooldown && isUpright && isGrounded && !isSucked)
         {

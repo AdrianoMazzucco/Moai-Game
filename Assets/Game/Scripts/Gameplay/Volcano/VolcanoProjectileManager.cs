@@ -17,6 +17,11 @@ public class VolcanoProjectileManager : MonoBehaviour
     [SerializeField] private float verticalJumpHeight = 30f;
     [SerializeField] private GameObject projectileGameObject;
     [SerializeField] private Ease projectileEase;
+
+
+
+    private Boulder _boulder;
+    
     #endregion
 
     #region Unity
@@ -25,6 +30,7 @@ public class VolcanoProjectileManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(FirePojectile());
+        _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,31 @@ public class VolcanoProjectileManager : MonoBehaviour
         StopCoroutine(FirePojectile());
     }
 
+    #endregion
+
+    #region Functions
+
+    public void FireVolcano(int _burstCount,Vector3 center,float inner,float outer,float _duration)
+    {
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
+        GameObject projectile;
+        Vector3 endPos;
+        for (int i = 0; i < _burstCount; i++)
+        {
+                 
+            Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
+            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+            endPos = new Vector3(direction.x + center.x,
+                0,
+                direction.y + center.z);
+            endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+
+            projectile.transform.DOJump(endPos, verticalJumpHeight, 1, _duration).SetEase(projectileEase);
+            GameObject g =  GameManager.Instance.DecalPool.GetObject(endPos);
+            StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
+        }
+    }
+    
     #endregion
 
     #region Coroutines and Invokes
@@ -56,12 +87,14 @@ public class VolcanoProjectileManager : MonoBehaviour
                  
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
                 projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+                
                 endPos = new Vector3(direction.x + transform.position.x,
                     0,
                     direction.y + transform.position.z);
                 endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
 
-                projectile.transform.DOJump(endPos, verticalJumpHeight, 1, projectileAirTime).SetEase(projectileEase);
+                projectile.GetComponent<Boulder>().FireProjectile(endPos, verticalJumpHeight, projectileAirTime,projectileEase);
+               
                 GameObject g =  GameManager.Instance.DecalPool.GetObject(endPos);
                 StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
             }
