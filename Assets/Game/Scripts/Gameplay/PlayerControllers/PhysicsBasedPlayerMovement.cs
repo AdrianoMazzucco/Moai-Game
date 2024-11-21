@@ -19,6 +19,19 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private Rigidbody playerRB;
     private float chargeAmount = 0;
     private MovementState currentState = MovementState.walking;
+
+    public MovementState CurrentState
+    {
+        get
+        {
+            return currentState;
+        }
+        set
+        {
+            currentState = value;
+            CheckAnimation();
+        }
+    }
     private float flightTime = 0;
     [SerializeField] private float flightDuration = 3;
 
@@ -77,8 +90,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     #endregion
     
     [SerializeField] private GameObject currentCamera;
-
-
+    [SerializeField] private Animator playerAnimator;
+    
     private void OnEnable()
     {
         chargeAttack.performed += StartCharge;
@@ -118,7 +131,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void Update()
     {        
-        switch(currentState)
+        switch(CurrentState)
         {
             case MovementState.walking:
                 Movement();
@@ -148,6 +161,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void Movement()
     {
         Vector2 inputDirection = movement.ReadValue<Vector2>();
+        playerAnimator.SetFloat("WalkBlend",playerRB.linearVelocity.magnitude);
         if (inputDirection != Vector2.zero)
         {
             playerRB.freezeRotation = true;
@@ -180,6 +194,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             Quaternion deltaRotation = Quaternion.Euler(turnAngle * Time.fixedDeltaTime);
             transform.forward = Vector3.Lerp(transform.forward, directionTotal, 0.005f);
         }
+        
     }
 
     private void Flight()
@@ -189,7 +204,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if( flightTime > flightDuration ) 
         {
             flightTime = 0;
-            currentState = MovementState.walking;
+            CurrentState = MovementState.walking;
         }
     }
 
@@ -205,17 +220,17 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (currentState == MovementState.walking)
+        if (CurrentState == MovementState.walking)
         {
-            currentState = MovementState.charging;
+            CurrentState = MovementState.charging;
         }
     }
 
     private void ChargeAttack(InputAction.CallbackContext obj) 
     {
-        if (currentState != MovementState.charging) return;
+        if (CurrentState != MovementState.charging) return;
 
-        currentState = MovementState.flying;
+        CurrentState = MovementState.flying;
         chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
@@ -239,14 +254,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartSuck(InputAction.CallbackContext obj)
     {
-        currentState = MovementState.sucking;
+        CurrentState = MovementState.sucking;
     }
 
     private void EndSuck(InputAction.CallbackContext obj)
     {
-       currentState = MovementState.walking;
+       CurrentState = MovementState.walking;
     }
-
+    
     private void SuckUpdate()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, suckRadius);
@@ -261,6 +276,26 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         }
     }
 
+
+    private void CheckAnimation()
+    {
+        switch(CurrentState)
+        {
+            case MovementState.walking:
+                playerAnimator.SetTrigger("Walk");
+                break;
+            case MovementState.charging:
+                playerAnimator.SetTrigger("Charge");
+                break; 
+            case MovementState.flying:
+                playerAnimator.SetTrigger("Spin");
+                break;
+            case MovementState.sucking:
+                playerAnimator.SetTrigger("Suck");
+                break;
+        }
+    }
+    
     public void UpdateStats(int _mineralCount)
     {
         movementForceMultiplier = minimumMovementForceMultiplier + multiplierMovementForceMultiplier * _mineralCount;
