@@ -23,11 +23,11 @@ Material:
   m_Name: Cliff05_Grass
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: f73031b949654e49af6ba962a537eb0f, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
   - _DETAIL_MULX2
-  - _METALLICSPECGLOSSMAP
   - _NORMALMAP
+  - _OCCLUSIONMAP
   m_InvalidKeywords:
   - _METALLICGLOSSMAP
   - _VERTEXCOLORCHANNEL_B
@@ -43,6 +43,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 371b9280e24847eeae41bcdd324bf170, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: f60dbc832030412db7e3ce9554f6ec22, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -52,21 +56,33 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 371b9280e24847eeae41bcdd324bf170, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9bd0e1b453af416f86a2578c8ddcdad5, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: c0a288bd8dc27e946b382ed719061d62, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9bd0e1b453af416f86a2578c8ddcdad5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 2800000, guid: 9bd0e1b453af416f86a2578c8ddcdad5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BlendPower: 0
     - _LayerPower: 0.577
+    - _Metallic: 0.3
+    - _Parallax: 0.005
+    - _Smoothness: 0.2
+    - _WorkflowMode: 1
     - __dirty: 0
     m_Colors: []
   m_BuildTextureStacks: []
