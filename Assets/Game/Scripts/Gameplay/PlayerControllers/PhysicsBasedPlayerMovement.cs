@@ -220,7 +220,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking)
+        if (currentState == MovementState.walking && !jumpCharging)
         {
             CurrentState = MovementState.charging;
         }
@@ -238,23 +238,30 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if (CheckGrounded())
+        if (currentState == MovementState.walking)
         {
+            jumpChargeTime = 0;
             jumpCharging = true;
         }
     }
 
-    private void Jump(InputAction.CallbackContext obj) 
+    private void Jump(InputAction.CallbackContext obj)
     {
-        if(!jumpCharging) { return; }
-        jumpCharging = false;
-        jumpChargeTime = 0;
-        playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
+        if (!jumpCharging) { return; }
+        if (CheckGrounded())
+        {
+            jumpCharging = false;
+            jumpChargeTime = 0;
+            playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
+        }
     }
 
     private void StartSuck(InputAction.CallbackContext obj)
     {
-        CurrentState = MovementState.sucking;
+        if (currentState == MovementState.walking && !jumpCharging)
+        {
+            currentState = MovementState.sucking;
+        }
     }
 
     private void EndSuck(InputAction.CallbackContext obj)
@@ -330,6 +337,6 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, currentScale);
+        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2F);
     }
 }
