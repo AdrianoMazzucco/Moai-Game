@@ -220,7 +220,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (currentState == MovementState.walking && !jumpCharging)
+        if (CurrentState == MovementState.walking && !jumpCharging)
         {
             CurrentState = MovementState.charging;
         }
@@ -238,7 +238,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if (currentState == MovementState.walking)
+        if (CurrentState == MovementState.walking)
         {
             jumpChargeTime = 0;
             jumpCharging = true;
@@ -258,9 +258,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartSuck(InputAction.CallbackContext obj)
     {
-        if (currentState == MovementState.walking && !jumpCharging)
+        if (CurrentState == MovementState.walking && !jumpCharging)
         {
-            currentState = MovementState.sucking;
+            CurrentState = MovementState.sucking;
         }
     }
 
