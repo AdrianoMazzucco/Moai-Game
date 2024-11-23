@@ -25,7 +25,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _TERRAIN_BLEND_HEIGHT
   - _TERRAIN_INSTANCED_PERPIXEL_NORMAL
   m_InvalidKeywords:
   - _MK_ARTISTIC_ANIMATION_STUTTER
@@ -260,14 +259,14 @@ Material:
     - _DrawnClampMin: 0
     - _DrawnMapScale: 1
     - _DstBlend: 0
-    - _EnableHeightBlend: 1
+    - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GoochRampIntensity: 0.5
     - _HatchingMapScale: 1
-    - _HeightTransition: 0.75
+    - _HeightTransition: 1
     - _Hue: 0
     - _IndirectFade: 1
     - _Initialized: 0

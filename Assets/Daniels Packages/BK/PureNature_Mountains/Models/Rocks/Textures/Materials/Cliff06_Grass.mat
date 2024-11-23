@@ -293,13 +293,13 @@ Material:
     - _OcclusionStrength: 1
     - _OptionsTab: 0
     - _Outline: 1
-    - _OutlineClipOffset: 0
+    - _OutlineClipOffset: 1
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
     - _OutlineSize: 300
-    - _OutlineTab: 0
+    - _OutlineTab: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -331,7 +331,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 0
     - _ThresholdMapScale: 1
     - _Tiling: 0.2
@@ -354,7 +354,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.4235294, g: 0.4235294, b: 0.4235294, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.44, g: 0.39072, b: 0.3872, a: 1}
+    - _EmissionColor: {r: 0.20719104, g: 0.20719104, b: 0.20719104, a: 1}
     - _GoochBrightColor: {r: 1, g: 0.94770557, b: 0.8443396, a: 1}
     - _GoochDarkColor: {r: 0.4245283, g: 0.1778065, b: 0.1501869, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}

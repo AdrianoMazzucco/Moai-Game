@@ -31,7 +31,6 @@ Material:
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
   - _MK_NORMAL_MAP
-  - _MK_OUTLINE_HULL_ORIGIN
   - _MK_RECEIVE_SHADOWS
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
@@ -57,7 +56,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 238ec53f1682958499b657692cb298fc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 141e919ee584cc34893e34bbcf0ee6a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -117,7 +116,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 238ec53f1682958499b657692cb298fc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 141e919ee584cc34893e34bbcf0ee6a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -244,16 +243,16 @@ Material:
     - _LightBandsScale: 0.5
     - _LightThreshold: 0.745
     - _Metallic: 0
-    - _NormalMapIntensity: 1
+    - _NormalMapIntensity: 0
     - _OcclusionStrength: 1
     - _OptionsTab: 1
-    - _Outline: 2
+    - _Outline: 1
     - _OutlineClipOffset: 0
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 5
+    - _OutlineSize: 150
     - _OutlineTab: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -295,11 +294,11 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlbedoColor: {r: 0.54567957, g: 1, b: 0, a: 1}
     - _BaseColor: {r: 0.14117648, g: 0.42352945, b: 0.09019608, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.5456795, g: 1, b: 0, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.12175676, g: 0.33610108, b: 0.036463805, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
