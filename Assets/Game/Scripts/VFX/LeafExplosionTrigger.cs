@@ -42,14 +42,12 @@ public class LeafExplosionTrigger : MonoBehaviour
         // Disable the leaf mesh
         if (leafMesh) leafMesh.SetActive(false);
 
-        /// Enable the parent object containing leaf explosion particles
-        if (leafExplosion)
-        {
+        
             leafExplosion.SetActive(true);
             foreach (ParticleSystem ps in leafExplosion.GetComponentsInChildren<ParticleSystem>())
             {
                 ps.Play(); // Ensure all particles are manually triggered
             }
-        }
+        
     }
 }
