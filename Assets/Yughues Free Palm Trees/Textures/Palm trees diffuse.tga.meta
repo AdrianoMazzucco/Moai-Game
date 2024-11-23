@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 238ec53f1682958499b657692cb298fc
+AssetOrigin:
+  serializedVersion: 1
+  productId: 13540
+  packageName: Yughues Free Palm Trees
+  packageVersion: 1.2
+  assetPath: Assets/Yughues Free Palm Trees/Textures/Palm trees diffuse.tga
+  uploadId: 227389
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -58,7 +65,7 @@ TextureImporter:
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
-  flipbookColumns: 1
+  flipbookColumns: 2
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -81,10 +88,10 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Web
+    buildTarget: WebGL
     maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -141,10 +148,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 13540
-  packageName: Yughues Free Palm Trees
-  packageVersion: 1.2
-  assetPath: Assets/Yughues Free Palm Trees/Textures/Palm trees diffuse.tga
-  uploadId: 227389
