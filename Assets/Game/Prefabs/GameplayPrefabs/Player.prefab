@@ -2103,7 +2103,7 @@ GameObject:
   - component: {fileID: 3690003145838620124}
   - component: {fileID: 9213588451285641435}
   - component: {fileID: 7570318550050928338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2119,7 +2119,7 @@ Transform:
   m_GameObject: {fileID: 5932044501326350265}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2170,13 +2170,13 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 0
+  m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &9213588451285641435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3014,7 +3014,7 @@ GameObject:
   - component: {fileID: 3485762280502091763}
   - component: {fileID: 7506289735495821274}
   - component: {fileID: 6818954337607233847}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tempNose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3724,7 +3724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6297452340817706182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
