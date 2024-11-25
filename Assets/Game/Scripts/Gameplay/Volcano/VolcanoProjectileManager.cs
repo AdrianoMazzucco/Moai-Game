@@ -9,6 +9,11 @@ public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables
 
+
+    [Header("Checks")] 
+    public bool bCheckForPlayer;
+    
+    
     [SerializeField] private float BurstCount = 2f;
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float projectileAirTime;
@@ -17,20 +22,35 @@ public class VolcanoProjectileManager : MonoBehaviour
     [SerializeField] private float verticalJumpHeight = 30f;
     [SerializeField] private GameObject projectileGameObject;
     [SerializeField] private Ease projectileEase;
-
+    
 
 
     private Boulder _boulder;
+    private float DistanceToPlayer;
     
     #endregion
 
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        StartCoroutine(FirePojectile());
+        
         _boulder = projectileGameObject.GetComponent<Boulder>();
+    }
+
+    private void OnEnable()
+    {
+        
+        if (bCheckForPlayer)
+        {
+            InvokeRepeating(nameof(CheckDistanceToPlayer),1f,1f);
+        }
+        else
+        {
+            StartCoroutine(FirePojectile());
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +62,7 @@ public class VolcanoProjectileManager : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(FirePojectile());
+        CancelInvoke(nameof(CheckDistanceToPlayer));
     }
 
     #endregion
@@ -68,7 +89,21 @@ public class VolcanoProjectileManager : MonoBehaviour
             StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.DecalPool,g,projectileAirTime));
         }
     }
-    
+
+    public void CheckDistanceToPlayer()
+    {
+        DistanceToPlayer = Vector3.Distance(GameManager.Instance.playerGameObject.transform.position,
+            this.gameObject.transform.position);
+
+        if (DistanceToPlayer < outerRadius)
+        {
+            StartCoroutine(FirePojectile());
+        }
+        else
+        {
+            StopCoroutine(FirePojectile());
+        }
+    }
     #endregion
 
     #region Coroutines and Invokes
@@ -103,5 +138,8 @@ public class VolcanoProjectileManager : MonoBehaviour
 
         }
     }
+    
+    
+    
     #endregion
 }
