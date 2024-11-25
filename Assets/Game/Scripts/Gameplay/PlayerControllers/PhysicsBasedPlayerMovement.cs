@@ -326,7 +326,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         suckRadius = minimumSuckRadius + multiplierSuckRadius * _mineralCount;
         if (suckRadius > maximumSuckRadius) { suckRadius = maximumSuckRadius; }
 
-        currentScale = minimumScale + multiplierScale * _mineralCount;
+        currentScale = minimumScale + (multiplierScale * _mineralCount);
         if(currentScale > maximumScale) {  currentScale = maximumScale; }
         transform.localScale= new Vector3(currentScale, currentScale, currentScale);
 
