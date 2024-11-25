@@ -25,6 +25,13 @@ public static class Util
         yield return new WaitForSeconds(delay);
         pool.Release(gameObject);
     }
+
+    public static bool CompareWithLayerMask(LayerMask mask,GameObject go)
+    {
+
+        return ((mask.value & (1 << go.layer)) > 0);
+    }
+    
     
     
 }
