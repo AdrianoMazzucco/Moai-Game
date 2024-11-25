@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public class VolcanoProjectileManager : MonoBehaviour
@@ -138,8 +139,23 @@ public class VolcanoProjectileManager : MonoBehaviour
 
         }
     }
-    
-    
-    
+
+
+
+    #endregion
+
+    #region Gizmos
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, innerRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, outerRadius);
+    }
+
+
+
     #endregion
 }
