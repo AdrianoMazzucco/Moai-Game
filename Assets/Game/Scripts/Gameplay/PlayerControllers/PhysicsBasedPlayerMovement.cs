@@ -32,6 +32,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             CheckAnimation();
         }
     }
+
     private float flightTime = 0;
     [SerializeField] private float flightDuration = 3;
 
@@ -154,8 +155,6 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
             jumpChargeForce = minimumJumpForce + (maximumJumpForce - minimumJumpForce) * (jumpChargeTime / time4FullJumpCharge);
             //Debug.Log(jumpChargeForce);
         }
-
-        Debug.Log(movementForceMultiplier);
     }
 
     private void Movement()
@@ -283,7 +282,6 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         }
     }
 
-
     private void CheckAnimation()
     {
         switch(CurrentState)
@@ -337,6 +335,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2F);
+        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f);
     }
+
 }
