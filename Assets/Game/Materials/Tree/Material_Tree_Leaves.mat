@@ -26,12 +26,14 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _MK_ARTISTIC_ANIMATION_STUTTER
+  - _MK_DISSOLVE_DEFAULT
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
   - _MK_OUTLINE_HULL_CLIP
   - _MK_RECEIVE_SHADOWS
   - _MK_RIM_DEFAULT
   - _MK_SPECULAR_ISOTROPIC
+  - _MK_VERTEX_ANIMATION_SINE
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
   - _RECEIVESHADOWS_ON
@@ -208,7 +210,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DiffuseSmoothness: 0
     - _DiffuseThresholdOffset: 0.25
-    - _Dissolve: 0
+    - _Dissolve: 1
     - _DissolveAmount: 0.5
     - _DissolveBorderSize: 0.25
     - _DissolveMapScale: 1
@@ -253,7 +255,7 @@ Material:
     - _RenderFace: 0
     - _RenderPriority: 0
     - _Rim: 1
-    - _RimSize: 0.69
+    - _RimSize: 1.41
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _Saturation: 1
@@ -278,8 +280,8 @@ Material:
     - _StylizeTab: 1
     - _Surface: 0
     - _ThresholdMapScale: 1
-    - _VertexAnimation: 0
-    - _VertexAnimationIntensity: 0.05
+    - _VertexAnimation: 1
+    - _VertexAnimationIntensity: 0.041
     - _VertexAnimationStutter: 0
     - _WorkflowMode: 1
     - _WrappedLighting: 1
@@ -300,6 +302,6 @@ Material:
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 1}
-    - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}
+    - _VertexAnimationFrequency: {r: 10, g: 10, b: 10, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
