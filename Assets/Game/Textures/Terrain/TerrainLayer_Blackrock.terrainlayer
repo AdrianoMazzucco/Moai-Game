@@ -6,18 +6,18 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TerrainLayer_Grass1
-  m_DiffuseTexture: {fileID: 2800000, guid: 141e919ee584cc34893e34bbcf0ee6a0, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}
+  m_Name: TerrainLayer_Blackrock
+  m_DiffuseTexture: {fileID: 2800000, guid: 01dfff477f24abc4591011520a15b6e2, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: bc5458d56bf2b104cabdb95519a3502a, type: 3}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 24, y: 24}
+  m_TileSize: {x: 8, y: 8}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
-  m_NormalScale: 0.5
+  m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_DiffuseRemapMax: {x: 0.1571695, y: 0.4811321, z: 0.07489321, w: 1}
+  m_DiffuseRemapMax: {x: 1, y: 0.3537736, z: 0.3537736, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_MaskMapRemapMax: {x: 1, y: 0, z: 0.01, w: 1}
-  m_SmoothnessSource: 1
+  m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}
+  m_SmoothnessSource: 0
