@@ -58,7 +58,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.530082, z: 0, w: 0.8479464}
   m_LocalPosition: {x: 336.42, y: 14.0084305, z: 860.51}
-  m_LocalScale: {x: 1.2500002, y: 1, z: 1.2500002}
+  m_LocalScale: {x: 1.2500004, y: 1, z: 1.2500004}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7866322162271238488}
@@ -85,8 +85,8 @@ MonoBehaviour:
   innerRadius: 6.4
   outerRadius: 250
   verticalJumpHeight: 24
-  projectileGameObject: {fileID: 0}
-  projectileEase: 0
+  projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
+  projectileEase: 2
 --- !u!1 &4106568616289059138
 GameObject:
   m_ObjectHideFlags: 0
