@@ -236,8 +236,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         //transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);   // ENABLE THIS TO RETURN TO OLD CODE
         flightTime += Time.deltaTime;
         if (bisGrounded) {
-            flightTime += Time.deltaTime;
-           // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
+            playerAnimator.SetTrigger("Vertical");
+            // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
         }
         
         
@@ -409,7 +409,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         float radius;
         Vector3 pos;
        
-        radius = _capsuleCollider.radius;
+        radius = _capsuleCollider.radius * 0.75f;
         pos = transform.position + Vector3.up * (radius * 0.9f);
         
         // else
