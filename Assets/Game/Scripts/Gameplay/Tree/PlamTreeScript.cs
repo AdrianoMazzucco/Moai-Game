@@ -123,21 +123,21 @@ public class PlamTreeScript : MonoBehaviour
     {
         for (int i = 0; i < Leaves.Length; i++)
         {
-            Leaves[i].isKinematic = true;
+            //Leaves[i].isKinematic = true;
             Leaves[i].position = initalLeavesPositions[i];
-             Leaves[i].rotation = initalLeavesRotations[i];
+            Leaves[i].rotation = initalLeavesRotations[i];
             
         }
         for (int i = 0; i < Trunks.Length; i++)
         {
-            Trunks[i].isKinematic = true;
+            //Trunks[i].isKinematic = true;
             Trunks[i].position = initalTrunksPositions[i];
             Trunks[i].rotation = initalTrunksRotations[i];
           
         }
         for (int i = 0; i < Coconuts.Length; i++)
         {
-            Coconuts[i].isKinematic = true;
+            //Coconuts[i].isKinematic = true;
             Coconuts[i].position = initalCoconutsPositions[i];
             Coconuts[i].rotation = initalCoconutsRotations[i];
           
