@@ -8,6 +8,7 @@ public class MineralCountScript : MonoBehaviour
     public int currentHP = 5;
 
     [SerializeField] private int totalMineralCount = 500;
+    [SerializeField] private int startingMineralCount = 50;
     public int currentMineralCount = 50;
 
     private int healCounter = 0;
@@ -17,6 +18,8 @@ public class MineralCountScript : MonoBehaviour
 
     [SerializeField] private float damageCoolDownTimer = 1;
     private float damageTime = 0;
+
+    [SerializeField] private GameObject respawnLocation;
 
     private void Start()
     {
@@ -61,6 +64,18 @@ public class MineralCountScript : MonoBehaviour
             currentMineralCount -= 10;
             damageTime = damageCoolDownTimer;
             UpdateMineralCount();
+
+            if(currentHP <= 0) 
+            {
+                currentHP = totalHP;
+                currentMineralCount = startingMineralCount;
+                UpdateMineralCount();
+                
+                if (respawnLocation != null)
+                {
+                    transform.position = respawnLocation.transform.position;
+                }
+            }
         }
     }
 

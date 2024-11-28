@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1067390723032223925}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 500.6788, y: 3.375, z: 494.40216}
+  m_LocalPosition: {x: 4.1191025, y: 3.375, z: -3.364746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -130,12 +130,12 @@ MonoBehaviour:
   m_BindingMode: 1
   m_SplineCurvature: 0
   m_Orbits:
-  - m_Height: 20
-    m_Radius: 24
-  - m_Height: 8
-    m_Radius: 16
-  - m_Height: 1
-    m_Radius: 6
+  - m_Height: 30
+    m_Radius: 40
+  - m_Height: 16
+    m_Radius: 26
+  - m_Height: 5
+    m_Radius: 20
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 5505939162621915799}
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.75
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.75
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.55
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.65
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.55
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.75
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.65
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1332,7 +1332,7 @@ Transform:
   m_GameObject: {fileID: 4059785731186918635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 496.43616, y: 1, z: 498.6448}
+  m_LocalPosition: {x: 494.86, y: 1, z: 498.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.55
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1703,7 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.55
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1954,7 +1954,7 @@ Transform:
   m_GameObject: {fileID: 5599266790583668395}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -490, y: -2, z: -514}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2121,7 +2121,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6555747190532761116}
   m_Father: {fileID: 6297452340817706182}
@@ -2145,10 +2145,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1.35
+  m_Height: 4.75
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2.35, z: 0}
 --- !u!54 &3690003145838620124
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2157,7 +2157,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5932044501326350265}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2191,43 +2191,43 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 573010d4c174a914ebc88b0fbfdeaa03, type: 3}
   flightDuration: 2
   time4FullJumpCharge: 1
-  tiltBackAngle: 15
+  tiltBackAngle: 20
   movementForceMultiplier: 50
-  multiplierMovementForceMultiplier: -0.04
-  minimumMovementForceMultiplier: 8
-  maximumMovementForceMultiplier: 100
+  multiplierMovementForceMultiplier: -0.06
+  minimumMovementForceMultiplier: 12
+  maximumMovementForceMultiplier: 50
   airMovementForceMultiplier: 30
-  multiplierAirMovementForceMultiplier: -0.03
-  minimumAirMovementForceMultiplier: 3
-  maximumAirMovementForceMultiplier: 10
+  multiplierAirMovementForceMultiplier: 0
+  minimumAirMovementForceMultiplier: 5
+  maximumAirMovementForceMultiplier: 20
   currentDrag: 0
-  multiplierDrag: -0.01
-  minimumDrag: 0.5
+  multiplierDrag: -0.009
+  minimumDrag: 0.4
   maximumDrag: 1
   chargeForcecMultiplier: 150
-  multiplierChargeForcecMultiplier: -0.1
-  minimumChargeForcecMultiplier: 20
-  maximumChargeForcecMultiplier: 100
+  multiplierChargeForcecMultiplier: 2
+  minimumChargeForcecMultiplier: 150
+  maximumChargeForcecMultiplier: 1000
   maxSpeed: 10
-  multiplierMaxSpeed: 0.05
-  minimumMaxSpeed: 7.5
+  multiplierMaxSpeed: 0.5
+  minimumMaxSpeed: 20
   maximumMaxSpeed: 100
   suckRadius: 10
-  multiplierSuckRadius: 0.2
-  minimumSuckRadius: 10
-  maximumSuckRadius: 20
+  multiplierSuckRadius: 0.5
+  minimumSuckRadius: 20
+  maximumSuckRadius: 50
   minimumJumpForce: 10
-  multiplierMinimumJumpForce: 0
-  minimumMinimumJumpForce: 1
-  maximumMinimumJumpForce: 3
+  multiplierMinimumJumpForce: 0.15
+  minimumMinimumJumpForce: 15
+  maximumMinimumJumpForce: 100
   maximumJumpForce: 100
-  multiplierMaximumJumpForce: 0.2
-  minimumMaximumJumpForce: 15
-  maximumMaximumJumpForce: 100
+  multiplierMaximumJumpForce: 1.6
+  minimumMaximumJumpForce: 60
+  maximumMaximumJumpForce: 1000
   currentScale: 1
-  multiplierScale: 0.04
+  multiplierScale: 0.02
   minimumScale: 1
-  maximumScale: 3
+  maximumScale: 2
   currentCamera: {fileID: 7872683393006117165}
   playerAnimator: {fileID: 8548776467910562494}
 --- !u!114 &7570318550050928338
@@ -2242,9 +2242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f06ca397e93442bd9e2ddbf78af19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalHP: 5
+  currentHP: 5
+  totalMineralCount: 500
   currentMineralCount: 0
   mineralCountDisplay: {fileID: 3885433811743341841}
   playerController: {fileID: 9213588451285641435}
+  damageCoolDownTimer: 1
 --- !u!1 &5971470961391965835
 GameObject:
   m_ObjectHideFlags: 3
@@ -2383,7 +2387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2443,7 +2447,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.75
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -2557,7 +2561,7 @@ Transform:
   m_GameObject: {fileID: 6266746684598461710}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 492.1935, y: 3.375, z: 494.40216}
+  m_LocalPosition: {x: -4.366172, y: 3.375, z: -3.3647656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2660,12 +2664,12 @@ MonoBehaviour:
   m_BindingMode: 1
   m_SplineCurvature: 0
   m_Orbits:
-  - m_Height: 20
-    m_Radius: 24
-  - m_Height: 8
-    m_Radius: 16
-  - m_Height: 1
-    m_Radius: 6
+  - m_Height: 30
+    m_Radius: 40
+  - m_Height: 16
+    m_Radius: 26
+  - m_Height: 5
+    m_Radius: 20
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 4900235252334368917}
@@ -2872,7 +2876,7 @@ Transform:
   m_GameObject: {fileID: 6936322655702225711}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 500.6788, y: 3.375, z: 502.88745}
+  m_LocalPosition: {x: 4.1191025, y: 3.375, z: 5.1205444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2975,12 +2979,12 @@ MonoBehaviour:
   m_BindingMode: 1
   m_SplineCurvature: 0
   m_Orbits:
-  - m_Height: 20
-    m_Radius: 24
-  - m_Height: 8
-    m_Radius: 16
-  - m_Height: 1
-    m_Radius: 6
+  - m_Height: 30
+    m_Radius: 40
+  - m_Height: 16
+    m_Radius: 26
+  - m_Height: 5
+    m_Radius: 20
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 8511809268896924904}
@@ -3061,7 +3065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3121,7 +3125,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.65
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -3324,7 +3328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1, z: -6}
+  m_FollowOffset: {x: 0, y: 5, z: -20}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3384,7 +3388,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.65
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -3419,7 +3423,7 @@ Transform:
   m_GameObject: {fileID: 7841572154384680722}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 492.1935, y: 3.375, z: 502.88745}
+  m_LocalPosition: {x: -4.366188, y: 3.375, z: 5.1205444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3522,12 +3526,12 @@ MonoBehaviour:
   m_BindingMode: 1
   m_SplineCurvature: 0
   m_Orbits:
-  - m_Height: 20
-    m_Radius: 24
-  - m_Height: 8
-    m_Radius: 16
-  - m_Height: 1
-    m_Radius: 6
+  - m_Height: 30
+    m_Radius: 40
+  - m_Height: 16
+    m_Radius: 26
+  - m_Height: 5
+    m_Radius: 20
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 4316728703716321023}
@@ -3697,7 +3701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 500.67883
+      value: -4.366188
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3705,7 +3709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 494.40216
+      value: 5.1205444
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3725,7 +3729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -10.546
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3832,15 +3836,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3848,7 +3852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3882,9 +3886,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_Name
       value: Moai_Character_Model_rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267253823419170595, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267253823419170595, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267253823419170595, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267253823419170595, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7134948111089829045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3900,35 +3924,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0442
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.0442
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0442
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.37735
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.035645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8684713213250944844, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.51386
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8684713213250944844, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.51386
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8684713213250944844, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.51386
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684713213250944844, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
