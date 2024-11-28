@@ -211,7 +211,6 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
 
         if (CheckGrounded(2)) {
-            Debug.LogError(flightTime);
             flightTime += Time.deltaTime; 
         }
 
