@@ -2228,6 +2228,10 @@ MonoBehaviour:
   multiplierScale: 0.02
   minimumScale: 1
   maximumScale: 2
+  currentMass: 5
+  multiplierMass: 1
+  minimumMass: 5
+  maximumMass: 20
   currentCamera: {fileID: 7872683393006117165}
   playerAnimator: {fileID: 8548776467910562494}
 --- !u!114 &7570318550050928338
@@ -2245,10 +2249,12 @@ MonoBehaviour:
   totalHP: 5
   currentHP: 5
   totalMineralCount: 500
+  startingMineralCount: 50
   currentMineralCount: 0
   mineralCountDisplay: {fileID: 3885433811743341841}
   playerController: {fileID: 9213588451285641435}
   damageCoolDownTimer: 1
+  respawnLocation: {fileID: 0}
 --- !u!1 &5971470961391965835
 GameObject:
   m_ObjectHideFlags: 3
@@ -3701,7 +3707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.366188
+      value: 4.1190796
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3834,6 +3840,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1304830962426461265}
     m_Modifications:
+    - target: {fileID: -8694707389081891038, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7440733040a9214688bd4c3eb8a57a2, type: 2}
     - target: {fileID: -8679921383154817045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.75
@@ -3890,6 +3900,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4396642182433536433, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e9ba47095087d44ca0b6416775eb577, type: 2}
+    - target: {fileID: -91681808587120018, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e9ba47095087d44ca0b6416775eb577, type: 2}
     - target: {fileID: 919132149155446097, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_Name
       value: Moai_Character_Model_rig
@@ -3910,6 +3928,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3755235998027395917, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7440733040a9214688bd4c3eb8a57a2, type: 2}
     - target: {fileID: 7134948111089829045, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6300122
