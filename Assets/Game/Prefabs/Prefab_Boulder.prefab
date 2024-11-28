@@ -25010,7 +25010,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 11903b8bf7ec7c54680c711a599a5d9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25213,7 +25213,7 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: -3661639628750336703, guid: 7e0223e1d3e1733499accfa5ebffb67e, type: 3}
+      objectReference: {fileID: 2100000, guid: 11903b8bf7ec7c54680c711a599a5d9f, type: 2}
     - target: {fileID: -348859713845243500, guid: 1734256b42855a44484f0020481002e6, type: 3}
       propertyPath: m_Layer
       value: 9
