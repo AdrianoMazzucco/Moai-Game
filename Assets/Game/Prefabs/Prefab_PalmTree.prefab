@@ -4243,6 +4243,7 @@ GameObject:
   - component: {fileID: 7671538159596600909}
   - component: {fileID: 5602463116673350156}
   - component: {fileID: 4729292304661662352}
+  - component: {fileID: 1948041827264748782}
   m_Layer: 13
   m_Name: Prefab_PalmTree
   m_TagString: Untagged
@@ -4326,7 +4327,7 @@ MonoBehaviour:
   LeavesExplosionForce: 1
   CoconutExplosionForce: 1
   TrunkForceMultiplier: 1
-  RespawnTime: 5
+  RespawnTime: 3
 --- !u!136 &4729292304661662352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4350,3 +4351,15 @@ CapsuleCollider:
   m_Height: 13.756189
   m_Direction: 1
   m_Center: {x: 0, y: 5.171812, z: 0.61731553}
+--- !u!114 &1948041827264748782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8927366502743397227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258214a392f7bb04d8f79ba6b3fe3a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
