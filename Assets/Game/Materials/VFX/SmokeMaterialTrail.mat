@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SmokeMaterial
+  m_Name: SmokeMaterialTrail
   m_Shader: {fileID: -6465566751694194690, guid: 03fb35d2276624a44879d397da8351c8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -129,7 +129,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BrightColor: {r: 0.038024556, g: 0.024479799, b: 0.008429972, a: 0}
+    - _BrightColor: {r: 0.04075372, g: 0.026236804, b: 0.009035022, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 0.49056602, g: 0.32138327, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
