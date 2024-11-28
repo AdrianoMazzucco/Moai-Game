@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,8 +39,12 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float flightDuration = 3;
 
     bool jumpCharging = false;
+    private bool bisGrounded;
     float jumpChargeForce = 0;
     float jumpChargeTime = 0;
+    
+    private CapsuleCollider _capsuleCollider;
+    
     [SerializeField] private float time4FullJumpCharge = 1.5f;
     [SerializeField] private float tiltBackAngle = 45;
 
@@ -140,6 +145,18 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         suckAbility = playerActionMap?.FindAction("Suck");
     }
 
+    private void Start()
+    {
+        _capsuleCollider = this.GetComponent<CapsuleCollider>();
+    }
+
+    private void FixedUpdate()
+    { 
+        bisGrounded = CheckGrounded();
+    }
+
+
+
     private void Update()
     {        
         switch(CurrentState)
@@ -151,7 +168,15 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 ChargeUpdate();
                 break; 
             case MovementState.flying:
-                Flight();
+                if (bisGrounded)
+                {
+                    GroundedFlight();
+                }
+                else
+                {
+                    Flight();
+                }
+
                 break;
             case MovementState.sucking:
                 SuckUpdate();
@@ -184,7 +209,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
             Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
             directionTotal.Normalize();
-            if (CheckGrounded())
+            if (bisGrounded)
             {
                 directionTotal *= movementForceMultiplier;
             }
@@ -210,15 +235,30 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void Flight()
     {
         transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
-
-        if (CheckGrounded(2)) {
-            flightTime += Time.deltaTime; 
-        }
+        flightTime += Time.deltaTime;
+        // if (CheckGrounded(1.5f)) {
+        //     flightTime += Time.deltaTime;
+        //     transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
+        // }
 
         if( flightTime >= flightDuration ) 
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
+        }
+    }
+
+    private void GroundedFlight()
+    {
+       
+        flightTime += Time.deltaTime;
+        transform.forward = Vector3.Lerp(transform.forward, new Vector3(-1, 0, -1), 0.05f);
+
+        if( flightTime >= flightDuration ) 
+        {
+            flightTime = 0;
+            CurrentState = MovementState.walking;
+           
         }
     }
 
@@ -234,7 +274,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking && !jumpCharging && CheckGrounded())
+        if (CurrentState == MovementState.walking && !jumpCharging && bisGrounded)
         {
             CurrentState = MovementState.charging;
         }
@@ -243,8 +283,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void ChargeAttack(InputAction.CallbackContext obj) 
     {
         if (CurrentState != MovementState.charging) return;
-
+        
         CurrentState = MovementState.flying;
+       
         chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
@@ -263,7 +304,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         if (!jumpCharging) { return; }
-        if (CheckGrounded())
+        if (bisGrounded)
         {
             playerAnimator.SetTrigger("Jump");
             jumpCharging = false;
@@ -356,11 +397,27 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         
     }
 
-    private bool CheckGrounded(int _lengthMultiplier = 1)
+    private bool CheckGrounded(float _lengthMultiplier = 1)
     {
-        bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        //bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        float radius;
+        Vector3 pos;
+       
+        radius = _capsuleCollider.radius * 1.3f;
+        pos = transform.position + Vector3.up * (radius * 0.9f);
+        
+        // else
+        // {
+        //     radius = _capsuleCollider.radius * 0.9f;
+        //     pos = transform.position + Vector3.up * (radius * 0.9f);
+        // }
+    
+        
+        
+        bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
+        bisGrounded = bground;
         playerAnimator.SetBool("isGrounded",bground);
         return bground;
     }
-
+   
 }
