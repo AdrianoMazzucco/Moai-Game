@@ -160,6 +160,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         if(jumpCharging) 
         {
+           
             jumpChargeTime += Time.deltaTime;
             if(jumpChargeTime >  time4FullJumpCharge) { jumpChargeTime = time4FullJumpCharge; }
             jumpChargeForce = minimumJumpForce + (maximumJumpForce - minimumJumpForce) * (jumpChargeTime / time4FullJumpCharge);
@@ -255,6 +256,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         {
             jumpChargeTime = 0;
             jumpCharging = true;
+            playerAnimator.SetTrigger("JumpCharge");
         }
     }
 
@@ -263,6 +265,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if (!jumpCharging) { return; }
         if (CheckGrounded())
         {
+            playerAnimator.SetTrigger("Jump");
             jumpCharging = false;
             jumpChargeTime = 0;
             playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
@@ -355,7 +358,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private bool CheckGrounded(int _lengthMultiplier = 1)
     {
-        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        playerAnimator.SetBool("isGrounded",bground);
+        return bground;
     }
 
 }
