@@ -30,8 +30,15 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         }
         set
         {
-            currentState = value;
-            CheckAnimation();
+            if (currentState != value)
+            {
+                currentState = value;
+                CheckAnimation();
+            }
+            else
+            {
+                currentState = value;
+            }
         }
     }
 
@@ -168,15 +175,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 ChargeUpdate();
                 break; 
             case MovementState.flying:
-                if (bisGrounded)
-                {
-                    GroundedFlight();
-                }
-                else
-                {
-                    Flight();
-                }
-
+                Flight();
                 break;
             case MovementState.sucking:
                 SuckUpdate();
@@ -234,33 +233,40 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void Flight()
     {
-        transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
+        //transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);   // ENABLE THIS TO RETURN TO OLD CODE
         flightTime += Time.deltaTime;
-        // if (CheckGrounded(1.5f)) {
-        //     flightTime += Time.deltaTime;
-        //     transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
-        // }
+        if (bisGrounded) {
+            flightTime += Time.deltaTime;
+           // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
+        }
+        
+        
 
         if( flightTime >= flightDuration ) 
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
         }
-    }
 
-    private void GroundedFlight()
-    {
-       
-        flightTime += Time.deltaTime;
-        transform.forward = Vector3.Lerp(transform.forward, new Vector3(-1, 0, -1), 0.05f);
-
-        if( flightTime >= flightDuration ) 
+        if (playerRB.linearVelocity.magnitude < 2f)
         {
-            flightTime = 0;
-            CurrentState = MovementState.walking;
-           
+           //
         }
     }
+
+    // private void GroundedFlight()
+    // {
+    //    
+    //     flightTime += Time.deltaTime;
+    //     transform.forward = Vector3.Lerp(transform.forward, new Vector3(-1, 0, -1), 0.05f);
+    //
+    //     if( flightTime >= flightDuration ) 
+    //     {
+    //         flightTime = 0;
+    //         CurrentState = MovementState.walking;
+    //        
+    //     }
+    // }
 
     private void ChargeUpdate()
     {
@@ -293,11 +299,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking)
+        if (CurrentState == MovementState.walking && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
         {
             jumpChargeTime = 0;
             jumpCharging = true;
-            playerAnimator.SetTrigger("JumpCharge");
+            if(bisGrounded) playerAnimator.SetTrigger("JumpCharge");
         }
     }
 
@@ -403,7 +409,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         float radius;
         Vector3 pos;
        
-        radius = _capsuleCollider.radius * 1.3f;
+        radius = _capsuleCollider.radius;
         pos = transform.position + Vector3.up * (radius * 0.9f);
         
         // else

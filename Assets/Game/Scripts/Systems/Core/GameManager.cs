@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using MoreMountains.Feedbacks;
 using QFSW.MOP2;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
     private void Start()
     {
+        DOTween.SetTweensCapacity(500,500);
         BoulderPool = ObjectPool.Create(boulderGameObject);
         DecalPool = ObjectPool.Create(decalGameObject);
         DestructionFXPool = ObjectPool.Create(destructionFXObject);

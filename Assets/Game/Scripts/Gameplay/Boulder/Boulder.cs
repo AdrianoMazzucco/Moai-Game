@@ -13,7 +13,9 @@ public class Boulder : MonoBehaviour
     [SerializeField] private int maxHp = 100;
     [SerializeField] private int hpThreshold = 10;
     private int _currentHealth;
-    
+
+    [Header("Other values")] [Space] [SerializeField]
+    private float totalLifeTime = 15f;
     [Header("Connections")] [Space] 
     [SerializeField] private GameObject shatterModel;
     [SerializeField] private GameObject projectileModel;
@@ -26,6 +28,9 @@ public class Boulder : MonoBehaviour
     [SerializeField] private BoxCollider _triggerCollider;
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
+
+    private Coroutine selfDestroyCoroutine;
+    
     #endregion
 
     #region Properties
@@ -68,11 +73,13 @@ public class Boulder : MonoBehaviour
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
         SwapModels();
+         selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
     }
 
     private void OnDisable()
     {
         OnLanded.RemoveListener(SwapModels);
+        StopCoroutine(selfDestroyCoroutine);
     }
 
     private void Start()
