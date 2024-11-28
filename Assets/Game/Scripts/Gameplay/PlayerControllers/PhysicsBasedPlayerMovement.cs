@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,6 +43,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float time4FullJumpCharge = 1.5f;
     [SerializeField] private float tiltBackAngle = 45;
 
+    /*
+     * Should refactor all the stats
+    */
     #region Player Stats
     [ReadOnly, SerializeField] private float movementForceMultiplier = 30;
     [SerializeField] private float multiplierMovementForceMultiplier = 1;
@@ -87,6 +91,12 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float multiplierScale = 0.25f;
     [SerializeField] private float minimumScale = 1;
     [SerializeField] private float maximumScale = 10;
+
+    [ReadOnly, SerializeField] private float currentMass = 5;
+    [SerializeField] private float multiplierMass = 1;
+    [SerializeField] private float minimumMass = 5;
+    [SerializeField] private float maximumMass = 20;
+
 
     #endregion
     
@@ -199,8 +209,13 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void Flight()
     {
         transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
-        flightTime += Time.deltaTime;
-        if( flightTime > flightDuration ) 
+
+        if (CheckGrounded(2)) {
+            Debug.LogError(flightTime);
+            flightTime += Time.deltaTime; 
+        }
+
+        if( flightTime >= flightDuration ) 
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
@@ -219,7 +234,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking && !jumpCharging)
+        if (CurrentState == MovementState.walking && !jumpCharging && CheckGrounded())
         {
             CurrentState = MovementState.charging;
         }
@@ -331,11 +346,17 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         currentDrag = minimumDrag + multiplierDrag * _mineralCount;
         if (currentDrag > maximumDrag) { currentDrag = maximumDrag; }
         playerRB.linearDamping  = currentDrag;
+
+        currentMass = minimumMass + multiplierMass * _mineralCount;
+        if (currentMass > maximumMass) { currentMass = maximumMass; }
+        playerRB.mass = currentMass;
+            
+        
     }
 
-    private bool CheckGrounded()
+    private bool CheckGrounded(int _lengthMultiplier = 1)
     {
-        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f);
+        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
     }
 
 }
