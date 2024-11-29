@@ -22,11 +22,11 @@ public class Boulder : MonoBehaviour
     [SerializeField] private GameObject projectileModel;
     [SerializeField] private GameObject VFX;
     [Space]
-    private Collider _collider;
     private Rigidbody _rigidbody;
     
     [SerializeField] private GameObject _particleSystem;
     [SerializeField] private BoxCollider _triggerCollider;
+    [SerializeField] private BoxCollider _collider;
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
 
@@ -85,10 +85,14 @@ public class Boulder : MonoBehaviour
         _particleSystem.SetActive(false);
     }
 
+    private void Awake()
+    {
+       
+    }
+
     private void Start()
     {
         _pieceManager = this.GetComponent<BoulderPieceManager>();
-        _collider = this.GetComponent<Collider>();
         _rigidbody = this.GetComponent<Rigidbody>();
         
        
