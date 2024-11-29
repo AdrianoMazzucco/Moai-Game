@@ -56,6 +56,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float tiltBackAngle = 45;
 
     [SerializeField] private float GroundCheckRadiusMultiplier = 1.0f;
+
+    private float groundedDistance = 0;
     /*
      * Should refactor all the stats
     */
@@ -122,8 +124,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
 
     [Header("VFX")] 
-    [SerializeField] private GameObject particleTrail1;
-    [SerializeField] private GameObject particleTrail2;
+    [SerializeField] private ParticleSystem particleTrail1;
+    [SerializeField] private ParticleSystem particleTrail2;
     
     private void OnEnable()
     {
@@ -194,6 +196,20 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 break;
         }
 
+        if (bisGrounded)
+        {
+            
+           if(!particleTrail1.isPlaying) particleTrail1.Play();
+           if(!particleTrail2.isPlaying) particleTrail2.Play();
+
+        }
+        else
+        {
+            particleTrail1.Stop();
+            particleTrail1.Clear();
+            particleTrail2.Stop();
+            particleTrail2.Clear();
+        }
         if(jumpCharging) 
         {
            
@@ -456,24 +472,25 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         //bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
         float radius;
         Vector3 pos;
-       
+
         radius = _capsuleCollider.radius * GroundCheckRadiusMultiplier;
         pos = transform.position + Vector3.up * (radius * 0.9f);
-        
+
         // else
         // {
         //     radius = _capsuleCollider.radius * 0.9f;
         //     pos = transform.position + Vector3.up * (radius * 0.9f);
         // }
-    
-        
-        
+
+
+
         bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
         bisGrounded = bground;
-        playerAnimator.SetBool("isGrounded",bground);
+        playerAnimator.SetBool("isGrounded", bground);
         
-        particleTrail1.SetActive(bground);
-        particleTrail2.SetActive(bground);
+
+
+
         return bground;
     }
    
