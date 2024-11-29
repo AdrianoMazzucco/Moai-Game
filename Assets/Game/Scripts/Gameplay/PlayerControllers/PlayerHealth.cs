@@ -5,7 +5,7 @@ public class PlayerHealth : MonoBehaviour
     #region Variables
 
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int currentHealth
+    [SerializeField] private int currentHealth ;
 
     #endregion
 
