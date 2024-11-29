@@ -70,7 +70,7 @@ public class BoulderPieceManager : MonoBehaviour
     {
         foreach (var piece in Pieces)
         {
-            piece.SetActive(true);
+            piece.SetActive(false);
         }
         for (int i = 0; i < rb.Length; i++)
         {

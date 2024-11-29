@@ -3,6 +3,8 @@ using System.Collections;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables
@@ -10,7 +12,8 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     [Header("Checks")] 
     public bool bCheckForPlayer;
-    
+
+    [SerializeField] private float variance = 10f;
     
     [SerializeField] private float BurstCount = 2f;
     [SerializeField] private float timeBetweenSpawns;
@@ -139,9 +142,9 @@ public class VolcanoProjectileManager : MonoBehaviour
 
                 if (bCheckForPlayer)
                 {
-                    endPos = new Vector3(GameManager.Instance.playerGameObject.transform.position.x,
+                    endPos = new Vector3(GameManager.Instance.playerGameObject.transform.position.x + Random.Range(-variance,variance),
                         0,
-                        GameManager.Instance.playerGameObject.transform.position.z);
+                        GameManager.Instance.playerGameObject.transform.position.z + Random.Range(-variance,variance));
                     endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
                 }
                 else

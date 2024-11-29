@@ -78,6 +78,7 @@ public class Boulder : MonoBehaviour
     {  
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
+        OnLanded.AddListener(CollideWithTerrain);
         SwapModels();
          selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
          _currentHealth = maxHp;
@@ -87,6 +88,7 @@ public class Boulder : MonoBehaviour
     private void OnDisable()
     {
         OnLanded.RemoveListener(SwapModels);
+        OnLanded.RemoveListener(CollideWithTerrain);
         StopCoroutine(selfDestroyCoroutine);
         _particleSystem.SetActive(false);
     }
@@ -121,6 +123,12 @@ public class Boulder : MonoBehaviour
     {
         _collider.enabled = false;
         _pieceManager.Break(lastAttacktype);
+    }
+
+    private void CollideWithTerrain()
+    {
+        _triggerCollider.enabled = false;
+        _particleSystem.SetActive(true);
     }
 
     private void SwapModels()
@@ -165,12 +173,11 @@ public class Boulder : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 6)
-        {
-            _triggerCollider.enabled = false;
-            _particleSystem.SetActive(true);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.layer == 6)
+    //     {
+    //        
+    //     }
+    // }
 }
