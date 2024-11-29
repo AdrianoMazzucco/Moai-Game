@@ -64,6 +64,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float multiplierMovementForceMultiplier = 1;
     [SerializeField] private float minimumMovementForceMultiplier = 30;
     [SerializeField] private float maximumMovementForceMultiplier = 60;
+    
+    [ReadOnly, SerializeField] private float SuckMovementForceMultiplier = 10;
+    [SerializeField] private float SuckmultiplierMovementForceMultiplier = 1;
+    [SerializeField] private float SuckminimumMovementForceMultiplier = 15;
+    [SerializeField] private float SuckmaximumMovementForceMultiplier = 30;
 
     [ReadOnly, SerializeField] private float airMovementForceMultiplier = 15;
     [SerializeField] private float multiplierAirMovementForceMultiplier = 1;
@@ -115,6 +120,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject currentCamera;
     [SerializeField] private Animator playerAnimator;
+
+    [Header("VFX")] 
+    [SerializeField] private GameObject particleTrail1;
+    [SerializeField] private GameObject particleTrail2;
     
     private void OnEnable()
     {
@@ -327,12 +336,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if (CurrentState == MovementState.walking && !jumpCharging)
         {
             CurrentState = MovementState.sucking;
+            playerAnimator.SetBool("isSuck",true);
         }
     }
 
     private void EndSuck(InputAction.CallbackContext obj)
     {
        CurrentState = MovementState.walking;
+       playerAnimator.SetBool("isSuck",false);
     }
     
     private void SuckUpdate()
@@ -346,6 +357,40 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 Vector3 direction = transform.position - hitCollider.transform.position;
                 hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
             }
+        }
+        Vector2 inputDirection = movement.ReadValue<Vector2>();
+        playerAnimator.SetFloat("WalkBlend",playerRB.linearVelocity.magnitude);
+        if (inputDirection != Vector2.zero)
+        {
+            playerRB.freezeRotation = true;
+
+            Vector3 camForward = transform.position - currentCamera.transform.position;
+            camForward.y = 0;
+            camForward.Normalize();
+
+            Vector3 camRight = Vector3.Cross(new Vector3(0, 1, 0), camForward);
+
+            Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
+            directionTotal.Normalize();
+            if (bisGrounded)
+            {
+                directionTotal *= SuckMovementForceMultiplier;
+            }
+            else
+            {
+                directionTotal *= airMovementForceMultiplier;
+            }
+            if (jumpCharging) { directionTotal *= 0.5f; }
+
+            playerRB.AddForce(directionTotal, ForceMode.Acceleration);
+            
+            if (playerRB.linearVelocity.magnitude > maxSpeed)
+            {
+                playerRB.linearVelocity = playerRB.linearVelocity.normalized * maxSpeed;
+            }
+            Vector3 turnAngle = new Vector3(directionTotal.x, directionTotal.z, directionTotal.y);
+            Quaternion deltaRotation = Quaternion.Euler(turnAngle * Time.fixedDeltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, directionTotal, 0.005f);
         }
     }
 
@@ -363,7 +408,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 playerAnimator.SetTrigger("Spin");
                 break;
             case MovementState.sucking:
-                playerAnimator.SetTrigger("Suck");
+                playerAnimator.SetTrigger("Walk");
                 break;
         }
     }
@@ -426,6 +471,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
         bisGrounded = bground;
         playerAnimator.SetBool("isGrounded",bground);
+        
+        particleTrail1.SetActive(bground);
+        particleTrail2.SetActive(bground);
         return bground;
     }
    

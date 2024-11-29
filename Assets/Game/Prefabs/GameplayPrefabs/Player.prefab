@@ -7055,6 +7055,7 @@ MonoBehaviour:
   flightDuration: 2
   time4FullJumpCharge: 1
   tiltBackAngle: 20
+  GroundCheckRadiusMultiplier: 1
   movementForceMultiplier: 50
   multiplierMovementForceMultiplier: -0.15
   minimumMovementForceMultiplier: 20
@@ -7097,6 +7098,8 @@ MonoBehaviour:
   maximumMass: 20
   currentCamera: {fileID: 7872683393006117165}
   playerAnimator: {fileID: 8548776467910562494}
+  particleTrail1: {fileID: 6997759635518087897}
+  particleTrail2: {fileID: 5750842796304626937}
 --- !u!114 &7570318550050928338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13430,7 +13433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1190796
+      value: 4.1191025
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
