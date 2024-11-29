@@ -29,7 +29,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     private Boulder _boulder;
     private float DistanceToPlayer;
-    private Coroutine fireCoroutine;
+    private IEnumerator fireCoroutine ;
     private bool isFiring;
     #endregion
 
@@ -42,10 +42,14 @@ public class VolcanoProjectileManager : MonoBehaviour
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+    private void Awake()
+    {
+        fireCoroutine = FirePojectile();
+    }
+
     void Start()
     {
-        
+       
         _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
@@ -59,7 +63,7 @@ public class VolcanoProjectileManager : MonoBehaviour
         else
         {
              isFiring = true;
-             fireCoroutine =  StartCoroutine(FirePojectile());
+             StartCoroutine(fireCoroutine);
         }
     }
 
@@ -109,7 +113,7 @@ public class VolcanoProjectileManager : MonoBehaviour
         if (DistanceToPlayer < outerRadius && !isFiring)
         {
             isFiring = true;
-           fireCoroutine =  StartCoroutine(FirePojectile());
+            StartCoroutine(fireCoroutine);
         }
         else if(DistanceToPlayer > outerRadius)
         {
