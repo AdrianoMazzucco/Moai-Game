@@ -128,10 +128,10 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 1
-  m_SplineCurvature: 0
+  m_SplineCurvature: 0.4
   m_Orbits:
-  - m_Height: 30
-    m_Radius: 40
+  - m_Height: 35
+    m_Radius: 32
   - m_Height: 16
     m_Radius: 26
   - m_Height: 5
@@ -1954,7 +1954,7 @@ Transform:
   m_GameObject: {fileID: 5599266790583668395}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.11, y: 0, z: -3.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2364,7 +2364,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -7278,7 +7278,7 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 573010d4c174a914ebc88b0fbfdeaa03, type: 3}
   playerRB: {fileID: 0}
   flightDuration: 2
-  time4FullJumpCharge: 1
+  time4FullJumpCharge: 0.5
   tiltBackAngle: 20
   GroundCheckRadiusMultiplier: 1
   movementForceMultiplier: 50
@@ -7319,7 +7319,7 @@ MonoBehaviour:
   maximumMaximumJumpForce: 1000
   currentScale: 1
   multiplierScale: 0.02
-  minimumScale: 1
+  minimumScale: 0.75
   maximumScale: 2
   currentMass: 5
   multiplierMass: 1
@@ -7327,8 +7327,8 @@ MonoBehaviour:
   maximumMass: 20
   currentCamera: {fileID: 7872683393006117165}
   playerAnimator: {fileID: 8548776467910562494}
-  particleTrail1: {fileID: 7314482015013858656}
-  particleTrail2: {fileID: 3568896867022803007}
+  particleTrail1: {fileID: 6997759635518087897}
+  particleTrail2: {fileID: 5750842796304626937}
 --- !u!114 &7570318550050928338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7344,7 +7344,7 @@ MonoBehaviour:
   totalHP: 5
   currentHP: 5
   totalMineralCount: 500
-  startingMineralCount: 50
+  startingMineralCount: 0
   currentMineralCount: 0
   mineralCountDisplay: {fileID: 3885433811743341841}
   playerController: {fileID: 9213588451285641435}
@@ -7782,10 +7782,10 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 1
-  m_SplineCurvature: 0
+  m_SplineCurvature: 0.4
   m_Orbits:
-  - m_Height: 30
-    m_Radius: 40
+  - m_Height: 35
+    m_Radius: 32
   - m_Height: 16
     m_Radius: 26
   - m_Height: 5
@@ -8097,10 +8097,10 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 1
-  m_SplineCurvature: 0
+  m_SplineCurvature: 0.4
   m_Orbits:
-  - m_Height: 30
-    m_Radius: 40
+  - m_Height: 35
+    m_Radius: 32
   - m_Height: 16
     m_Radius: 26
   - m_Height: 5
@@ -8176,7 +8176,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -13504,10 +13504,10 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 1
-  m_SplineCurvature: 0
+  m_SplineCurvature: 0.4
   m_Orbits:
-  - m_Height: 30
-    m_Radius: 40
+  - m_Height: 35
+    m_Radius: 32
   - m_Height: 16
     m_Radius: 26
   - m_Height: 5
@@ -13714,7 +13714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.119095
+      value: -4.366173
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13722,7 +13722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.1205444
+      value: -3.364746
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
