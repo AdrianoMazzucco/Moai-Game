@@ -85,6 +85,11 @@ public class Boulder : MonoBehaviour
         _particleSystem.SetActive(false);
     }
 
+    private void Awake()
+    {
+        _collider = this.GetComponent<Collider>();
+    }
+
     private void Start()
     {
         _pieceManager = this.GetComponent<BoulderPieceManager>();
