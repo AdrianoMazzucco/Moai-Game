@@ -21,15 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TransparentGrass
-  m_Shader: {fileID: 4800000, guid: 0090e1ad98e67474688688c537c151d7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 65f8982ee37c28d45a36fa523f1d4950, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _MK_ALPHA_CLIPPING
   - _MK_COLOR_GRADING_ALBEDO
   - _MK_SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
-  - _ALPHACLIPPING_ON
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
@@ -192,8 +190,8 @@ Material:
     - _AlbedoMapIntensity: 1
     - _AlembicMotionVectors: 0
     - _AlphaClip: 0
-    - _AlphaClipping: 1
-    - _AlphaCutoff: 0.5
+    - _AlphaClipping: 0
+    - _AlphaCutoff: 0
     - _AlphaToMask: 0
     - _Artistic: 0
     - _ArtisticFrequency: 1
@@ -207,12 +205,16 @@ Material:
     - _BlendSrcAlpha: 1
     - _Brightness: 2
     - _BumpScale: 1
+    - _CameraFade: 0
+    - _CameraFadeFarDistance: 2
+    - _CameraFadeNearDistance: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorBlend: 0
     - _ColorGrading: 1
     - _Contrast: 1.13
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseSmoothness: 0
@@ -227,6 +229,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Flipbook: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -258,6 +261,7 @@ Material:
     - _OutlineSize: 50
     - _OutlineTab: 1
     - _Parallax: 0.005
+    - _ParticlesTab: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RefractionDistortion: 0.1
@@ -274,6 +278,9 @@ Material:
     - _SketchMapScale: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SoftFade: 0
+    - _SoftFadeFarDistance: 1
+    - _SoftFadeNearDistance: 0
     - _Specular: 1
     - _SpecularHighlights: 1
     - _SpecularIntensity: 1
@@ -300,9 +307,10 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     m_Colors:
-    - _AlbedoColor: {r: 0.087180234, g: 0.23584908, b: 0, a: 0.5019608}
+    - _AlbedoColor: {r: 0.3964934, g: 0.6226415, b: 0.45635614, a: 0.16078432}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.08718019, g: 0.23584905, b: 0, a: 0.5019608}
+    - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.39649338, g: 0.62264144, b: 0.45635605, a: 0.16078432}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -312,6 +320,7 @@ Material:
     - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SoftFadeModeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _VertexAnimationFrequency: {r: 0.1, g: 0.1, b: 0.1, a: 0}
