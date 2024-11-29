@@ -58,6 +58,7 @@ public class VolcanoProjectileManager : MonoBehaviour
         }
         else
         {
+             isFiring = true;
              fireCoroutine =  StartCoroutine(FirePojectile());
         }
     }
@@ -70,6 +71,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     private void OnDisable()
     {
+        isFiring = false;
         StopCoroutine(fireCoroutine);
         CancelInvoke(nameof(CheckDistanceToPlayer));
     }
@@ -106,10 +108,12 @@ public class VolcanoProjectileManager : MonoBehaviour
 
         if (DistanceToPlayer < outerRadius && !isFiring)
         {
+            isFiring = true;
            fireCoroutine =  StartCoroutine(FirePojectile());
         }
         else if(DistanceToPlayer > outerRadius)
         {
+            isFiring = false;
             StopCoroutine(fireCoroutine);
         }
     }
