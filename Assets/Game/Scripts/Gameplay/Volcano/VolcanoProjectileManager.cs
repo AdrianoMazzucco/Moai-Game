@@ -29,7 +29,8 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     private Boulder _boulder;
     private float DistanceToPlayer;
-    
+    private Coroutine fireCoroutine;
+    private bool isFiring;
     #endregion
 
     #region Feel
@@ -57,7 +58,8 @@ public class VolcanoProjectileManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(FirePojectile());
+             isFiring = true;
+             fireCoroutine =  StartCoroutine(FirePojectile());
         }
     }
 
@@ -69,7 +71,8 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(FirePojectile());
+        isFiring = false;
+        StopCoroutine(fireCoroutine);
         CancelInvoke(nameof(CheckDistanceToPlayer));
     }
 
@@ -103,13 +106,15 @@ public class VolcanoProjectileManager : MonoBehaviour
         DistanceToPlayer = Vector3.Distance(GameManager.Instance.playerGameObject.transform.position,
             this.gameObject.transform.position);
 
-        if (DistanceToPlayer < outerRadius)
+        if (DistanceToPlayer < outerRadius && !isFiring)
         {
-            StartCoroutine(FirePojectile());
+            isFiring = true;
+           fireCoroutine =  StartCoroutine(FirePojectile());
         }
-        else
+        else if(DistanceToPlayer > outerRadius)
         {
-            StopCoroutine(FirePojectile());
+            isFiring = false;
+            StopCoroutine(fireCoroutine);
         }
     }
     #endregion
