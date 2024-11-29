@@ -8,7 +8,7 @@ public class PlamTreeScript : MonoBehaviour
     [Header("Connections")]
     [SerializeField] private GameObject[] GameObjectsToActivateOnContact;
     [SerializeField] private GameObject[] GameObjectsToDEactivateOnContact;
-    
+    [SerializeField] private CapsuleCollider _capsuleCollider;
     
     
     [SerializeField] private Rigidbody[] Leaves;
@@ -82,6 +82,7 @@ public class PlamTreeScript : MonoBehaviour
             _collisionForce = other.GetComponent<Rigidbody>().linearVelocity;
             if (_collisionForce.magnitude > BigBreakThreshold)
             {
+                _capsuleCollider.enabled = false;
                 BigBreak(_collisionForce);
             }
             // else if(_collisionForce.magnitude > SmallBreakThreshold)
@@ -121,6 +122,7 @@ public class PlamTreeScript : MonoBehaviour
 
     private void RestorePositions()
     {
+        _capsuleCollider.enabled = true;
         for (int i = 0; i < Leaves.Length; i++)
         {
             Leaves[i].isKinematic = true;
@@ -164,7 +166,7 @@ public class PlamTreeScript : MonoBehaviour
     public void BigBreak(Vector3 collisionForce)
     {
         SwapModelsToRigidbodies();
-        
+
         foreach (var leaf in Leaves)
         {
             leaf.isKinematic = false;

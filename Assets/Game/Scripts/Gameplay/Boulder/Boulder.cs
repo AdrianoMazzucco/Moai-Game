@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -63,7 +64,12 @@ public class Boulder : MonoBehaviour
     private UnityEvent OnLanded = new UnityEvent();
 
     #endregion
-    
+
+    #region Feel
+
+    [SerializeField] private MMF_Player DamageMMF;
+
+    #endregion
     
     
     #region Unity
@@ -72,6 +78,7 @@ public class Boulder : MonoBehaviour
     {  
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
+        OnLanded.AddListener(CollideWithTerrain);
         SwapModels();
          selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
          _currentHealth = maxHp;
@@ -81,6 +88,7 @@ public class Boulder : MonoBehaviour
     private void OnDisable()
     {
         OnLanded.RemoveListener(SwapModels);
+        OnLanded.RemoveListener(CollideWithTerrain);
         StopCoroutine(selfDestroyCoroutine);
         _particleSystem.SetActive(false);
     }
@@ -117,6 +125,12 @@ public class Boulder : MonoBehaviour
         _pieceManager.Break(lastAttacktype);
     }
 
+    private void CollideWithTerrain()
+    {
+        _triggerCollider.enabled = false;
+        _particleSystem.SetActive(true);
+    }
+
     private void SwapModels()
     {
 
@@ -151,20 +165,19 @@ public class Boulder : MonoBehaviour
        
         if (collision.gameObject.layer == 3)
         {
-           
+            DamageMMF?.PlayFeedbacks();
             CurrentHealth -= (int)(collision.impulse.magnitude *
                              collideWithPlayerDamageMultipler);
-            Debug.Log("Collided with player" +  collision.impulse.magnitude);
+         
         }
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 6)
-        {
-            _triggerCollider.enabled = false;
-            _particleSystem.SetActive(true);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.layer == 6)
+    //     {
+    //        
+    //     }
+    // }
 }

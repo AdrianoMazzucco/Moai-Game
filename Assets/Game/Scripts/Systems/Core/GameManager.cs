@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     #region Pools
 
     public ObjectPool BoulderPool;
+    public ObjectPool MineralPool;
     public ObjectPool DecalPool;
     public ObjectPool DestructionFXPool;
 
@@ -28,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject boulderGameObject;
     [SerializeField] private GameObject decalGameObject;
     [SerializeField] private GameObject destructionFXObject;
-
+    [SerializeField] private GameObject mineralRuby;
 
 
     [Header("MMFs")] [SerializeField] 
@@ -42,7 +43,8 @@ public class GameManager : Singleton<GameManager>
         BoulderPool = ObjectPool.Create(boulderGameObject);
         DecalPool = ObjectPool.Create(decalGameObject);
         DestructionFXPool = ObjectPool.Create(destructionFXObject);
-    }
+        MineralPool = ObjectPool.Create(mineralRuby);
+    }   
 
     #region Methods
 
