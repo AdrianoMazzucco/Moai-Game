@@ -521,7 +521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &669640458
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1180,6 +1180,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5602463116673350156, guid: 502eb82f7fca9844eb3e24acdea102c3, type: 3}
+      propertyPath: TrunkForceMultiplier
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7671538159596600909, guid: 502eb82f7fca9844eb3e24acdea102c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.1
