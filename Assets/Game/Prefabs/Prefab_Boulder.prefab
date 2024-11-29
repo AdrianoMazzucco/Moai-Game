@@ -1497,6 +1497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vfx_Explosion
       objectReference: {fileID: 0}
+    - target: {fileID: 262293957202056876, guid: db4a0b59829eea242b33474b33922ebc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1278116139343332752, guid: db4a0b59829eea242b33474b33922ebc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.48
