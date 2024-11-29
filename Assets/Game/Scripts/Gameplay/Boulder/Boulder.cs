@@ -25,7 +25,7 @@ public class Boulder : MonoBehaviour
     private Collider _collider;
     private Rigidbody _rigidbody;
     
-    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private GameObject _particleSystem;
     [SerializeField] private BoxCollider _triggerCollider;
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
@@ -75,12 +75,14 @@ public class Boulder : MonoBehaviour
         SwapModels();
          selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
          _currentHealth = maxHp;
+         _collider.enabled = true;
     }
 
     private void OnDisable()
     {
         OnLanded.RemoveListener(SwapModels);
         StopCoroutine(selfDestroyCoroutine);
+        _particleSystem.SetActive(false);
     }
 
     private void Start()
@@ -107,6 +109,7 @@ public class Boulder : MonoBehaviour
     //What happens when HP hits 0
     private void Shatter()
     {
+        _collider.enabled = false;
         _pieceManager.Break(lastAttacktype);
     }
 
@@ -157,7 +160,7 @@ public class Boulder : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             _triggerCollider.enabled = false;
-            _particleSystem.Play();
+            _particleSystem.SetActive(true);
         }
     }
 }
