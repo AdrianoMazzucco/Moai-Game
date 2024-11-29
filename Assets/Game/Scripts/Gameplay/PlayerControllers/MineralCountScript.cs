@@ -1,19 +1,24 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using VHierarchy.Libs;
 
 public class MineralCountScript : MonoBehaviour
 {
-    [SerializeField] private int totalHP = 5;
-    public int currentHP = 5;
+    [SerializeField] private int totalHP = 3;
+    public int currentHP = 3;
 
     [SerializeField] private int totalMineralCount = 500;
-    [SerializeField] private int startingMineralCount = 50;
-    public int currentMineralCount = 50;
+    [SerializeField] private int startingMineralCount = 0;
+    [SerializeField] private int mineralsLostOnHit = 20;
+    public int currentMineralCount = 0;
 
     private int healCounter = 0;
+    [SerializeField] private int mineralRequiredtoHeal = 20;
+    [SerializeField] private int maxMineralToHealth = 60;
 
     [SerializeField] private TMP_Text mineralCountDisplay;
+    [SerializeField] private TMP_Text healthCountDisplay;
     [SerializeField] private PhysicsBasedPlayerMovement playerController;
 
     [SerializeField] private float damageCoolDownTimer = 1;
@@ -44,12 +49,27 @@ public class MineralCountScript : MonoBehaviour
 
             if(currentHP < totalHP) 
             {
-                healCounter++;
-                if(healCounter >= 10)
+                if (healCounter > maxMineralToHealth)
                 {
-                    currentHP++;
-                    healCounter = 0;
+
                 }
+                healCounter++;
+                if(mineralRequiredtoHeal > healCounter)
+                {
+                    currentHP = 1;
+                    
+                } else if (mineralRequiredtoHeal <= healCounter && mineralRequiredtoHeal *2 > healCounter)
+                {
+                    currentHP = 1;
+
+                } else if (mineralRequiredtoHeal*2 <= healCounter && healCounter < maxMineralToHealth) {
+                    currentHP = 2;
+
+                } else if (healCounter == maxMineralToHealth) {
+                    currentHP = 3;
+                    
+                }
+
             }
 
             UpdateMineralCount();
@@ -61,7 +81,7 @@ public class MineralCountScript : MonoBehaviour
         if (damageTime <= 0 && currentHP > 0)
         {
             currentHP--;
-            currentMineralCount -= 10;
+            currentMineralCount -= mineralsLostOnHit;
             damageTime = damageCoolDownTimer;
             UpdateMineralCount();
 
@@ -82,9 +102,12 @@ public class MineralCountScript : MonoBehaviour
     private void UpdateMineralCount()
     {
         if (mineralCountDisplay != null)
-            mineralCountDisplay.text = "Minerals: " + currentMineralCount + "\n HP: "  + currentHP;
+            mineralCountDisplay.text = "Minerals: " + currentMineralCount;
 
-        if(playerController != null)
+        if (healthCountDisplay != null)
+            healthCountDisplay.text = "HP: " + currentHP;
+
+        if (playerController != null)
             playerController.UpdateStats(currentMineralCount);
     }
 }
