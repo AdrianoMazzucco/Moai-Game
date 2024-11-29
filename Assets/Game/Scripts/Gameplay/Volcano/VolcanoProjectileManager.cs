@@ -135,11 +135,22 @@ public class VolcanoProjectileManager : MonoBehaviour
                 fireMMF?.PlayFeedbacks();
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
                 projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position + spawnPos);
-                
-                endPos = new Vector3(direction.x + transform.position.x,
-                    0,
-                    direction.y + transform.position.z);
-                endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+
+
+                if (bCheckForPlayer)
+                {
+                    endPos = new Vector3(GameManager.Instance.playerGameObject.transform.position.x,
+                        0,
+                        GameManager.Instance.playerGameObject.transform.position.z);
+                    endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+                }
+                else
+                {
+                    endPos = new Vector3(direction.x + transform.position.x,
+                        0,
+                        direction.y + transform.position.z);
+                    endPos.y = GameManager.Instance.CurrentTerrain.SampleHeight(endPos);
+                }
 
                 projectile.GetComponent<Boulder>().FireProjectile(endPos, verticalJumpHeight, projectileAirTime,projectileEase);
                
