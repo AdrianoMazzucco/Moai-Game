@@ -11,8 +11,9 @@ public class BoulderPieceManager : MonoBehaviour
     
 
     private Boulder _boulder;
-    
+
     [Header("Destruction")] 
+    [SerializeField] private int NumberOfMinerals = 1;
     [SerializeField] private float ExplosiveForce = 4f;
     [SerializeField] private float ExplosiveRadius = 0.5f;
     [SerializeField] private float PieceDisappearDelay = 1.5f;
@@ -63,6 +64,12 @@ public class BoulderPieceManager : MonoBehaviour
                 }
               
             }
+        }
+        
+        for (int i = 0; i < NumberOfMinerals; i++)
+        {
+            GameManager.Instance.MineralPool.GetObject(this.transform.position).GetComponent<Rigidbody>().AddExplosionForce(ExplosiveForce,this.transform.position,ExplosiveRadius);
+            
         }
 
         StartCoroutine(FadeOutRigidbodies(Pieces));
