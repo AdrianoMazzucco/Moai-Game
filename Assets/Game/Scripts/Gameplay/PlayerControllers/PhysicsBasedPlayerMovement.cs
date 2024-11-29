@@ -18,7 +18,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private InputAction jumpInput;
     private InputAction suckAbility;
 
-    private Rigidbody playerRB;
+    public  Rigidbody playerRB;
     private float chargeAmount = 0;
     private MovementState currentState = MovementState.walking;
 
@@ -55,6 +55,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float time4FullJumpCharge = 1.5f;
     [SerializeField] private float tiltBackAngle = 45;
 
+    [SerializeField] private float GroundCheckRadiusMultiplier = 1.0f;
     /*
      * Should refactor all the stats
     */
@@ -155,6 +156,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void Start()
     {
         _capsuleCollider = this.GetComponent<CapsuleCollider>();
+        GameManager.Instance.playerMovementScript = this;
+        GameManager.Instance.playerGameObject = this.gameObject;
     }
 
     private void FixedUpdate()
@@ -312,7 +315,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if (!jumpCharging) { return; }
         if (bisGrounded)
         {
-            playerAnimator.SetTrigger("Jump");
+            if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpCharge")) playerAnimator.SetTrigger("Jump");
             jumpCharging = false;
             jumpChargeTime = 0;
             playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
@@ -409,7 +412,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         float radius;
         Vector3 pos;
        
-        radius = _capsuleCollider.radius * 0.75f;
+        radius = _capsuleCollider.radius * GroundCheckRadiusMultiplier;
         pos = transform.position + Vector3.up * (radius * 0.9f);
         
         // else

@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     #region Globals
 
     public GameObject playerGameObject;
-
+    public PhysicsBasedPlayerMovement playerMovementScript;
     public Terrain CurrentTerrain;
 
     #region Pools

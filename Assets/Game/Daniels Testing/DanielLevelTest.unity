@@ -38052,12 +38052,20 @@ PrefabInstance:
       value: -4.366173
       objectReference: {fileID: 0}
     - target: {fileID: 7872683393006117160, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872683393006117160, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.364746
       objectReference: {fileID: 0}
     - target: {fileID: 8924352402367633118, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: GroundCheckRadiusMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9213588451285641435, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: minimumChargeForcecMultiplier
