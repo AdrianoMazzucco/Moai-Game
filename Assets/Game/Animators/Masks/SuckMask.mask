@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SuckMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Head
+    m_Weight: 0
+  - m_Path: LeftLeg
+    m_Weight: 0
+  - m_Path: Maoi_Armature
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/LegIKLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/LegIKLeft/FootLeftIKUP
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/LegIKRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/LegIKRight/FootRight.001
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegLeft/LowerLegLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegLeft/LowerLegLeft/FootLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegRight/LowerLegRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/BothLegsIK/UpperLegRight/LowerLegRight/FootRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine
+    m_Weight: 1
+  - m_Path: Maoi_Armature/Spine/LowerHead
+    m_Weight: 1
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead
+    m_Weight: 1
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/CheekLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/CheekLeft/EarLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/CheekRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/CheekRight/EarRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/EarIKLeft
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/EarIKRight
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/ForeHead
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/NostrilRight.001
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/NostrilRight.001/NostrilRight.002
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MidHead/TopHead
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MouthBase
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MouthBase/LowerLip
+    m_Weight: 0
+  - m_Path: Maoi_Armature/Spine/LowerHead/MouthBase/UpperLip
+    m_Weight: 0
+  - m_Path: Nose
+    m_Weight: 0
+  - m_Path: RightLeg
+    m_Weight: 0

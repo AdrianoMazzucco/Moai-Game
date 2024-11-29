@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,19 +14,25 @@ public class Boulder : MonoBehaviour
     [SerializeField] private int maxHp = 100;
     [SerializeField] private int hpThreshold = 10;
     private int _currentHealth;
-    
+
+    [Header("Other values")] [Space] 
+    [SerializeField] private float totalLifeTime = 15f;
+    [SerializeField] private float collideWithPlayerDamageMultipler = 0.1f;
     [Header("Connections")] [Space] 
     [SerializeField] private GameObject shatterModel;
     [SerializeField] private GameObject projectileModel;
     [SerializeField] private GameObject VFX;
     [Space]
-    private Collider _collider;
     private Rigidbody _rigidbody;
     
-    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private GameObject _particleSystem;
     [SerializeField] private BoxCollider _triggerCollider;
+    [SerializeField] private BoxCollider _collider;
     private Enums.Attacktype lastAttacktype = Enums.Attacktype.Bonk;
     private BoulderPieceManager _pieceManager;
+
+    private Coroutine selfDestroyCoroutine;
+    
     #endregion
 
     #region Properties
@@ -39,14 +46,13 @@ public class Boulder : MonoBehaviour
         set
         {
             int previousHealth = _currentHealth;
-            if (value > hpThreshold)
+            
+            _currentHealth = value;
+            if (_currentHealth <= 0)
             {
-                _currentHealth -= value;
-                if (_currentHealth <= 0)
-                {
-                    Shatter();
-                }
+                Shatter();
             }
+            
         }
     }
 
@@ -58,32 +64,46 @@ public class Boulder : MonoBehaviour
     private UnityEvent OnLanded = new UnityEvent();
 
     #endregion
-    
+
+    #region Feel
+
+    [SerializeField] private MMF_Player DamageMMF;
+
+    #endregion
     
     
     #region Unity
 
     private void OnEnable()
-    {
+    {  
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
         SwapModels();
+         selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
+         _currentHealth = maxHp;
+         _collider.enabled = true;
     }
 
     private void OnDisable()
     {
         OnLanded.RemoveListener(SwapModels);
+        StopCoroutine(selfDestroyCoroutine);
+        _particleSystem.SetActive(false);
+    }
+
+    private void Awake()
+    {
+       
     }
 
     private void Start()
     {
         _pieceManager = this.GetComponent<BoulderPieceManager>();
-        _collider = this.GetComponent<Collider>();
         _rigidbody = this.GetComponent<Rigidbody>();
         
        
         
-        _currentHealth = maxHp;
+       
     }
 
     private void Update()
@@ -99,6 +119,7 @@ public class Boulder : MonoBehaviour
     //What happens when HP hits 0
     private void Shatter()
     {
+        _collider.enabled = false;
         _pieceManager.Break(lastAttacktype);
     }
 
@@ -133,11 +154,13 @@ public class Boulder : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("YES");
-        if (collision.gameObject == GameManager.Instance.playerGameObject)
+       
+        if (collision.gameObject.layer == 3)
         {
-            Debug.Log("YES");
-            Shatter();
+            DamageMMF?.PlayFeedbacks();
+            CurrentHealth -= (int)(collision.impulse.magnitude *
+                             collideWithPlayerDamageMultipler);
+         
         }
         
     }
@@ -147,7 +170,7 @@ public class Boulder : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             _triggerCollider.enabled = false;
-            _particleSystem.Play();
+            _particleSystem.SetActive(true);
         }
     }
 }

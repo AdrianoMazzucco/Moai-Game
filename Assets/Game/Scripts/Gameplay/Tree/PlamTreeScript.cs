@@ -8,7 +8,7 @@ public class PlamTreeScript : MonoBehaviour
     [Header("Connections")]
     [SerializeField] private GameObject[] GameObjectsToActivateOnContact;
     [SerializeField] private GameObject[] GameObjectsToDEactivateOnContact;
-    
+    [SerializeField] private CapsuleCollider _capsuleCollider;
     
     
     [SerializeField] private Rigidbody[] Leaves;
@@ -82,12 +82,13 @@ public class PlamTreeScript : MonoBehaviour
             _collisionForce = other.GetComponent<Rigidbody>().linearVelocity;
             if (_collisionForce.magnitude > BigBreakThreshold)
             {
+                _capsuleCollider.enabled = false;
                 BigBreak(_collisionForce);
             }
-            else if(_collisionForce.magnitude > SmallBreakThreshold)
-            {
-                SmallBreak(_collisionForce);
-            }
+            // else if(_collisionForce.magnitude > SmallBreakThreshold)
+            // {
+            //     SmallBreak(_collisionForce);
+            // }
         }
     }
 
@@ -121,11 +122,12 @@ public class PlamTreeScript : MonoBehaviour
 
     private void RestorePositions()
     {
+        _capsuleCollider.enabled = true;
         for (int i = 0; i < Leaves.Length; i++)
         {
             Leaves[i].isKinematic = true;
             Leaves[i].position = initalLeavesPositions[i];
-             Leaves[i].rotation = initalLeavesRotations[i];
+            Leaves[i].rotation = initalLeavesRotations[i];
             
         }
         for (int i = 0; i < Trunks.Length; i++)
@@ -164,37 +166,37 @@ public class PlamTreeScript : MonoBehaviour
     public void BigBreak(Vector3 collisionForce)
     {
         SwapModelsToRigidbodies();
-        
+
         foreach (var leaf in Leaves)
         {
             leaf.isKinematic = false;
-            leaf.excludeLayers = LayersToInteractWith | 1<< 3;
+            //leaf.excludeLayers = LayersToInteractWith | 1<< 3;
             leaf.AddExplosionForce(LeavesExplosionForce,LeafExplosionCenter.position,5f,1f ,ForceMode.Impulse);
         }
 
         foreach (var trunk in Trunks)
         {
             trunk.isKinematic = false;
-            trunk.excludeLayers = LayersToInteractWith | 1<< 3;
-            trunk.AddForce(-collisionForce *TrunkForceMultiplier,ForceMode.Impulse);
+           // trunk.excludeLayers = LayersToInteractWith | 1<< 3;
+            trunk.AddForce(collisionForce *TrunkForceMultiplier,ForceMode.Impulse);
         }
 
         foreach (var coconut in Coconuts)
         {
             coconut.isKinematic = false;
-            coconut.excludeLayers = LayersToInteractWith | 1<< 3;
+            //coconut.excludeLayers = LayersToInteractWith | 1<< 3;
             coconut.AddExplosionForce(LeavesExplosionForce,LeafExplosionCenter.position,5f,1f ,ForceMode.Impulse);
         }
         
         StartCoroutine(RespawnDelay());
-        Invoke(nameof(ReturnPlayerCollision),0.1f);
+       // Invoke(nameof(ReturnPlayerCollision),0.1f);
     }
 
     public void SmallBreak(Vector3 collisionForce)
     {
         SwapModelsToRigidbodies();
         StartCoroutine(RespawnDelay());
-        Invoke(nameof(ReturnPlayerCollision),0.1f);
+       // Invoke(nameof(ReturnPlayerCollision),0.1f);
     }
 
 

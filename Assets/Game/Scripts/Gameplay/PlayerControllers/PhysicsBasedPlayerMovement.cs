@@ -1,5 +1,7 @@
 using System;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +18,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private InputAction jumpInput;
     private InputAction suckAbility;
 
-    private Rigidbody playerRB;
+    public  Rigidbody playerRB;
     private float chargeAmount = 0;
     private MovementState currentState = MovementState.walking;
 
@@ -28,8 +30,15 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         }
         set
         {
-            currentState = value;
-            CheckAnimation();
+            if (currentState != value)
+            {
+                currentState = value;
+                CheckAnimation();
+            }
+            else
+            {
+                currentState = value;
+            }
         }
     }
 
@@ -37,16 +46,31 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float flightDuration = 3;
 
     bool jumpCharging = false;
+    private bool bisGrounded;
     float jumpChargeForce = 0;
     float jumpChargeTime = 0;
+    
+    private CapsuleCollider _capsuleCollider;
+    
     [SerializeField] private float time4FullJumpCharge = 1.5f;
     [SerializeField] private float tiltBackAngle = 45;
 
+    [SerializeField] private float GroundCheckRadiusMultiplier = 1.0f;
+
+    private float groundedDistance = 0;
+    /*
+     * Should refactor all the stats
+    */
     #region Player Stats
     [ReadOnly, SerializeField] private float movementForceMultiplier = 30;
     [SerializeField] private float multiplierMovementForceMultiplier = 1;
     [SerializeField] private float minimumMovementForceMultiplier = 30;
     [SerializeField] private float maximumMovementForceMultiplier = 60;
+    
+    [ReadOnly, SerializeField] private float SuckMovementForceMultiplier = 10;
+    [SerializeField] private float SuckmultiplierMovementForceMultiplier = 1;
+    [SerializeField] private float SuckminimumMovementForceMultiplier = 15;
+    [SerializeField] private float SuckmaximumMovementForceMultiplier = 30;
 
     [ReadOnly, SerializeField] private float airMovementForceMultiplier = 15;
     [SerializeField] private float multiplierAirMovementForceMultiplier = 1;
@@ -88,10 +112,20 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float minimumScale = 1;
     [SerializeField] private float maximumScale = 10;
 
+    [ReadOnly, SerializeField] private float currentMass = 5;
+    [SerializeField] private float multiplierMass = 1;
+    [SerializeField] private float minimumMass = 5;
+    [SerializeField] private float maximumMass = 20;
+
+
     #endregion
     
     [SerializeField] private GameObject currentCamera;
     [SerializeField] private Animator playerAnimator;
+
+    [Header("VFX")] 
+    [SerializeField] private ParticleSystem particleTrail1;
+    [SerializeField] private ParticleSystem particleTrail2;
     
     private void OnEnable()
     {
@@ -130,6 +164,20 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         suckAbility = playerActionMap?.FindAction("Suck");
     }
 
+    private void Start()
+    {
+        _capsuleCollider = this.GetComponent<CapsuleCollider>();
+        GameManager.Instance.playerMovementScript = this;
+        GameManager.Instance.playerGameObject = this.gameObject;
+    }
+
+    private void FixedUpdate()
+    { 
+        bisGrounded = CheckGrounded();
+    }
+
+
+
     private void Update()
     {        
         switch(CurrentState)
@@ -148,8 +196,30 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 break;
         }
 
+        if (bisGrounded)
+        {
+
+            if (!particleTrail1.isPlaying)
+            {
+                particleTrail1.Clear();
+                particleTrail1.Play();
+            }
+
+            if (!particleTrail2.isPlaying)
+            {
+                particleTrail2.Clear();
+                particleTrail2.Play();
+            }
+
+        }
+        else
+        {
+            particleTrail1.Stop();
+            particleTrail2.Stop();
+        }
         if(jumpCharging) 
         {
+           
             jumpChargeTime += Time.deltaTime;
             if(jumpChargeTime >  time4FullJumpCharge) { jumpChargeTime = time4FullJumpCharge; }
             jumpChargeForce = minimumJumpForce + (maximumJumpForce - minimumJumpForce) * (jumpChargeTime / time4FullJumpCharge);
@@ -173,7 +243,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
             Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
             directionTotal.Normalize();
-            if (CheckGrounded())
+            if (bisGrounded)
             {
                 directionTotal *= movementForceMultiplier;
             }
@@ -198,14 +268,40 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void Flight()
     {
-        transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);
+        //transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);   // ENABLE THIS TO RETURN TO OLD CODE
         flightTime += Time.deltaTime;
-        if( flightTime > flightDuration ) 
+        if (bisGrounded) {
+            playerAnimator.SetTrigger("Vertical");
+            // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
+        }
+        
+        
+
+        if( flightTime >= flightDuration ) 
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
         }
+
+        if (playerRB.linearVelocity.magnitude < 2f)
+        {
+           //
+        }
     }
+
+    // private void GroundedFlight()
+    // {
+    //    
+    //     flightTime += Time.deltaTime;
+    //     transform.forward = Vector3.Lerp(transform.forward, new Vector3(-1, 0, -1), 0.05f);
+    //
+    //     if( flightTime >= flightDuration ) 
+    //     {
+    //         flightTime = 0;
+    //         CurrentState = MovementState.walking;
+    //        
+    //     }
+    // }
 
     private void ChargeUpdate()
     {
@@ -219,7 +315,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartCharge(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking && !jumpCharging)
+        if (CurrentState == MovementState.walking && !jumpCharging && bisGrounded)
         {
             CurrentState = MovementState.charging;
         }
@@ -228,8 +324,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     private void ChargeAttack(InputAction.CallbackContext obj) 
     {
         if (CurrentState != MovementState.charging) return;
-
+        
         CurrentState = MovementState.flying;
+       
         chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
@@ -237,18 +334,20 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking)
+        if (CurrentState == MovementState.walking && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
         {
             jumpChargeTime = 0;
             jumpCharging = true;
+            if(bisGrounded) playerAnimator.SetTrigger("JumpCharge");
         }
     }
 
     private void Jump(InputAction.CallbackContext obj)
     {
         if (!jumpCharging) { return; }
-        if (CheckGrounded())
+        if (bisGrounded)
         {
+            if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpCharge")) playerAnimator.SetTrigger("Jump");
             jumpCharging = false;
             jumpChargeTime = 0;
             playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
@@ -260,12 +359,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         if (CurrentState == MovementState.walking && !jumpCharging)
         {
             CurrentState = MovementState.sucking;
+            playerAnimator.SetBool("isSuck",true);
         }
     }
 
     private void EndSuck(InputAction.CallbackContext obj)
     {
        CurrentState = MovementState.walking;
+       playerAnimator.SetBool("isSuck",false);
     }
     
     private void SuckUpdate()
@@ -279,6 +380,40 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 Vector3 direction = transform.position - hitCollider.transform.position;
                 hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
             }
+        }
+        Vector2 inputDirection = movement.ReadValue<Vector2>();
+        playerAnimator.SetFloat("WalkBlend",playerRB.linearVelocity.magnitude);
+        if (inputDirection != Vector2.zero)
+        {
+            playerRB.freezeRotation = true;
+
+            Vector3 camForward = transform.position - currentCamera.transform.position;
+            camForward.y = 0;
+            camForward.Normalize();
+
+            Vector3 camRight = Vector3.Cross(new Vector3(0, 1, 0), camForward);
+
+            Vector3 directionTotal = camForward * inputDirection.y + camRight * inputDirection.x;
+            directionTotal.Normalize();
+            if (bisGrounded)
+            {
+                directionTotal *= SuckMovementForceMultiplier;
+            }
+            else
+            {
+                directionTotal *= airMovementForceMultiplier;
+            }
+            if (jumpCharging) { directionTotal *= 0.5f; }
+
+            playerRB.AddForce(directionTotal, ForceMode.Acceleration);
+            
+            if (playerRB.linearVelocity.magnitude > maxSpeed)
+            {
+                playerRB.linearVelocity = playerRB.linearVelocity.normalized * maxSpeed;
+            }
+            Vector3 turnAngle = new Vector3(directionTotal.x, directionTotal.z, directionTotal.y);
+            Quaternion deltaRotation = Quaternion.Euler(turnAngle * Time.fixedDeltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, directionTotal, 0.005f);
         }
     }
 
@@ -296,7 +431,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 playerAnimator.SetTrigger("Spin");
                 break;
             case MovementState.sucking:
-                playerAnimator.SetTrigger("Suck");
+                playerAnimator.SetTrigger("Walk");
                 break;
         }
     }
@@ -331,11 +466,39 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
         currentDrag = minimumDrag + multiplierDrag * _mineralCount;
         if (currentDrag > maximumDrag) { currentDrag = maximumDrag; }
         playerRB.linearDamping  = currentDrag;
+
+        currentMass = minimumMass + multiplierMass * _mineralCount;
+        if (currentMass > maximumMass) { currentMass = maximumMass; }
+        playerRB.mass = currentMass;
+            
+        
     }
 
-    private bool CheckGrounded()
+    private bool CheckGrounded(float _lengthMultiplier = 1)
     {
-        return Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f);
-    }
+        //bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        float radius;
+        Vector3 pos;
 
+        radius = _capsuleCollider.radius * GroundCheckRadiusMultiplier;
+        pos = transform.position + Vector3.up * (radius * 0.9f);
+
+        // else
+        // {
+        //     radius = _capsuleCollider.radius * 0.9f;
+        //     pos = transform.position + Vector3.up * (radius * 0.9f);
+        // }
+
+
+
+        bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
+        bisGrounded = bground;
+        playerAnimator.SetBool("isGrounded", bground);
+        
+
+
+
+        return bground;
+    }
+   
 }

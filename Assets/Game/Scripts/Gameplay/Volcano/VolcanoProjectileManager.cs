@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.Serialization;
-using static UnityEditor.PlayerSettings;
-using Random = UnityEngine.Random;
-
 public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables
@@ -23,21 +20,32 @@ public class VolcanoProjectileManager : MonoBehaviour
     [SerializeField] private float verticalJumpHeight = 30f;
     [SerializeField] private GameObject projectileGameObject;
     [SerializeField] private Ease projectileEase;
-    
+    [SerializeField] private Vector3 spawnPos;
 
 
     private Boulder _boulder;
     private float DistanceToPlayer;
-    
+    private IEnumerator fireCoroutine ;
+    private bool isFiring;
     #endregion
 
+    #region Feel
+
+    [SerializeField] private MMF_Player fireMMF;
+
+    #endregion
+    
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+    private void Awake()
+    {
+        fireCoroutine = FirePojectile();
+    }
+
     void Start()
     {
-        
+       
         _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
@@ -50,7 +58,8 @@ public class VolcanoProjectileManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(FirePojectile());
+             isFiring = true;
+             StartCoroutine(fireCoroutine);
         }
     }
 
@@ -62,7 +71,8 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(FirePojectile());
+        isFiring = false;
+        StopCoroutine(fireCoroutine);
         CancelInvoke(nameof(CheckDistanceToPlayer));
     }
 
@@ -77,9 +87,9 @@ public class VolcanoProjectileManager : MonoBehaviour
         Vector3 endPos;
         for (int i = 0; i < _burstCount; i++)
         {
-                 
+            fireMMF?.PlayFeedbacks();
             Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
-            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position + spawnPos);
             endPos = new Vector3(direction.x + center.x,
                 0,
                 direction.y + center.z);
@@ -96,13 +106,15 @@ public class VolcanoProjectileManager : MonoBehaviour
         DistanceToPlayer = Vector3.Distance(GameManager.Instance.playerGameObject.transform.position,
             this.gameObject.transform.position);
 
-        if (DistanceToPlayer < outerRadius)
+        if (DistanceToPlayer < outerRadius && !isFiring)
         {
-            StartCoroutine(FirePojectile());
+            isFiring = true;
+            StartCoroutine(fireCoroutine);
         }
-        else
+        else if(DistanceToPlayer > outerRadius)
         {
-            StopCoroutine(FirePojectile());
+            isFiring = false;
+            StopCoroutine(fireCoroutine);
         }
     }
     #endregion
@@ -117,12 +129,12 @@ public class VolcanoProjectileManager : MonoBehaviour
         while (true)
         {
             yield return waitTime;
-
+            
             for (int i = 0; i < BurstCount; i++)
             {
-                 
+                fireMMF?.PlayFeedbacks();
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
-                projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+                projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position + spawnPos);
                 
                 endPos = new Vector3(direction.x + transform.position.x,
                     0,

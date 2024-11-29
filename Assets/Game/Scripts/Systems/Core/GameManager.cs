@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using MoreMountains.Feedbacks;
 using QFSW.MOP2;
 using UnityEngine;
@@ -9,12 +10,13 @@ public class GameManager : Singleton<GameManager>
     #region Globals
 
     public GameObject playerGameObject;
-
+    public PhysicsBasedPlayerMovement playerMovementScript;
     public Terrain CurrentTerrain;
 
     #region Pools
 
     public ObjectPool BoulderPool;
+    public ObjectPool MineralPool;
     public ObjectPool DecalPool;
     public ObjectPool DestructionFXPool;
 
@@ -27,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject boulderGameObject;
     [SerializeField] private GameObject decalGameObject;
     [SerializeField] private GameObject destructionFXObject;
-
+    [SerializeField] private GameObject mineralRuby;
 
 
     [Header("MMFs")] [SerializeField] 
@@ -37,10 +39,12 @@ public class GameManager : Singleton<GameManager>
     #endregion
     private void Start()
     {
+        DOTween.SetTweensCapacity(500,500);
         BoulderPool = ObjectPool.Create(boulderGameObject);
         DecalPool = ObjectPool.Create(decalGameObject);
         DestructionFXPool = ObjectPool.Create(destructionFXObject);
-    }
+        MineralPool = ObjectPool.Create(mineralRuby);
+    }   
 
     #region Methods
 
