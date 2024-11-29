@@ -4244,6 +4244,7 @@ GameObject:
   - component: {fileID: 5602463116673350156}
   - component: {fileID: 4729292304661662352}
   - component: {fileID: 1948041827264748782}
+  - component: {fileID: 6885180265433058231}
   m_Layer: 13
   m_Name: Prefab_PalmTree
   m_TagString: Untagged
@@ -4288,6 +4289,7 @@ MonoBehaviour:
   - {fileID: 475123012637181668}
   - {fileID: 4231894041045062377}
   - {fileID: 5676179512989156382}
+  _capsuleCollider: {fileID: 6885180265433058231}
   Leaves:
   - {fileID: 8660512393386269694}
   - {fileID: 363765718312338408}
@@ -4347,7 +4349,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.2914598
+  m_Radius: 3.07
   m_Height: 13.756189
   m_Direction: 1
   m_Center: {x: 0, y: 5.171812, z: 0.61731553}
@@ -4363,3 +4365,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258214a392f7bb04d8f79ba6b3fe3a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &6885180265433058231
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8927366502743397227}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.55
+  m_Height: 12.0081625
+  m_Direction: 1
+  m_Center: {x: -0.35, y: 4.9, z: 0.42}

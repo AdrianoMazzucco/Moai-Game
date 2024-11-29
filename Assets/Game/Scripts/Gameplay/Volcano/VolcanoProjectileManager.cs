@@ -3,10 +3,6 @@ using System.Collections;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.Serialization;
-using static UnityEditor.PlayerSettings;
-using Random = UnityEngine.Random;
-
 public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables

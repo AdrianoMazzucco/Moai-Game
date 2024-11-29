@@ -198,17 +198,24 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         if (bisGrounded)
         {
-            
-           if(!particleTrail1.isPlaying) particleTrail1.Play();
-           if(!particleTrail2.isPlaying) particleTrail2.Play();
+
+            if (!particleTrail1.isPlaying)
+            {
+                particleTrail1.Clear();
+                particleTrail1.Play();
+            }
+
+            if (!particleTrail2.isPlaying)
+            {
+                particleTrail2.Clear();
+                particleTrail2.Play();
+            }
 
         }
         else
         {
             particleTrail1.Stop();
-            particleTrail1.Clear();
             particleTrail2.Stop();
-            particleTrail2.Clear();
         }
         if(jumpCharging) 
         {

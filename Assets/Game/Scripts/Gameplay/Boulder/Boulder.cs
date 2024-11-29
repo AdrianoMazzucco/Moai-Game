@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -63,7 +64,12 @@ public class Boulder : MonoBehaviour
     private UnityEvent OnLanded = new UnityEvent();
 
     #endregion
-    
+
+    #region Feel
+
+    [SerializeField] private MMF_Player DamageMMF;
+
+    #endregion
     
     
     #region Unity
@@ -151,10 +157,10 @@ public class Boulder : MonoBehaviour
        
         if (collision.gameObject.layer == 3)
         {
-           
+            DamageMMF?.PlayFeedbacks();
             CurrentHealth -= (int)(collision.impulse.magnitude *
                              collideWithPlayerDamageMultipler);
-            Debug.Log("Collided with player" +  collision.impulse.magnitude);
+         
         }
         
     }

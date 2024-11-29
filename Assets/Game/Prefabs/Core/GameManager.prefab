@@ -349,11 +349,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGameObject: {fileID: 0}
+  playerMovementScript: {fileID: 0}
   CurrentTerrain: {fileID: 0}
   BoulderPool: {fileID: 0}
+  MineralPool: {fileID: 0}
   DecalPool: {fileID: 0}
   DestructionFXPool: {fileID: 0}
   boulderGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
   decalGameObject: {fileID: 8867350441792015155, guid: 67fbec50f07d1fa4ba52c707531393c4, type: 3}
   destructionFXObject: {fileID: 8608962886978865870, guid: 64ff553b8b8b2ab488d9eeb89d28f465, type: 3}
+  mineralRuby: {fileID: 7046991975177724950, guid: eefe276495408b045934f014ac1d55ca, type: 3}
   Camera_Shake_MMF: {fileID: 6188374666962140858}

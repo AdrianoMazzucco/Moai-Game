@@ -68,7 +68,7 @@ public class BoulderPieceManager : MonoBehaviour
         
         for (int i = 0; i < NumberOfMinerals; i++)
         {
-            GameManager.Instance.MineralPool.GetObject(this.transform.position).GetComponent<Rigidbody>().AddExplosionForce(ExplosiveForce,this.transform.position,ExplosiveRadius);
+            GameManager.Instance.MineralPool.GetObject(this.transform.position).GetComponent<Rigidbody>().AddExplosionForce(ExplosiveForce * 5f,this.transform.position,ExplosiveRadius);
             
         }
 
