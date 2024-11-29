@@ -93,7 +93,7 @@ public class VolcanoProjectileManager : MonoBehaviour
         {
             fireMMF?.PlayFeedbacks();
             Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
-            projectile =  GameManager.Instance.BoulderPool.GetObject(spawnPos);
+            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position + spawnPos);
             endPos = new Vector3(direction.x + center.x,
                 0,
                 direction.y + center.z);
@@ -138,7 +138,7 @@ public class VolcanoProjectileManager : MonoBehaviour
             {
                 fireMMF?.PlayFeedbacks();
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
-                projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+                projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position + spawnPos);
                 
                 endPos = new Vector3(direction.x + transform.position.x,
                     0,
