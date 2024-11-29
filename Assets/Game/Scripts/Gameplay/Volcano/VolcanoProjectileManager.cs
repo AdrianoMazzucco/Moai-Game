@@ -42,10 +42,14 @@ public class VolcanoProjectileManager : MonoBehaviour
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-    void Start()
+    private void Awake()
     {
         fireCoroutine = FirePojectile();
+    }
+
+    void Start()
+    {
+       
         _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
@@ -59,7 +63,7 @@ public class VolcanoProjectileManager : MonoBehaviour
         else
         {
              isFiring = true;
-              StartCoroutine(fireCoroutine);
+             StartCoroutine(fireCoroutine);
         }
     }
 
