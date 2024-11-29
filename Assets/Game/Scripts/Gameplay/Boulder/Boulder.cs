@@ -14,8 +14,9 @@ public class Boulder : MonoBehaviour
     [SerializeField] private int hpThreshold = 10;
     private int _currentHealth;
 
-    [Header("Other values")] [Space] [SerializeField]
-    private float totalLifeTime = 15f;
+    [Header("Other values")] [Space] 
+    [SerializeField] private float totalLifeTime = 15f;
+    [SerializeField] private float collideWithPlayerDamageMultipler = 0.1f;
     [Header("Connections")] [Space] 
     [SerializeField] private GameObject shatterModel;
     [SerializeField] private GameObject projectileModel;
@@ -44,14 +45,13 @@ public class Boulder : MonoBehaviour
         set
         {
             int previousHealth = _currentHealth;
-            if (value > hpThreshold)
+            
+            _currentHealth = value;
+            if (_currentHealth <= 0)
             {
-                _currentHealth -= value;
-                if (_currentHealth <= 0)
-                {
-                    Shatter();
-                }
+                Shatter();
             }
+            
         }
     }
 
@@ -69,11 +69,12 @@ public class Boulder : MonoBehaviour
     #region Unity
 
     private void OnEnable()
-    {
+    {  
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
         SwapModels();
          selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
+         _currentHealth = maxHp;
     }
 
     private void OnDisable()
@@ -90,7 +91,7 @@ public class Boulder : MonoBehaviour
         
        
         
-        _currentHealth = maxHp;
+       
     }
 
     private void Update()
@@ -140,11 +141,13 @@ public class Boulder : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("YES");
-        if (collision.gameObject == GameManager.Instance.playerGameObject)
+       
+        if (collision.gameObject.layer == 3)
         {
-            Debug.Log("YES");
-            Shatter();
+           
+            CurrentHealth -= (int)(collision.impulse.magnitude *
+                             collideWithPlayerDamageMultipler);
+            Debug.Log("Collided with player" +  collision.impulse.magnitude);
         }
         
     }

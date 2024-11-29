@@ -53,11 +53,11 @@ public class BoulderPieceManager : MonoBehaviour
                 switch (attacktype)
                 {
                     case Enums.Attacktype.Lunge:
-                        rigidbody.linearVelocity = rigidbody.linearVelocity ;
+                        //rigidbody.linearVelocity = rigidbody.linearVelocity ;
                         rigidbody.AddExplosionForce(ExplosiveForce,GameManager.Instance.playerGameObject.transform.position,ExplosiveRadius);
                         break;
                     case Enums.Attacktype.Bonk:
-                        rigidbody.linearVelocity = rigidbody.linearVelocity ;
+                        //rigidbody.linearVelocity = rigidbody.linearVelocity ;
                         rigidbody.AddExplosionForce(ExplosiveForce,this.transform.position,ExplosiveRadius);
                         break;
                 }
