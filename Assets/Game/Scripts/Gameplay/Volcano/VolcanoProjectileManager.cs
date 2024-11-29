@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static UnityEditor.PlayerSettings;
@@ -23,7 +24,7 @@ public class VolcanoProjectileManager : MonoBehaviour
     [SerializeField] private float verticalJumpHeight = 30f;
     [SerializeField] private GameObject projectileGameObject;
     [SerializeField] private Ease projectileEase;
-    
+    [SerializeField] private Vector3 spawnPos;
 
 
     private Boulder _boulder;
@@ -31,6 +32,12 @@ public class VolcanoProjectileManager : MonoBehaviour
     
     #endregion
 
+    #region Feel
+
+    [SerializeField] private MMF_Player fireMMF;
+
+    #endregion
+    
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -77,9 +84,9 @@ public class VolcanoProjectileManager : MonoBehaviour
         Vector3 endPos;
         for (int i = 0; i < _burstCount; i++)
         {
-                 
+            fireMMF?.PlayFeedbacks();
             Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
-            projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
+            projectile =  GameManager.Instance.BoulderPool.GetObject(spawnPos);
             endPos = new Vector3(direction.x + center.x,
                 0,
                 direction.y + center.z);
@@ -117,10 +124,10 @@ public class VolcanoProjectileManager : MonoBehaviour
         while (true)
         {
             yield return waitTime;
-
+            
             for (int i = 0; i < BurstCount; i++)
             {
-                 
+                fireMMF?.PlayFeedbacks();
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
                 projectile =  GameManager.Instance.BoulderPool.GetObject(this.transform.position);
                 
