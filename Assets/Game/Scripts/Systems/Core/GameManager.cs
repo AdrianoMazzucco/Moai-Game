@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
     public PhysicsBasedPlayerMovement playerMovementScript;
     public Terrain CurrentTerrain;
 
+    [HideInInspector] public float volcanoSpawnTimeOffset = 0;
+
     #region Pools
 
     public ObjectPool BoulderPool;
