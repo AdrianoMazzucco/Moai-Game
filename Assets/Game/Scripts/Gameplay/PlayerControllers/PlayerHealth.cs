@@ -65,4 +65,13 @@ public class PlayerHealth : MonoBehaviour
             CurrentHealth -= FireBallDamageValue;
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 17)
+        {
+            CurrentHealth -= FireBallDamageValue;
+        }
+    }
+    
 }

@@ -2459,8 +2459,8 @@ MonoBehaviour:
         ExtraBoundRenderers: []
         Mode: 0
         PropertyName: _Tint
-        FlickerDuration: 0.2
-        FlickerPeriod: 0.04
+        FlickerDuration: 0.4
+        FlickerPeriod: 0.1
         FlickerColor: {r: 4, g: 0.3137255, b: 0.3137255, a: 1}
         MaterialIndexes: 
         UseMaterialPropertyBlocks: 0
@@ -7625,19 +7625,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 573010d4c174a914ebc88b0fbfdeaa03, type: 3}
   playerRB: {fileID: 0}
-  flightDuration: 2
+  flightDuration: 1
   time4FullJumpCharge: 0.5
   tiltBackAngle: 20
-  GroundCheckRadiusMultiplier: 1
-  shockwavePushMultiplier: 100
-  verticalShockwaveValue: 10
+  GroundCheckRadiusMultiplier: 1.5
+  shockwavePushMultiplier: 1
+  verticalShockwaveValue: 50
   movementForceMultiplier: 50
   multiplierMovementForceMultiplier: -0.15
   minimumMovementForceMultiplier: 20
   maximumMovementForceMultiplier: 50
   SuckMovementForceMultiplier: 10
-  SuckmultiplierMovementForceMultiplier: 1
-  SuckminimumMovementForceMultiplier: 15
+  SuckmultiplierMovementForceMultiplier: 1.5
+  SuckminimumMovementForceMultiplier: 20
   SuckmaximumMovementForceMultiplier: 30
   airMovementForceMultiplier: 30
   multiplierAirMovementForceMultiplier: 0
@@ -14014,15 +14014,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -850.7562
+      value: -4.366196
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.375
+      value: 3.375
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -93.32947
+      value: -3.3647437
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
