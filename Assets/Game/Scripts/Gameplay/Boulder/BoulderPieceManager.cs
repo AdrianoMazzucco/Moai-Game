@@ -17,6 +17,12 @@ public class BoulderPieceManager : MonoBehaviour
     [SerializeField] private float ExplosiveForce = 4f;
     [SerializeField] private float ExplosiveRadius = 0.5f;
     [SerializeField] private float PieceDisappearDelay = 1.5f;
+
+
+    private Vector3[] initalLocations;
+    private Quaternion[] initalRotations;
+    
+    
     #endregion
 
     #region Events
@@ -25,17 +31,56 @@ public class BoulderPieceManager : MonoBehaviour
 
     #region UnityEvents
 
+    private void Awake()
+    {
+        initalLocations = new Vector3[Pieces.Length];
+        initalRotations = new Quaternion[Pieces.Length];
+        StoreInitalTransform();
+    }
+
     private void OnEnable()
     {
-        _boulder = this.GetComponent<Boulder>();
+       
+        RestoreTransforms( GetComponentsInChildren<Rigidbody>());
+     
     }
 
     #endregion
-    
-    
+
+    private void Start()
+    {
+        _boulder = this.GetComponent<Boulder>();
+     
+    }
 
     #region Methods
 
+
+    public void StoreInitalTransform()
+    {
+        
+        for (int i = 0; i < Pieces.Length; i++)
+        {
+            initalLocations[i] = Pieces[i].transform.localPosition;
+            initalRotations[i] = Pieces[i].transform.localRotation;
+        }
+    }
+
+    public void RestoreTransforms(Rigidbody[] rb)
+    {
+        foreach (var piece in Pieces)
+        {
+            piece.SetActive(false);
+        }
+        for (int i = 0; i < rb.Length; i++)
+        {
+            rb[i].isKinematic = true;
+            rb[i].position = initalLocations[i] + transform.position;
+            rb[i].rotation = initalRotations[i];
+            
+        }
+        UnFracturedGameobject.SetActive(true);
+    }
     public void Break(Enums.Attacktype attacktype)
     {
         UnFracturedGameobject.SetActive(false);
@@ -51,6 +96,7 @@ public class BoulderPieceManager : MonoBehaviour
         {
             if (rigidbody != null)
             {
+                rigidbody.isKinematic = false;
                 switch (attacktype)
                 {
                     case Enums.Attacktype.Lunge:
