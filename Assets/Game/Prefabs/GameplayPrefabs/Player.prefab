@@ -7631,6 +7631,7 @@ MonoBehaviour:
   GroundCheckRadiusMultiplier: 1
   shockwavePushMultiplier: 100
   verticalShockwaveValue: 10
+  airbornCheckLeeway: 0.5
   movementForceMultiplier: 50
   multiplierMovementForceMultiplier: -0.15
   minimumMovementForceMultiplier: 20
@@ -7660,7 +7661,7 @@ MonoBehaviour:
   minimumSuckRadius: 30
   maximumSuckRadius: 60
   minimumJumpForce: 10
-  multiplierMinimumJumpForce: 0.15
+  multiplierMinimumJumpForce: 2
   minimumMinimumJumpForce: 15
   maximumMinimumJumpForce: 100
   maximumJumpForce: 100
@@ -14014,15 +14015,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -850.7562
+      value: 4.1190944
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.375
+      value: 3.375
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -93.32947
+      value: 5.120547
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
