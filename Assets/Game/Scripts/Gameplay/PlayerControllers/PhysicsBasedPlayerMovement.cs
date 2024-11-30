@@ -314,7 +314,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         
         flightTime += Time.deltaTime;
         if (flightTime > flightDuration*0.9f) {
-            playerAnimator.SetTrigger("Vertical");
+            playerAnimator.SetBool("isVertical",true);
             // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
         }
         
@@ -324,6 +324,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
+            playerAnimator.SetBool("isVertical",false);
         }
 
         if (playerRB.linearVelocity.magnitude < 2f)
