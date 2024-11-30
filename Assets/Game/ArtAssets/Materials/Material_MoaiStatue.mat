@@ -17,7 +17,6 @@ Material:
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
   - _MK_NORMAL_MAP
-  - _MK_OUTLINE_HULL_CLIP
   - _MK_OUTLINE_NOISE
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
@@ -273,8 +272,8 @@ Material:
     - _OcclusionMapIntensity: 1
     - _OcclusionStrength: 1
     - _OptionsTab: 1
-    - _Outline: 3
-    - _OutlineClipOffset: 0.4
+    - _Outline: 1
+    - _OutlineClipOffset: 1
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
@@ -332,7 +331,7 @@ Material:
     - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _LightTransmissionColor: {r: 1, g: 0.65, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 1, b: 0.08620691, a: 1}
+    - _OutlineColor: {r: 0, g: 0.21808434, b: 1, a: 1}
     - _RimBrightColor: {r: 0.6981132, g: 0.3786935, b: 0.3786935, a: 1}
     - _RimColor: {r: 0.5, g: 0.1662287, b: 0.12971699, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
