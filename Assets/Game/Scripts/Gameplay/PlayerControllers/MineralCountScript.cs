@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using VHierarchy.Libs;
 
 public class MineralCountScript : MonoBehaviour
@@ -26,6 +27,14 @@ public class MineralCountScript : MonoBehaviour
 
     [SerializeField] private GameObject respawnLocation;
 
+
+    #region Events
+
+    public UnityEvent<float> OnMineralCountChange;
+    public UnityEvent<string> OnMineralCountChangeTXT;
+
+    #endregion
+    
     private void Start()
     {
         UpdateMineralCount();
@@ -101,6 +110,9 @@ public class MineralCountScript : MonoBehaviour
 
     private void UpdateMineralCount()
     {
+        OnMineralCountChange.Invoke(currentMineralCount);
+        OnMineralCountChangeTXT.Invoke("" + currentMineralCount);
+        
         if (mineralCountDisplay != null)
             mineralCountDisplay.text = "Minerals: " + currentMineralCount;
 

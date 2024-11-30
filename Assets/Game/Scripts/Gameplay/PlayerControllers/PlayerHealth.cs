@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     #region Events
 
     public UnityEvent OnDamageTaken;
+    public UnityEvent<float> OnHealthChange;
+    public UnityEvent<string> OnHealthChangeTXT;
 
     #endregion
     
@@ -36,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
                 OnDamageTaken.Invoke();
                 _damagedMMF.PlayFeedbacks();
             }
+            OnHealthChange.Invoke(value);
+            OnHealthChangeTXT.Invoke("" + value);
             currentHealth = value;
         }
         
