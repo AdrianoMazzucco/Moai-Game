@@ -2132,6 +2132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5263736119608647566}
   - component: {fileID: 7996787360195706616}
+  - component: {fileID: 5984306172367317774}
   m_Layer: 0
   m_Name: NPC Tooltip Popup
   m_TagString: Untagged
@@ -2376,7 +2377,7 @@ MonoBehaviour:
         LockYAxis: 0
         LockZAxis: 0
         Mode: 0
-        TransformToRotate: {fileID: 0}
+        TransformToRotate: {fileID: 2362460004814880572}
         UpwardVector: 1
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
@@ -2384,6 +2385,19 @@ MonoBehaviour:
         LookAtTarget: {fileID: 0}
         LookAtTargetWorldPosition: {x: 0, y: 0, z: 1}
         LookAtDirection: {x: 0, y: 0, z: 1}
+--- !u!114 &5984306172367317774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499514945729264072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7b3fe3cd795a24185bf1e7e723328f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MMFplayer: {fileID: 7996787360195706616}
 --- !u!1 &7764881078948016278
 GameObject:
   m_ObjectHideFlags: 0

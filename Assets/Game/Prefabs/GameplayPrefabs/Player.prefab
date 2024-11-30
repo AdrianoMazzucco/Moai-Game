@@ -14202,7 +14202,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: prewarm
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: VelocityModule.orbitalZ.scalar
