@@ -48,12 +48,12 @@ public class MineralCountScript : MonoBehaviour
         if(damageTime > 0) { damageTime-=Time.deltaTime; }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter (Collider collider)
     {
-        if (collision.gameObject.GetComponent<MineralStateMachine>())
+        if (collider.gameObject.GetComponent<MineralStateMachine>())
         {
             currentMineralCount++;
-            Destroy( collision.gameObject);
+            GameManager.Instance.MineralPool.Release(collider.gameObject);
 
             if(currentHP < totalHP) 
             {
