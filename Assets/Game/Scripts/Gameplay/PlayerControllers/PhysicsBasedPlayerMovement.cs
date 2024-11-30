@@ -309,8 +309,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     private void Flight()
     {
         //transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);   // ENABLE THIS TO RETURN TO OLD CODE
+        
+        playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Acceleration);
+        
         flightTime += Time.deltaTime;
-        if (bisGrounded) {
+        if (flightTime > flightDuration*0.9f) {
             playerAnimator.SetTrigger("Vertical");
             // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
         }
@@ -356,7 +359,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
        
         chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
-        playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Impulse);
+       
     }
 
     private void StartJump(InputAction.CallbackContext obj)
