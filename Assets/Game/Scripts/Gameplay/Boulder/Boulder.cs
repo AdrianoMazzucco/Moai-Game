@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class Boulder : MonoBehaviour
+public class Boulder : MonoBehaviour,IDestructable
 {
     #region Variables
     [Header("Health")]
@@ -18,6 +18,8 @@ public class Boulder : MonoBehaviour
     [Header("Other values")] [Space] 
     [SerializeField] private float totalLifeTime = 15f;
     [SerializeField] private float collideWithPlayerDamageMultipler = 0.1f;
+    [Header("ShockWave")] 
+    [SerializeField] private float shockwaveRadius = 4f;
     [Header("Connections")] [Space] 
     [SerializeField] private GameObject shatterModel;
     [SerializeField] private GameObject projectileModel;
@@ -79,6 +81,7 @@ public class Boulder : MonoBehaviour
         _triggerCollider.enabled = true;
         OnLanded.AddListener(SwapModels);
         OnLanded.AddListener(CollideWithTerrain);
+        OnLanded.AddListener(ExplosionForceAroundLand);
         SwapModels();
          selfDestroyCoroutine = StartCoroutine(Util.ReleaseAfterDelay(GameManager.Instance.BoulderPool, this.gameObject, totalLifeTime));
          _currentHealth = maxHp;
@@ -89,6 +92,8 @@ public class Boulder : MonoBehaviour
     {
         OnLanded.RemoveListener(SwapModels);
         OnLanded.RemoveListener(CollideWithTerrain);
+        
+        OnLanded.RemoveListener(ExplosionForceAroundLand);
         StopCoroutine(selfDestroyCoroutine);
         _particleSystem.SetActive(false);
     }
@@ -116,7 +121,30 @@ public class Boulder : MonoBehaviour
     #endregion
 
     #region Methods
-    
+
+    private void ExplosionForceAroundLand()
+    {
+        Vector3 center = transform.position;
+
+        Collider[] colliders = Physics.OverlapSphere(center, shockwaveRadius);
+        foreach (var collider in colliders)
+        {
+            if(collider.TryGetComponent(out IDestructable destructable) && collider != this._collider)
+            {
+                destructable.Destruct(this.transform.position);
+            }
+            // if (collider.attachedRigidbody && !col.rigidbody.isKinematic)
+            // {
+            //     // if it's a non kinematic rigidbody...
+            //     // var dir = col.transform.position - center; // dir = player->object
+            //     // col.rigidbody.velocity = dir.normalized * dragSpeed; // kick it out
+            // }
+        }
+    }
+    public void Destruct(Vector3 pos)
+    {
+        Shatter();
+    }
     
     //What happens when HP hits 0
     private void Shatter()
@@ -180,4 +208,5 @@ public class Boulder : MonoBehaviour
     //        
     //     }
     // }
+    
 }

@@ -10,7 +10,7 @@ public enum MovementState
     walking, charging, flying, sucking 
 }
 
-public class PhysicsBasedPlayerMovement : MonoBehaviour
+public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 {
     [SerializeField] private InputActionAsset inputActions;
     private InputAction movement;
@@ -56,7 +56,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
     [SerializeField] private float tiltBackAngle = 45;
 
     [SerializeField] private float GroundCheckRadiusMultiplier = 1.0f;
-
+    [SerializeField] private float shockwavePushMultiplier = 10f;
+    [SerializeField] private float verticalShockwaveValue = 10f;
     private float groundedDistance = 0;
     /*
      * Should refactor all the stats
@@ -429,6 +430,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
                 break; 
             case MovementState.flying:
                 playerAnimator.SetTrigger("Spin");
+                playerAnimator.ResetTrigger("Charge");
                 break;
             case MovementState.sucking:
                 playerAnimator.SetTrigger("Walk");
@@ -500,5 +502,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour
 
         return bground;
     }
-   
+
+    public void Destruct(Vector3 position)
+    {
+        playerRB.AddForce(((this.transform.position - position).normalized 
+                 + new Vector3(0,verticalShockwaveValue,0))* shockwavePushMultiplier,ForceMode.Impulse );
+    }
 }

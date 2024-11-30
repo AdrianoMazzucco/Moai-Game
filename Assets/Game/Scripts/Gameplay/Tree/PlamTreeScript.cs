@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlamTreeScript : MonoBehaviour
+public class PlamTreeScript : MonoBehaviour, IDestructable
 {
     #region Variables
     [Header("Connections")]
@@ -231,4 +231,9 @@ public class PlamTreeScript : MonoBehaviour
     }
 
     #endregion
+
+    public void Destruct(Vector3 position)
+    {
+        BigBreak((this.transform.position - position  )* 5f );
+    }
 }
