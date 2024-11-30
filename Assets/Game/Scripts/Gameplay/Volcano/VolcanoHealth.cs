@@ -3,6 +3,7 @@ using System.Collections;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class VolcanoHealth : MonoBehaviour
 {
@@ -18,9 +19,13 @@ public class VolcanoHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
     [SerializeField] private float invulDuration = 2f;
-
+    [Header("Minerals")]
+    [SerializeField] private Vector3 mineralSpawnDirection;
+    [SerializeField] private float mineralLaunchMagnitude = 10f;
+    
+    [SerializeField] private int MineralsToSpawn = 10;
     [SerializeField] private int DamageTaken = 10;
-
+   
     [Header("Connections")] 
     [SerializeField] private Collider _collider;
 
@@ -41,6 +46,17 @@ public class VolcanoHealth : MonoBehaviour
             {
                 OnDamageTaken.Invoke();
                 _damagedMMF.PlayFeedbacks();
+                if (GameManager.Instance.playerMovementScript.CurrentState == MovementState.flying)
+                {
+                    for (int i = 0; i < MineralsToSpawn; i++)
+                    {
+                        GameManager.Instance.MineralPool.GetObject(this.transform.position + new Vector3(0,10,0)).GetComponent<Rigidbody>()
+                            .linearVelocity =
+                                new Vector3((mineralSpawnDirection.x + Random.Range(-2, 2)), mineralSpawnDirection.y,
+                                    mineralSpawnDirection.z + Random.Range(-2, 2)).normalized * mineralLaunchMagnitude;
+
+                    }
+                }
             }
             currentHealth = value;
         }

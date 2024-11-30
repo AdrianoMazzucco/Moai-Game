@@ -34,12 +34,12 @@ public class IsKineticState : MineralBaseState
     public override void ExitState() { }
     public override void UpdateState()
     {
-        if (Input.GetMouseButtonDown(0)) // 0 is for the left mouse button
+        if (Input.GetMouseButtonDown(1)) // 0 is for the left mouse button
         {
             isSucked = true;
             Debug.Log("isSucked is now: " + isSucked);
         }
-        else if (Input.GetMouseButtonUp(0)) 
+        else if (Input.GetMouseButtonUp(1)) 
         {
             isSucked = false;
             Debug.Log("isSucked is now: " + isSucked);

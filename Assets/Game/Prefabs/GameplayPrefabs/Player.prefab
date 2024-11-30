@@ -7535,6 +7535,7 @@ GameObject:
   - component: {fileID: 9213588451285641435}
   - component: {fileID: 7570318550050928338}
   - component: {fileID: 1066650696656508636}
+  - component: {fileID: 2015637936286689612}
   m_Layer: 3
   m_Name: CoreMechanics
   m_TagString: Player
@@ -7631,6 +7632,7 @@ MonoBehaviour:
   GroundCheckRadiusMultiplier: 1.5
   shockwavePushMultiplier: 1
   verticalShockwaveValue: 50
+  airbornCheckLeeway: 0.5
   movementForceMultiplier: 50
   multiplierMovementForceMultiplier: -0.15
   minimumMovementForceMultiplier: 20
@@ -7796,6 +7798,29 @@ MonoBehaviour:
   currentHealth: 50
   FireBallDamageValue: 10
   _damagedMMF: {fileID: 2106643671605440508}
+--- !u!136 &2015637936286689612
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932044501326350265}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.454689
+  m_Height: 5.6247463
+  m_Direction: 1
+  m_Center: {x: -0.30158997, y: 2.3123732, z: 0.07169342}
 --- !u!1 &5971470961391965835
 GameObject:
   m_ObjectHideFlags: 3
@@ -14014,7 +14039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.366196
+      value: 4.1190944
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14022,7 +14047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.3647437
+      value: 5.120547
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w

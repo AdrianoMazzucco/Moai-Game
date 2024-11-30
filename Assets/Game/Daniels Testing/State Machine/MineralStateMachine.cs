@@ -51,6 +51,7 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
         //Assert.IsNotNull(_stopVelocity, "XXX is not null.");
         //Assert.IsNotNull(_addMoreComponentsHere, "XXX is not null.");
     }
+    
 
     private void InitializeStates()
     {
