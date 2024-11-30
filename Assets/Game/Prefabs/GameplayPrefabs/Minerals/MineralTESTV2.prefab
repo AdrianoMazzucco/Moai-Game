@@ -294,7 +294,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7046991975177724950}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 1.75
   m_Drag: 0.2
   m_AngularDrag: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -532,10 +532,6 @@ PrefabInstance:
     - target: {fileID: 1154326822494738502, guid: 0eafdb7f14cf36444ad2688a515dabe7, type: 3}
       propertyPath: m_Name
       value: vfx_MineralGlow
-      objectReference: {fileID: 0}
-    - target: {fileID: 6926425711133991909, guid: 0eafdb7f14cf36444ad2688a515dabe7, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
