@@ -12,13 +12,11 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _MK_ALBEDO_MAP
   - _MK_ALPHA_CLIPPING
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_RECEIVE_SHADOWS
   - _MK_SPECULAR_ISOTROPIC
-  - _MK_SURFACE_TYPE_TRANSPARENT
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
   - _ALPHACLIPPING_ON
@@ -27,19 +25,17 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap:
     IGNOREPROJECTOR: true
-    RenderType: Transparent
-  disabledShaderPasses:
-  - SHADOWCASTER
-  - DepthOnly
+    RenderType: TransparentCutout
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -99,7 +95,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -169,17 +165,17 @@ Material:
     - _AlbedoMapIntensity: 1
     - _AlphaClip: 0
     - _AlphaClipping: 1
-    - _AlphaCutoff: 0
+    - _AlphaCutoff: 0.16
     - _AlphaToMask: 0
     - _Artistic: 0
     - _ArtisticFrequency: 1
     - _ArtisticProjection: 0
     - _ArtisticShadowFilter: 0
     - _Blend: 0
-    - _BlendDst: 10
-    - _BlendDstAlpha: 10
+    - _BlendDst: 0
+    - _BlendDstAlpha: 0
     - _BlendModePreserveSpecular: 1
-    - _BlendSrc: 5
+    - _BlendSrc: 1
     - _BlendSrcAlpha: 1
     - _Brightness: 1
     - _BumpScale: 1
@@ -192,7 +188,7 @@ Material:
     - _ColorGrading: 0
     - _Contrast: 1
     - _Cull: 2
-    - _Cutoff: 0
+    - _Cutoff: 0.16
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseSmoothness: 0
@@ -233,7 +229,7 @@ Material:
     - _ParticlesTab: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RenderFace: 2
+    - _RenderFace: 0
     - _RenderPriority: 0
     - _Rim: 0
     - _RimSize: 1
@@ -262,7 +258,7 @@ Material:
     - _StencilWriteMask: 255
     - _StencilZFail: 0
     - _StylizeTab: 0
-    - _Surface: 1
+    - _Surface: 0
     - _ThresholdMapScale: 1
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0.05
@@ -270,7 +266,7 @@ Material:
     - _WorkflowMode: 1
     - _WrappedLighting: 1
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

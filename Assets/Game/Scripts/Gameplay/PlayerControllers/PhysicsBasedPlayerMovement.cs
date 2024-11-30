@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -127,6 +128,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [Header("VFX")] 
     [SerializeField] private ParticleSystem particleTrail1;
     [SerializeField] private ParticleSystem particleTrail2;
+
+    [Header("Feel")] 
+    [SerializeField] private MMF_Player SuckFeel;
     
     private void OnEnable()
     {
@@ -360,7 +364,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         if (CurrentState == MovementState.walking && !jumpCharging)
         {
             CurrentState = MovementState.sucking;
-            playerAnimator.SetBool("isSuck",true);
+            playerAnimator.SetBool("isSuck", true);
+            SuckFeel?.PlayFeedbacks();
         }
     }
 
@@ -368,6 +373,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     {
        CurrentState = MovementState.walking;
        playerAnimator.SetBool("isSuck",false);
+       SuckFeel?.PlayFeedbacks();
     }
     
     private void SuckUpdate()
