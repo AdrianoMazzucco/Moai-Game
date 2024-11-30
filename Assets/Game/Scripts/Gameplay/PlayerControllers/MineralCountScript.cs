@@ -2,7 +2,6 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-using VHierarchy.Libs;
 
 public class MineralCountScript : MonoBehaviour
 {
@@ -54,7 +53,7 @@ public class MineralCountScript : MonoBehaviour
         if (collision.gameObject.GetComponent<MineralStateMachine>())
         {
             currentMineralCount++;
-            collision.gameObject.Destroy();
+            Destroy( collision.gameObject);
 
             if(currentHP < totalHP) 
             {

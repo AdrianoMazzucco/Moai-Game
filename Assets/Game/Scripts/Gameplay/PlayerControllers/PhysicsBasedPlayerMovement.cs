@@ -47,7 +47,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private float flightDuration = 3;
 
     bool jumpCharging = false;
-    private bool bisGrounded;
+    private bool bisGrounded = true;
     float jumpChargeForce = 0;
     float jumpChargeTime = 0;
     
@@ -64,6 +64,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
      * Should refactor all the stats
     */
     #region Player Stats
+
+    [SerializeField] private float airbornCheckLeeway = 0.5f;
+    
+    
     [ReadOnly, SerializeField] private float movementForceMultiplier = 30;
     [SerializeField] private float multiplierMovementForceMultiplier = 1;
     [SerializeField] private float minimumMovementForceMultiplier = 30;
@@ -176,9 +180,38 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         GameManager.Instance.playerGameObject = this.gameObject;
     }
 
+    private bool tempBool = false;
+    private float currentAirTime = 0f;
     private void FixedUpdate()
     { 
-        bisGrounded = CheckGrounded();
+        
+        tempBool = CheckGrounded();
+        if (!tempBool)
+        {
+            currentAirTime += Time.fixedDeltaTime;
+
+            if (currentAirTime > airbornCheckLeeway)
+            {
+                bisGrounded = false;
+                playerAnimator.SetBool("isGrounded", bisGrounded);
+            }
+        }
+        else
+        {
+            if (tempBool && !bisGrounded)
+            {
+                playerAnimator.ResetTrigger("JumpCharge");    
+                playerAnimator.ResetTrigger("Jump");    
+                playerAnimator.ResetTrigger("Charge");    
+                  
+            }
+            
+            bisGrounded = true;
+            playerAnimator.SetBool("isGrounded", bisGrounded);
+            currentAirTime = 0f;
+        }
+        
+       
     }
 
 
@@ -482,8 +515,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         
     }
 
+
     private bool CheckGrounded(float _lengthMultiplier = 1)
     {
+        
         //bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
         float radius;
         Vector3 pos;
@@ -500,8 +535,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
 
         bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
-        bisGrounded = bground;
-        playerAnimator.SetBool("isGrounded", bground);
+       // bisGrounded = bground;
+     
         
 
 
