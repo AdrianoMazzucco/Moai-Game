@@ -2,20 +2,22 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class MineralCountScript : MonoBehaviour
 {
-    [SerializeField] private int totalHP = 3;
-    public int currentHP = 3;
+    #region Stats
+    //[SerializeField] private int totalHP = 3;
+    //public int currentHP = 3;
 
-    [SerializeField] private int totalMineralCount = 500;
+    [SerializeField] private int totalMineralCount = 50;
     [SerializeField] private int startingMineralCount = 0;
-    [SerializeField] private int mineralsLostOnHit = 20;
+    [SerializeField] private int mineralsLostOnHit = 10;
     public int currentMineralCount = 0;
 
-    private int healCounter = 0;
-    [SerializeField] private int mineralRequiredtoHeal = 20;
-    [SerializeField] private int maxMineralToHealth = 60;
+    //private int healCounter = 0;
+    //[SerializeField] private int mineralRequiredtoHeal = 20;
+    //[SerializeField] private int maxMineralToHealth = 60;
 
     [SerializeField] private TMP_Text mineralCountDisplay;
     [SerializeField] private TMP_Text healthCountDisplay;
@@ -24,8 +26,12 @@ public class MineralCountScript : MonoBehaviour
     [SerializeField] private float damageCoolDownTimer = 1;
     private float damageTime = 0;
 
-    [SerializeField] private GameObject respawnLocation;
+    //[SerializeField] private GameObject respawnLocation;
+    [SerializeField] private int mineralsRequiredforShrine = 40;
 
+    [Header("Shrine Upgrade values")]
+    [SerializeField] private int changeToMineralsDropped = -2;
+    #endregion
 
     #region Events
 
@@ -55,55 +61,30 @@ public class MineralCountScript : MonoBehaviour
             currentMineralCount++;
             GameManager.Instance.MineralPool.Release(collider.gameObject);
 
-            if(currentHP < totalHP) 
-            {
-                if (healCounter > maxMineralToHealth)
-                {
-
-                }
-                healCounter++;
-                if(mineralRequiredtoHeal > healCounter)
-                {
-                    currentHP = 1;
-                    
-                } else if (mineralRequiredtoHeal <= healCounter && mineralRequiredtoHeal *2 > healCounter)
-                {
-                    currentHP = 1;
-
-                } else if (mineralRequiredtoHeal*2 <= healCounter && healCounter < maxMineralToHealth) {
-                    currentHP = 2;
-
-                } else if (healCounter == maxMineralToHealth) {
-                    currentHP = 3;
-                    
-                }
-
-            }
-
             UpdateMineralCount();
         }
     }
 
     public void TakeDamage()
     {
-        if (damageTime <= 0 && currentHP > 0)
+        if (damageTime <= 0)
         {
-            currentHP--;
             currentMineralCount -= mineralsLostOnHit;
+            if(currentMineralCount < 0) { currentMineralCount = 0; }
             damageTime = damageCoolDownTimer;
             UpdateMineralCount();
 
-            if(currentHP <= 0) 
-            {
-                currentHP = totalHP;
-                currentMineralCount = startingMineralCount;
-                UpdateMineralCount();
+            //if(currentHP <= 0) 
+            //{
+            //    currentHP = totalHP;
+            //    currentMineralCount = startingMineralCount;
+            //    UpdateMineralCount();
                 
-                if (respawnLocation != null)
-                {
-                    transform.position = respawnLocation.transform.position;
-                }
-            }
+            //    if (respawnLocation != null)
+            //    {
+            //        transform.position = respawnLocation.transform.position;
+            //    }
+            //}
         }
     }
 
@@ -115,10 +96,29 @@ public class MineralCountScript : MonoBehaviour
         if (mineralCountDisplay != null)
             mineralCountDisplay.text = "Minerals: " + currentMineralCount;
 
-        if (healthCountDisplay != null)
-            healthCountDisplay.text = "HP: " + currentHP;
+        //if (healthCountDisplay != null)
+        //    healthCountDisplay.text = "HP: " + currentHP;
 
         if (playerController != null)
             playerController.UpdateStats(currentMineralCount);
+    }
+
+    public bool ShrineUpgrade()
+    {
+        if(currentMineralCount > mineralsRequiredforShrine)
+        {
+            currentMineralCount = 0;
+            mineralsLostOnHit += changeToMineralsDropped;
+            if(mineralsLostOnHit <= 0) 
+            {
+                mineralsLostOnHit = 0;
+                UpdateMineralCount();
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

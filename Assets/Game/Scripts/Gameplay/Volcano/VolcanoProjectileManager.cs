@@ -9,7 +9,6 @@ public class VolcanoProjectileManager : MonoBehaviour
 {
     #region Variables
 
-
     [Header("Checks")] 
     public bool bCheckForPlayer;
 
@@ -30,6 +29,7 @@ public class VolcanoProjectileManager : MonoBehaviour
     private float DistanceToPlayer;
     private IEnumerator fireCoroutine ;
     private bool isFiring;
+    private GameManager _gameManager;
     #endregion
 
     #region Feel
@@ -48,7 +48,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     void Start()
     {
-       
+        _gameManager = GameManager.Instance;
         _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
@@ -85,7 +85,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     public void FireVolcano(int _burstCount,Vector3 center,float inner,float outer,float _duration)
     {
-        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns - _gameManager.volcanoSpawnTimeOffset);
         GameObject projectile;
         Vector3 endPos;
         for (int i = 0; i < _burstCount; i++)
@@ -126,7 +126,7 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     IEnumerator FirePojectile()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns - _gameManager.volcanoSpawnTimeOffset);
         GameObject projectile;
         Vector3 endPos;
         while (true)
