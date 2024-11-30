@@ -45,7 +45,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private float flightTime = 0;
     [SerializeField] private float flightDuration = 3;
-
+    [SerializeField] private float maxChargeValue = 3;
+    [SerializeField] private float chargeEndVelocityMult = 0.6f;
     bool jumpCharging = false;
     private bool bisGrounded = true;
     private bool bhasJumped = false;
@@ -311,16 +312,23 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         //transform.forward = Vector3.Lerp(transform.forward, new Vector3(0, -1, 0), 0.05f);   // ENABLE THIS TO RETURN TO OLD CODE
         
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Acceleration);
-        
+        playerAnimator.SetFloat("SpinSpeed",playerRB.linearVelocity.magnitude);
         flightTime += Time.deltaTime;
         if (flightTime > flightDuration*0.9f) {
-            playerAnimator.SetBool("isVertical",true);
+            if (bisGrounded)
+            {
+                playerAnimator.SetBool("isVertical",true);
+                playerRB.linearVelocity *= chargeEndVelocityMult;
+
+            }
+           
+            
             // transform.up = Vector3.Lerp(transform.up, new Vector3(0, -1, 0), 0.05f);
         }
         
         
 
-        if( flightTime >= flightDuration ) 
+        if( flightTime >= flightDuration + chargeAmount ) 
         {
             flightTime = 0;
             CurrentState = MovementState.walking;
@@ -336,7 +344,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     
     private void ChargeUpdate()
     {
-        if(chargeAmount < 1)
+        if(chargeAmount < maxChargeValue)
             chargeAmount += Time.deltaTime;
 
         Vector3 euler = transform.localEulerAngles;
@@ -349,6 +357,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         if (CurrentState == MovementState.walking && !jumpCharging && bisGrounded)
         {
             CurrentState = MovementState.charging;
+            playerAnimator.ResetTrigger("Walk");
+            chargeAmount = 0f;
         }
     }
 
@@ -358,7 +368,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         
         CurrentState = MovementState.flying;
        
-        chargeAmount = 0;
+       // chargeAmount = 0;
         // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
        
     }
@@ -471,7 +481,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
                 playerAnimator.ResetTrigger("Charge");
                 break;
             case MovementState.sucking:
-                playerAnimator.SetTrigger("Walk");
+               
                 break;
         }
     }
