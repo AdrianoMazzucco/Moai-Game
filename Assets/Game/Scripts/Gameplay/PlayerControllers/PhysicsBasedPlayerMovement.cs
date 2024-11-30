@@ -48,6 +48,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     bool jumpCharging = false;
     private bool bisGrounded = true;
+    private bool bhasJumped = false;
     float jumpChargeForce = 0;
     float jumpChargeTime = 0;
     
@@ -203,10 +204,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
                 playerAnimator.ResetTrigger("JumpCharge");    
                 playerAnimator.ResetTrigger("Jump");    
                 playerAnimator.ResetTrigger("Charge");    
-                  
+                bhasJumped = false;          
             }
             
             bisGrounded = true;
+        
             playerAnimator.SetBool("isGrounded", bisGrounded);
             currentAirTime = 0f;
         }
@@ -264,7 +266,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             //Debug.Log(jumpChargeForce);
         }
     }
-
+    
     private void Movement()
     {
         Vector2 inputDirection = movement.ReadValue<Vector2>();
@@ -290,8 +292,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
                 directionTotal *= airMovementForceMultiplier;
             }
             if (jumpCharging) { directionTotal *= 0.5f; }
-
-            playerRB.AddForce(directionTotal, ForceMode.Acceleration);
+            
+            playerRB.AddForce(new Vector3(directionTotal.x,0,directionTotal.z), ForceMode.Acceleration);
             
             if (playerRB.linearVelocity.magnitude > maxSpeed)
             {
@@ -327,20 +329,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         }
     }
 
-    // private void GroundedFlight()
-    // {
-    //    
-    //     flightTime += Time.deltaTime;
-    //     transform.forward = Vector3.Lerp(transform.forward, new Vector3(-1, 0, -1), 0.05f);
-    //
-    //     if( flightTime >= flightDuration ) 
-    //     {
-    //         flightTime = 0;
-    //         CurrentState = MovementState.walking;
-    //        
-    //     }
-    // }
-
+    
     private void ChargeUpdate()
     {
         if(chargeAmount < 1)
@@ -372,24 +361,29 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        if (!bhasJumped &&  CurrentState == MovementState.walking &&( state.IsName("Walk") || state.IsName("Land")))
         {
             jumpChargeTime = 0;
             jumpCharging = true;
-            if(bisGrounded) playerAnimator.SetTrigger("JumpCharge");
+            //if(bisGrounded)
+            playerAnimator.SetTrigger("JumpCharge");
         }
     }
 
     private void Jump(InputAction.CallbackContext obj)
     {
         if (!jumpCharging) { return; }
-        if (bisGrounded)
-        {
+       
             if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpCharge")) playerAnimator.SetTrigger("Jump");
+           
             jumpCharging = false;
             jumpChargeTime = 0;
-            playerRB.AddForce(new Vector3(0, jumpChargeForce, 0), ForceMode.Impulse);
-        }
+            playerRB.linearVelocity = new(playerRB.linearVelocity.x, 0, playerRB.linearVelocity.z);
+            playerRB.AddForce(new Vector3(0, jumpChargeForce + 9.8f, 0), ForceMode.Impulse);
+            currentAirTime += 1f;
+            bhasJumped = true;
+        
     }
 
     private void StartSuck(InputAction.CallbackContext obj)
@@ -415,9 +409,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
         foreach(var hitCollider in hitColliders) 
         {
-            if(hitCollider.gameObject.GetComponent < MineralStateMachine > () )
+            if( hitCollider.gameObject.TryGetComponent(out MineralStateMachine mineralStateMachine) )
             {
                 Vector3 direction = transform.position - hitCollider.transform.position;
+              
                 hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
             }
         }
