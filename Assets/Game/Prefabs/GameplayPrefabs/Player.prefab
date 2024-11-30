@@ -543,7 +543,7 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 2178739028103266630
+  - rid: 2178739050526802280
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   StopFeedbacksOnDisable: 0
@@ -551,11 +551,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2178739028103266630
+    - rid: 2178739050526802280
       type: {class: MMF_Particles, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: 1936763491
+        UniqueID: 885169998
         Label: Particles Play
         OriginalLabel: Particles Play
         ChannelMode: 0
@@ -7555,6 +7555,7 @@ Transform:
   - {fileID: 6555747190532761116}
   - {fileID: 2478045438395847137}
   - {fileID: 4630212525327589984}
+  - {fileID: 4501999061815339100}
   m_Father: {fileID: 6297452340817706182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7764880762989374469
@@ -13997,7 +13998,6 @@ Transform:
   - {fileID: 1282818151507939016}
   - {fileID: 7999621524533646222}
   - {fileID: 1901585604616153902}
-  - {fileID: 4501999061815339100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9079055668086165737
@@ -14198,7 +14198,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6297452340817706182}
+    m_TransformParent: {fileID: 1304830962426461265}
     m_Modifications:
     - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: prewarm
@@ -14206,7 +14206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 382289669950813415, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: VelocityModule.orbitalZ.scalar
@@ -14214,7 +14218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1230844470912367965, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.34
+      value: -0.34002686
       objectReference: {fileID: 0}
     - target: {fileID: 1230844470912367965, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14222,7 +14226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1230844470912367965, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.119
+      value: -0.119018555
       objectReference: {fileID: 0}
     - target: {fileID: 1230844470912367965, guid: b7e1c56c7eace01408415f304d17188b, type: 3}
       propertyPath: m_LocalRotation.w
