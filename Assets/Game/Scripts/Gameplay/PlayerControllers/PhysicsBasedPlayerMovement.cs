@@ -134,6 +134,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [Header("VFX")] 
     [SerializeField] private ParticleSystem particleTrail1;
     [SerializeField] private ParticleSystem particleTrail2;
+    [SerializeField] private GameObject suckParticle;
 
     [Header("Feel")] 
     [SerializeField] private MMF_Player SuckFeel;
@@ -146,7 +147,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         jumpInput.performed += StartJump;
         jumpInput.canceled += Jump;
 
-        suckAbility.started += StartSuck;
+       //suckAbility.started += TurnOnSuck;
+        suckAbility.performed += StartSuck;
         suckAbility.canceled += EndSuck;
     }
 
@@ -160,6 +162,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
         suckAbility.performed -= StartSuck;
         suckAbility.canceled -= EndSuck;
+       // suckAbility.started -= TurnOnSuck;
     }
 
     private void Awake()
@@ -268,7 +271,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             //Debug.Log(jumpChargeForce);
         }
     }
-    
+
+    private void TurnOnSuck(InputAction.CallbackContext obj)
+    {
+        SuckFeel?.PlayFeedbacks();
+    }
     private void Movement()
     {
         Vector2 inputDirection = movement.ReadValue<Vector2>();
@@ -403,15 +410,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private void StartSuck(InputAction.CallbackContext obj)
     {
-        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Charge"))
-        {
-            return;
-        }
         if ( CurrentState == MovementState.walking && !jumpCharging )
         {
             CurrentState = MovementState.sucking;
             playerAnimator.SetBool("isSuck", true);
-            SuckFeel?.PlayFeedbacks();
+            suckParticle.SetActive(true);
         }
     }
 
@@ -423,7 +426,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         }  
         CurrentState = MovementState.walking;
        playerAnimator.SetBool("isSuck",false);
-       SuckFeel?.PlayFeedbacks();
+       suckParticle.SetActive(false);
     }
     
     private void SuckUpdate()

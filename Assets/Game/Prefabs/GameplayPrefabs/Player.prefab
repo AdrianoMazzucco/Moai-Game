@@ -7627,6 +7627,8 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 573010d4c174a914ebc88b0fbfdeaa03, type: 3}
   playerRB: {fileID: 0}
   flightDuration: 1
+  maxChargeValue: 3
+  chargeEndVelocityMult: 0.6
   time4FullJumpCharge: 0.5
   tiltBackAngle: 20
   GroundCheckRadiusMultiplier: 1.5
@@ -7681,6 +7683,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 8548776467910562494}
   particleTrail1: {fileID: 7314482015013858656}
   particleTrail2: {fileID: 3568896867022803007}
+  suckParticle: {fileID: 2172224248613753336}
   SuckFeel: {fileID: 8904407089503737089}
 --- !u!114 &7570318550050928338
 MonoBehaviour:
@@ -7694,19 +7697,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f06ca397e93442bd9e2ddbf78af19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHP: 5
-  currentHP: 5
   totalMineralCount: 500
   startingMineralCount: 0
   mineralsLostOnHit: 20
   currentMineralCount: 0
-  mineralRequiredtoHeal: 20
-  maxMineralToHealth: 60
   mineralCountDisplay: {fileID: 0}
   healthCountDisplay: {fileID: 0}
   playerController: {fileID: 9213588451285641435}
   damageCoolDownTimer: 1
-  respawnLocation: {fileID: 0}
+  mineralsRequiredforShrine: 40
+  changeToMineralsDropped: -2
   OnMineralCountChange:
     m_PersistentCalls:
       m_Calls:
@@ -14685,25 +14685,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
-    - target: {fileID: 4583211636526076744, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2654210776151930042, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4583211636526076744, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583211636526076744, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4831142868984785902, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4831142868984785902, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4831142868984785902, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950454656969676151, guid: 2a9920fc48086584d976b2a427d4136b, type: 3}
       propertyPath: m_Value

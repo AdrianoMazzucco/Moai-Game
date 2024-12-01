@@ -60,9 +60,23 @@ public class MineralCountScript : MonoBehaviour
         {
             currentMineralCount++;
             GameManager.Instance.MineralPool.Release(collider.gameObject);
-
+            
             UpdateMineralCount();
         }
+        
+       
+        if (collider.gameObject.layer == 16)
+        {
+            TakeDamage();
+        }
+   
+
+    
+        if (collider.gameObject.layer == 17)
+        {
+            TakeDamage();
+        }
+      
     }
 
     public void TakeDamage()
