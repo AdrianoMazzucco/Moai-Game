@@ -19,6 +19,7 @@ public class VolcanoHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
     [SerializeField] private float invulDuration = 2f;
+    [SerializeField] private float respawnDelay = 10f;
     [Header("Minerals")]
     [SerializeField] private Vector3 mineralSpawnDirection;
     [SerializeField] private float mineralLaunchMagnitude = 10f;
@@ -29,6 +30,7 @@ public class VolcanoHealth : MonoBehaviour
     [Header("Connections")] 
     [SerializeField] private Collider _collider;
 
+    [SerializeField] private VolcanoProjectileManager projectileManager;
     [SerializeField] private BoxCollider _triggerCollider;
     #endregion
 
@@ -59,6 +61,13 @@ public class VolcanoHealth : MonoBehaviour
                 }
             }
             currentHealth = value;
+
+            if (CurrentHealth <= 0)
+            {
+                toBeDisabled.SetActive(false);
+                projectileManager.enabled = false;
+                StartCoroutine(RespawnLater());
+            }
         }
         
     }
@@ -66,6 +75,12 @@ public class VolcanoHealth : MonoBehaviour
 
     #endregion
 
+    #region Connections
+
+    [SerializeField] private GameObject toBeDisabled;
+
+    #endregion
+    
 
     #region Feel
 
@@ -90,6 +105,8 @@ public class VolcanoHealth : MonoBehaviour
         {
             CurrentHealth -= DamageTaken;
             StartCoroutine(InvulCoroutine);
+            
+            
         }
     }
 
@@ -141,6 +158,14 @@ public class VolcanoHealth : MonoBehaviour
         }
         
         SetInvul(true);
+    }
+
+    private IEnumerator RespawnLater()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+        toBeDisabled.SetActive(true);
+        projectileManager.enabled = true;
+        CurrentHealth = maxHealth;
     }
 
 

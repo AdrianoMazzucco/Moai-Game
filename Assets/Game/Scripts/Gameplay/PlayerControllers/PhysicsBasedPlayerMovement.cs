@@ -213,7 +213,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             }
             
             bisGrounded = true;
-        
+            bhasJumped = false;
             playerAnimator.SetBool("isGrounded", bisGrounded);
             currentAirTime = 0f;
         }
@@ -397,7 +397,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         {
             jumpChargeTime = 0;
             jumpCharging = true;
-            //if(bisGrounded)
+            if(bisGrounded)
             playerAnimator.SetTrigger("JumpCharge");
         }
     }
@@ -471,12 +471,19 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             }
             else
             {
-                directionTotal *= airMovementForceMultiplier;
+                directionTotal  *= (airMovementForceMultiplier);
             }
             if (jumpCharging) { directionTotal *= 0.5f; }
 
-            playerRB.AddForce(directionTotal, ForceMode.Acceleration);
-            
+            if (!bisGrounded)
+            {
+                playerRB.AddForce(directionTotal + new Vector3(0, -30f, 0), ForceMode.Acceleration);
+            }
+            else
+            {
+                playerRB.AddForce(directionTotal , ForceMode.Acceleration);
+            }
+
             if (playerRB.linearVelocity.magnitude > maxSpeed)
             {
                 playerRB.linearVelocity = playerRB.linearVelocity.normalized * maxSpeed;
