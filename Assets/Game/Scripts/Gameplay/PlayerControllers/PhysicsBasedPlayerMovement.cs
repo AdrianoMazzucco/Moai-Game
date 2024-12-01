@@ -146,7 +146,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         jumpInput.performed += StartJump;
         jumpInput.canceled += Jump;
 
-        suckAbility.performed += StartSuck;
+        suckAbility.started += StartSuck;
         suckAbility.canceled += EndSuck;
     }
 
@@ -221,6 +221,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private void Update()
     {        
+      
         switch(CurrentState)
         {
             case MovementState.walking:
@@ -314,7 +315,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         playerRB.AddForce(transform.forward * chargeForcecMultiplier, ForceMode.Acceleration);
         playerAnimator.SetFloat("SpinSpeed",playerRB.linearVelocity.magnitude);
         flightTime += Time.deltaTime;
-        if (flightTime > flightDuration*0.9f) {
+        if (flightTime > (flightDuration + chargeAmount)*0.9f) {
             if (bisGrounded)
             {
                 playerAnimator.SetBool("isVertical",true);
@@ -402,7 +403,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private void StartSuck(InputAction.CallbackContext obj)
     {
-        if (CurrentState == MovementState.walking && !jumpCharging)
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Charge"))
+        {
+            return;
+        }
+        if ( CurrentState == MovementState.walking && !jumpCharging )
         {
             CurrentState = MovementState.sucking;
             playerAnimator.SetBool("isSuck", true);
@@ -411,8 +416,12 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     }
 
     private void EndSuck(InputAction.CallbackContext obj)
-    {
-       CurrentState = MovementState.walking;
+    { 
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Charge"))
+        {
+            return;
+        }  
+        CurrentState = MovementState.walking;
        playerAnimator.SetBool("isSuck",false);
        SuckFeel?.PlayFeedbacks();
     }

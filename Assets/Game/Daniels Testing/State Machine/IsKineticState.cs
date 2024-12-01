@@ -7,7 +7,8 @@ public class IsKineticState : MineralBaseState
 
     public bool isGrounded;
     public bool isSucked;
-
+    public float DespawnTimer = 10f;
+    private float timer = 0f;
     public IsKineticState(MineralStateMachineContext context, MineralStateMachine.EStateMineral
         estate) : base(context, estate)
     {
@@ -28,12 +29,21 @@ public class IsKineticState : MineralBaseState
         anim.clip = mineralIdle;
        // Debug.Log(mineralIdle);
 
+       timer = 0f;       
         anim.Play();
 
     }
     public override void ExitState() { }
     public override void UpdateState()
     {
+        timer += Time.deltaTime;
+
+        if (timer > DespawnTimer)
+        {
+            timer = 0;
+            GameManager.Instance.MineralPool.Release(Context.Rigidbody.gameObject);
+        }
+
         if (Input.GetMouseButtonDown(1)) // 0 is for the left mouse button
         {
             isSucked = true;

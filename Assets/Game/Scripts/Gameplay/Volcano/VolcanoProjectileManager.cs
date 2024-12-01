@@ -44,11 +44,12 @@ public class VolcanoProjectileManager : MonoBehaviour
     private void Awake()
     {
         fireCoroutine = FirePojectile();
+        _gameManager = GameManager.Instance;
     }
-
+    
     void Start()
     {
-        _gameManager = GameManager.Instance;
+       
         _boulder = projectileGameObject.GetComponent<Boulder>();
     }
 
