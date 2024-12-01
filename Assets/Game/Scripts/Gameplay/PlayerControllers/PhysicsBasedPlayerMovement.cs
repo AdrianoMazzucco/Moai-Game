@@ -129,7 +129,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     #endregion
     
     [SerializeField] private GameObject currentCamera;
-    [SerializeField] private Animator playerAnimator;
+    public Animator playerAnimator;
 
     [Header("VFX")] 
     [SerializeField] private ParticleSystem particleTrail1;
@@ -139,7 +139,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [Header("Feel")] 
     [SerializeField] private MMF_Player SuckFeel;
     [SerializeField] private MMF_Player WalkFeel;
+    [Header("Terrain")] 
+    [SerializeField] private Terrain t1;
+    [SerializeField] private TerrainCollider t1Col;
     
+    [SerializeField] private Terrain t2;
+    [SerializeField] private Terrain t2Col;
+
+    [SerializeField] private PhysicsMaterial _physicsMaterial;
     private void OnEnable()
     {
         chargeAttack.performed += StartCharge;
@@ -350,6 +357,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             flightTime = 0;
             CurrentState = MovementState.walking;
             playerAnimator.SetBool("isVertical",false);
+            _physicsMaterial.bounciness = 0f;
         }
 
         if (playerRB.linearVelocity.magnitude < 2f)
@@ -376,6 +384,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             CurrentState = MovementState.charging;
             playerAnimator.ResetTrigger("Walk");
             chargeAmount = 0f;
+            _physicsMaterial.bounciness = 0.8f;
         }
     }
 
@@ -555,8 +564,21 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private bool CheckGrounded(float _lengthMultiplier = 1)
     {
+
+        RaycastHit hit;
+        Physics.Raycast(transform.position +new Vector3(0, 30,0), -Vector3.up, out hit,currentScale * 1.2f * _lengthMultiplier,1<<10 );
+
+
+        if (hit.collider == t1Col)
+        {
+            GameManager.Instance.CurrentTerrain = t1;
+        }
+        else
+        {
+            GameManager.Instance.CurrentTerrain = t2;
+        }
         
-        //bool bground =  Physics.Raycast(transform.position, -Vector3.up, currentScale * 1.2f * _lengthMultiplier);
+        
         float radius;
         Vector3 pos;
 
@@ -569,9 +591,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         //     pos = transform.position + Vector3.up * (radius * 0.9f);
         // }
 
+    
 
-
-        bool bground = Physics.CheckSphere(pos, radius, 1 << 10);
+        bool bground = Physics.CheckSphere(pos, radius, 1 << 10 | 1<<17);
+        
        // bisGrounded = bground;
      
         
