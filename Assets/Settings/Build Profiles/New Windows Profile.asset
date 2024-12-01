@@ -20,14 +20,12 @@ MonoBehaviour:
     rid: 2178738541952761856
   m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 0
-    m_path: Assets/Game/Scenes/Core/Core.unity
-  - m_enabled: 0
-    m_path: Assets/Game/Scenes/Core/UI.unity
-  - m_enabled: 0
-    m_path: Assets/Game/Scenes/GameScenes/SampleScene.unity
+  - m_enabled: 1
+    m_path: Assets/Game/Scenes/MainMenu.unity
   - m_enabled: 1
     m_path: Assets/Game/Daniels Testing/DanielLevelTest.unity
+  - m_enabled: 1
+    m_path: Assets/Feel/MMTools/Core/MMSceneLoading/LoadingScreens/MMAdditiveLoadingScreen.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
