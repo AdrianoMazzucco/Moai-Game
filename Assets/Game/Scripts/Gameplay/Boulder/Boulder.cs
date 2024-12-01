@@ -63,13 +63,14 @@ public class Boulder : MonoBehaviour,IDestructable
 
     #region Events
 
-    private UnityEvent OnLanded = new UnityEvent();
+    public UnityEvent OnLanded ;
 
     #endregion
 
     #region Feel
 
     [SerializeField] private MMF_Player DamageMMF;
+    [SerializeField] private MMF_Player LandMMF;
 
     #endregion
     

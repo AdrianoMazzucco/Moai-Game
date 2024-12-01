@@ -37,6 +37,7 @@ public class MineralCountScript : MonoBehaviour
 
     public UnityEvent<float> OnMineralCountChange;
     public UnityEvent<string> OnMineralCountChangeTXT;
+    public UnityEvent MineralPickup;
 
     #endregion
     
@@ -60,7 +61,7 @@ public class MineralCountScript : MonoBehaviour
         {
             currentMineralCount++;
             GameManager.Instance.MineralPool.Release(collider.gameObject);
-            
+            MineralPickup.Invoke();
             UpdateMineralCount();
         }
         
