@@ -37,9 +37,14 @@ public class MineralCountScript : MonoBehaviour
 
     public UnityEvent<float> OnMineralCountChange;
     public UnityEvent<string> OnMineralCountChangeTXT;
+    public UnityEvent<string> OnUpgradeCountChangeTXT;
+    public UnityEvent<float> OnUpgradeCountChange;
     public UnityEvent MineralPickup;
 
     #endregion
+
+    [SerializeField]
+    GameObject toDisableForBoss;    
     
     private void Start()
     {
@@ -108,6 +113,14 @@ public class MineralCountScript : MonoBehaviour
     {
         OnMineralCountChange.Invoke(currentMineralCount);
         OnMineralCountChangeTXT.Invoke("" + currentMineralCount);
+        OnUpgradeCountChange.Invoke(GameManager.Instance.volcanoSpawnCountModifier);
+        OnUpgradeCountChangeTXT.Invoke("" + GameManager.Instance.volcanoSpawnCountModifier);
+
+
+        if (mineralsLostOnHit == 0)
+        {
+            toDisableForBoss.SetActive(false);
+        }
         
         if (mineralCountDisplay != null)
             mineralCountDisplay.text = "Minerals: " + currentMineralCount;
@@ -120,7 +133,7 @@ public class MineralCountScript : MonoBehaviour
             playerController.goldMatRenderer.material = playerController.goldMat;
             playerController.goldMatRenderer2.material = playerController.goldMat;
         }
-
+        
         if (playerController != null)
             playerController.UpdateStats(currentMineralCount);
     }

@@ -147,6 +147,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private TerrainCollider t2Col;
 
     [SerializeField] private PhysicsMaterial _physicsMaterial;
+    
+    
     public Material goldMat;
     public Renderer goldMatRenderer;
     public Renderer goldMatRenderer2;
@@ -187,15 +189,16 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         jumpInput = playerActionMap?.FindAction("Jump");
 
         suckAbility = playerActionMap?.FindAction("Suck");
+        GameManager.Instance.playerMovementScript = this;
+        GameManager.Instance.playerGameObject = this.gameObject;
     }
-
+    
     private void Start()
     {
         _capsuleCollider = this.GetComponent<CapsuleCollider>();
-        GameManager.Instance.playerMovementScript = this;
-        GameManager.Instance.playerGameObject = this.gameObject;
+     
         
-        InvokeRepeating(nameof(UpdateTerrain),1f,1f);
+    //   InvokeRepeating(nameof(UpdateTerrain),1f,1f);
     }
 
     private bool tempBool = false;
@@ -302,6 +305,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     {
         //Get all terrain
         Terrain[] terrains = {t1,t2};
+        TerrainCollider[] terrainsColliders = {t1Col,t2Col};
 
         //Make sure that terrains length is ok
         if (terrains.Length == 0)
@@ -317,8 +321,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
         for (int i = 1; i < terrains.Length; i++)
         {
-            Terrain terrain = terrains[i];
-            Vector3 terrainPos = terrain.GetPosition();
+            
+            Vector3 terrainPos = terrainsColliders[i].ClosestPoint(transform.position);
 
             //Find the distance and check if it is lower than the last one then store it
             var dist = (terrainPos - playerPos).sqrMagnitude;
@@ -607,12 +611,12 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private bool CheckGrounded(float _lengthMultiplier = 1)
     {
-        //
+        
         // RaycastHit hit;
         // Physics.Raycast(transform.position +new Vector3(0, 30,0), -Vector3.up, out hit,currentScale * 1.2f * _lengthMultiplier,1<<10 );
         //
         //
-        // if (hit.collider == t1Col)
+        // if (hit.collider.)
         // {
         //     GameManager.Instance.CurrentTerrain = t1;
         // }
@@ -620,7 +624,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         // {
         //     GameManager.Instance.CurrentTerrain = t2;
         // }
-        
+        //
         
         float radius;
         Vector3 pos;

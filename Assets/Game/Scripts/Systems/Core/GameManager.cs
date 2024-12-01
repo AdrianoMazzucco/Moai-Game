@@ -5,6 +5,7 @@ using MoreMountains.Tools;
 using QFSW.MOP2;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MMSingleton<GameManager>
 {
@@ -40,6 +41,12 @@ public class GameManager : MMSingleton<GameManager>
     
     
     #endregion
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     private void Start()
     {
         DOTween.SetTweensCapacity(500,500);
@@ -50,13 +57,33 @@ public class GameManager : MMSingleton<GameManager>
 
 
         MineralPool.GetObject(new Vector3(122.679352f, 3.46000004f, 767.54425f));
-    }   
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     #region Methods
 
     public void ShakeCamera()
     {
         Camera_Shake_MMF.PlayFeedbacks();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        volcanoSpawnCountModifier = 0;
+
+        foreach (var terrain in Terrain.activeTerrains)
+        {
+            if (terrain.name == "LevelTerrain")
+            {
+                CurrentTerrain = terrain;
+                break;
+            }
+        }
+       
     }
 
     #endregion
