@@ -88,9 +88,9 @@ MonoBehaviour:
   variance: 10
   BurstCount: 1
   timeBetweenSpawns: 10
-  projectileAirTime: 8
+  projectileAirTime: 6
   innerRadius: 6.4
-  outerRadius: 250
+  outerRadius: 150
   verticalJumpHeight: 24
   projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
   projectileEase: 2
@@ -114,6 +114,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   invulDuration: 2
+  mineralSpawnDirection: {x: 0, y: 0, z: 0}
+  mineralLaunchMagnitude: 10
+  MineralsToSpawn: 10
   DamageTaken: 10
   _collider: {fileID: 7255420836249204165}
   _triggerCollider: {fileID: 1304363023720320886}
