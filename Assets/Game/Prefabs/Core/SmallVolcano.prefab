@@ -86,11 +86,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bCheckForPlayer: 1
   variance: 10
-  BurstCount: 1
-  timeBetweenSpawns: 10
-  projectileAirTime: 6
-  innerRadius: 6.4
-  outerRadius: 150
+  BurstCount: 2
+  timeBetweenSpawns: 5
+  projectileAirTime: 4
+  innerRadius: 8
+  outerRadius: 60
   verticalJumpHeight: 24
   projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
   projectileEase: 2
@@ -5641,7 +5641,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ed2e18c8b765ee488cc06eb4300f236, type: 2}
+  - {fileID: 2100000, guid: 66fc28fe30939a64590c69e931433049, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6438,8 +6438,8 @@ MonoBehaviour:
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
-          RepeatForever: 0
-          DelayBetweenRepeats: 1
+          RepeatForever: 1
+          DelayBetweenRepeats: 2
           PlayCount: 0
           LimitPlayCount: 0
           MaxPlayCount: 3
@@ -6461,7 +6461,7 @@ MonoBehaviour:
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
         RandomDurationMultiplier: {x: 0.5, y: 2}
-        UseRange: 0
+        UseRange: 1
         RangeDistance: 30
         UseRangeFalloff: 0
         RangeFalloff:
