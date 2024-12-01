@@ -1148,7 +1148,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000003774895, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2414844148387744190}
@@ -1180,10 +1180,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6856039959469991282}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.53008425, z: -0, w: 0.84794503}
-  m_LocalPosition: {x: -235.96313, y: -1.9966278, z: 183.14215}
-  m_LocalScale: {x: 0.6250001, y: 0.4, z: 0.6250001}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 18.2, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1288076406549523914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6149,7 +6149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 815.7, y: 14, z: 484.1}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1288076406549523914}
@@ -6168,14 +6168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ad5b4ef4d8c2a4fb86146aab8b3354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bCheckForPlayer: 0
-  variance: 10
-  BurstCount: 6
-  timeBetweenSpawns: 5
-  projectileAirTime: 5
-  innerRadius: 75
-  outerRadius: 250
-  verticalJumpHeight: 30
+  bCheckForPlayer: 1
+  variance: 30
+  BurstCount: 3
+  timeBetweenSpawns: 16
+  projectileAirTime: 6
+  innerRadius: 15
+  outerRadius: 370
+  verticalJumpHeight: 100
   projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
   projectileEase: 2
   spawnPos: {x: 0, y: 0, z: 0}
@@ -6203,7 +6203,7 @@ MonoBehaviour:
   mineralLaunchMagnitude: 10
   MineralsToSpawn: 10
   DamageTaken: 10
-  _collider: {fileID: 191865270223717776}
+  _collider: {fileID: 3329777601023338979}
   projectileManager: {fileID: 6269474898149664375}
   _triggerCollider: {fileID: 191865270223717776}
   isSecretVolcano: 0
@@ -6222,8 +6222,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1736864974570097437}
   - component: {fileID: 3968689585895904446}
+  - component: {fileID: 3329777601023338979}
   - component: {fileID: 191865270223717776}
-  - component: {fileID: 1487569790624530061}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -6308,6 +6308,28 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.13071585, y: 4.0450945, z: -0.19084549}
     m_Extent: {x: 5.4736085, y: 4.081959, z: 5.5288258}
   m_DirtyAABB: 0
+--- !u!64 &3329777601023338979
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860471070235984355}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!65 &191865270223717776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6327,29 +6349,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.358365, y: 8.163917, z: 12.302582}
-  m_Center: {x: -0.33628988, y: -88.5549, z: -0.18185091}
---- !u!65 &1487569790624530061
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8860471070235984355}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.947218, y: 8.16392, z: 10.846954}
-  m_Center: {x: -0.1307157, y: -88.5549, z: -0.2961979}
+  m_Size: {x: 32.445496, y: 22.439972, z: 32.863617}
+  m_Center: {x: 0.14089966, y: -81.41687, z: -0.3589611}
 --- !u!1 &9066796408203899824
 GameObject:
   m_ObjectHideFlags: 0

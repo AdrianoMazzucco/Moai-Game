@@ -144,7 +144,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private TerrainCollider t1Col;
     
     [SerializeField] private Terrain t2;
-    [SerializeField] private Terrain t2Col;
+    [SerializeField] private TerrainCollider t2Col;
 
     [SerializeField] private PhysicsMaterial _physicsMaterial;
     public Material goldMat;

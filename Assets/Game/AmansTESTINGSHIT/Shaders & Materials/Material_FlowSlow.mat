@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowMap:
-        m_Texture: {fileID: 2800000, guid: 7121b2e258173854e95757b4fee53af6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9e80f129350689a44889d3c68a6f4629, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normals:
@@ -70,16 +70,19 @@ Material:
     - _AmbientOcclusion: 0
     - _Float: 0.176
     - _FlowMapTiling: 1
+    - _LerpSpeed: 5
     - _Metallic: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _Speed: 0.2
+    - _Speed: 0.57
     - _Strength: 0.5
-    - _Tiling: 8
+    - _Tiling: 4
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Emission2: {r: 2.0026183, g: 0.033376973, b: 0, a: 1}
     - _EmissionColor: {r: 0.79910296, g: 0.14126332, b: 0.005181517, a: 1}
+    - _Emission_Color: {r: 1.3212125, g: 0.022020211, b: 0, a: 1}
     - _Tint: {r: 0.9245283, g: 0.7112782, b: 0.5276789, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
