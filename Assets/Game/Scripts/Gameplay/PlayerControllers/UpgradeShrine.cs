@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UpgradeShrine : MonoBehaviour
 {
-    [SerializeField] private float changeToVolcanoSpeed = 0.3f;
+    [SerializeField] private int changeToVolcanoSpawnCount = 1;
     private GameManager _gameManager;
 
     private void Start()
@@ -18,7 +18,7 @@ public class UpgradeShrine : MonoBehaviour
         {
             if (mineralCountScript.ShrineUpgrade())
             {
-                _gameManager.volcanoSpawnTimeOffset += changeToVolcanoSpeed;
+                _gameManager.volcanoSpawnCountModifier += changeToVolcanoSpawnCount;
             }
         }
     }
