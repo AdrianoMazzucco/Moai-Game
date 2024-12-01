@@ -149,6 +149,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private PhysicsMaterial _physicsMaterial;
     public Material goldMat;
     public Renderer goldMatRenderer;
+    public Renderer goldMatRenderer2;
     private void OnEnable()
     {
         chargeAttack.performed += StartCharge;
@@ -193,6 +194,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         _capsuleCollider = this.GetComponent<CapsuleCollider>();
         GameManager.Instance.playerMovementScript = this;
         GameManager.Instance.playerGameObject = this.gameObject;
+        
+        InvokeRepeating(nameof(UpdateTerrain),1f,1f);
     }
 
     private bool tempBool = false;
@@ -293,6 +296,44 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     private void TurnOnSuck(InputAction.CallbackContext obj)
     {
         SuckFeel?.PlayFeedbacks();
+    }
+    
+    Terrain GetClosestCurrentTerrain(Vector3 playerPos)
+    {
+        //Get all terrain
+        Terrain[] terrains = {t1,t2};
+
+        //Make sure that terrains length is ok
+        if (terrains.Length == 0)
+            return null;
+
+        //If just one, return that one terrain
+        if (terrains.Length == 1)
+            return terrains[0];
+
+        //Get the closest one to the player
+        float lowDist = (terrains[0].GetPosition() - playerPos).sqrMagnitude;
+        var terrainIndex = 0;
+
+        for (int i = 1; i < terrains.Length; i++)
+        {
+            Terrain terrain = terrains[i];
+            Vector3 terrainPos = terrain.GetPosition();
+
+            //Find the distance and check if it is lower than the last one then store it
+            var dist = (terrainPos - playerPos).sqrMagnitude;
+            if (dist < lowDist)
+            {
+                lowDist = dist;
+                terrainIndex = i;
+            }
+        }
+        return terrains[terrainIndex];
+    }
+
+    private void UpdateTerrain()
+    {
+        GameManager.Instance.CurrentTerrain = GetClosestCurrentTerrain(this.transform.position);
     }
     private void Movement()
     {
@@ -566,19 +607,19 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     private bool CheckGrounded(float _lengthMultiplier = 1)
     {
-
-        RaycastHit hit;
-        Physics.Raycast(transform.position +new Vector3(0, 30,0), -Vector3.up, out hit,currentScale * 1.2f * _lengthMultiplier,1<<10 );
-
-
-        if (hit.collider == t1Col)
-        {
-            GameManager.Instance.CurrentTerrain = t1;
-        }
-        else
-        {
-            GameManager.Instance.CurrentTerrain = t2;
-        }
+        //
+        // RaycastHit hit;
+        // Physics.Raycast(transform.position +new Vector3(0, 30,0), -Vector3.up, out hit,currentScale * 1.2f * _lengthMultiplier,1<<10 );
+        //
+        //
+        // if (hit.collider == t1Col)
+        // {
+        //     GameManager.Instance.CurrentTerrain = t1;
+        // }
+        // else
+        // {
+        //     GameManager.Instance.CurrentTerrain = t2;
+        // }
         
         
         float radius;

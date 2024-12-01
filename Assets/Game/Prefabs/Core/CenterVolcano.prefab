@@ -1043,7 +1043,7 @@ MonoBehaviour:
         Owner: {fileID: 3420009959234261151}
         DebugActive: 0
         LoadingSceneName: MMAdditiveLoadingScreen
-        DestinationSceneName: EndScene
+        DestinationSceneName: EndScreen
         LoadingMode: 2
         Priority: 4
         SecureLoad: 1
@@ -6132,6 +6132,7 @@ GameObject:
   - component: {fileID: 2127717241686329462}
   - component: {fileID: 6269474898149664375}
   - component: {fileID: 3450506463661810069}
+  - component: {fileID: 2603625827713045686}
   m_Layer: 0
   m_Name: CenterVolcano
   m_TagString: Untagged
@@ -6212,6 +6213,33 @@ MonoBehaviour:
   toBeDisabled: {fileID: 4002246031913975525}
   _damagedMMF: {fileID: 9173475556473104767}
   _InvulMMF: {fileID: 2034267637856803006}
+--- !u!54 &2603625827713045686
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6885337332525499552}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8860471070235984355
 GameObject:
   m_ObjectHideFlags: 0

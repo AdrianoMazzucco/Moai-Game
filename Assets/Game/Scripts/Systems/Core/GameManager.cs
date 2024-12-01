@@ -1,11 +1,12 @@
 using System;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using QFSW.MOP2;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MMSingleton<GameManager>
 {
     #region Globals
 
@@ -46,6 +47,9 @@ public class GameManager : Singleton<GameManager>
         DecalPool = ObjectPool.Create(decalGameObject);
         DestructionFXPool = ObjectPool.Create(destructionFXObject);
         MineralPool = ObjectPool.Create(mineralRuby);
+
+
+        MineralPool.GetObject(new Vector3(122.679352f, 3.46000004f, 767.54425f));
     }   
 
     #region Methods

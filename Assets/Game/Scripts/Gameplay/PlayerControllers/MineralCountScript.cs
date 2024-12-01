@@ -118,6 +118,7 @@ public class MineralCountScript : MonoBehaviour
         if (mineralsLostOnHit == 0)
         {
             playerController.goldMatRenderer.material = playerController.goldMat;
+            playerController.goldMatRenderer2.material = playerController.goldMat;
         }
 
         if (playerController != null)
@@ -147,5 +148,6 @@ public class MineralCountScript : MonoBehaviour
     public void CoolShrine()
     {
         mineralsLostOnHit = 0;
+        UpdateMineralCount();
     }
 }
