@@ -138,6 +138,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
     [Header("Feel")] 
     [SerializeField] private MMF_Player SuckFeel;
+    [SerializeField] private MMF_Player WalkFeel;
     
     private void OnEnable()
     {
@@ -256,6 +257,14 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
                 particleTrail2.Play();
             }
 
+            // if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+            // {
+            //     WalkFeel?.PlayFeedbacks();
+            // }
+            // else
+            // {
+            //   //  WalkFeel?.StopFeedbacks();
+            // }
         }
         else
         {

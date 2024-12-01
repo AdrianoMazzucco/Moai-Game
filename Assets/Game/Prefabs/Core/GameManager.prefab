@@ -313,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8850585406790166291}
   - component: {fileID: 8627797475894059899}
+  - component: {fileID: 6374363649272717414}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -351,6 +352,7 @@ MonoBehaviour:
   playerGameObject: {fileID: 0}
   playerMovementScript: {fileID: 0}
   CurrentTerrain: {fileID: 0}
+  volcanoSpawnTimeOffset: 0
   BoulderPool: {fileID: 0}
   MineralPool: {fileID: 0}
   DecalPool: {fileID: 0}
@@ -360,3 +362,19 @@ MonoBehaviour:
   destructionFXObject: {fileID: 8608962886978865870, guid: 64ff553b8b8b2ab488d9eeb89d28f465, type: 3}
   mineralRuby: {fileID: 7046991975177724950, guid: eefe276495408b045934f014ac1d55ca, type: 3}
   Camera_Shake_MMF: {fileID: 6188374666962140858}
+--- !u!114 &6374363649272717414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491284449468227614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614edb33c38bcf949846d5675f29f9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutomaticallyUnparentOnAwake: 1
+  settingsSo: {fileID: 11400000, guid: 07ea3ff88e1ecb84d91f58aa804badc6, type: 2}
+  AudioSourcePoolSize: 10
+  PoolCanExpand: 1

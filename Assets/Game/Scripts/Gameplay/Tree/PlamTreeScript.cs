@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlamTreeScript : MonoBehaviour, IDestructable
 {
@@ -40,8 +41,12 @@ public class PlamTreeScript : MonoBehaviour, IDestructable
 
     
     #endregion
-    
-    
+
+    #region Events
+
+    public UnityEvent OnBreak;
+
+    #endregion
 
 
     #region UnityFunctions
@@ -166,7 +171,7 @@ public class PlamTreeScript : MonoBehaviour, IDestructable
     public void BigBreak(Vector3 collisionForce)
     {
         SwapModelsToRigidbodies();
-
+        OnBreak.Invoke();
         foreach (var leaf in Leaves)
         {
             leaf.isKinematic = false;
