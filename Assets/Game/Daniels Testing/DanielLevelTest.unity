@@ -41262,6 +41262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696484104}
+  - component: {fileID: 696484105}
   m_Layer: 0
   m_Name: VOLCANOS
   m_TagString: Untagged
@@ -41295,6 +41296,20 @@ Transform:
   - {fileID: 1838929477}
   m_Father: {fileID: 8496747322266562665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696484105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696484103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc95ad8b6e328849a543a9421549efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potentialSectetVolcano:
+  - {fileID: 1559924342}
 --- !u!1001 &699265619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92222,6 +92237,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559255067}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1559924342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2551382590955049834, guid: 4cbad5a74c441d74baed4d5056d1453c, type: 3}
+  m_PrefabInstance: {fileID: 2952476553818246280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1561621090
 GameObject:
   m_ObjectHideFlags: 0
@@ -102292,6 +102312,10 @@ PrefabInstance:
     - target: {fileID: 7872683393006117160, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.366196
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872683393006117160, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.375
       objectReference: {fileID: 0}
     - target: {fileID: 7872683393006117160, guid: 5b0fe22717769e944ba6ebaf9ae9ab3c, type: 3}
       propertyPath: m_LocalPosition.z

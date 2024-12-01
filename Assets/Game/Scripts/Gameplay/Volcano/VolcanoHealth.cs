@@ -32,6 +32,8 @@ public class VolcanoHealth : MonoBehaviour
 
     [SerializeField] private VolcanoProjectileManager projectileManager;
     [SerializeField] private BoxCollider _triggerCollider;
+
+    public bool isSecretVolcano = false;
     #endregion
 
     #region Properties
@@ -64,6 +66,12 @@ public class VolcanoHealth : MonoBehaviour
 
             if (CurrentHealth <= 0)
             {
+                if(isSecretVolcano)
+                {
+                    isSecretVolcano=false;
+                    GameManager.Instance.playerGameObject.GetComponent<ToggleSunglasses>().Toggle(true);
+                }
+
                 toBeDisabled.SetActive(false);
                 projectileManager.enabled = false;
                 StartCoroutine(RespawnLater());
