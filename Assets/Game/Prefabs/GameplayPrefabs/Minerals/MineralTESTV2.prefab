@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 2861230618172168578}
   - component: {fileID: 1139049689295724176}
   - component: {fileID: 6066427763557725244}
+  - component: {fileID: 4641969589919408753}
   m_Layer: 7
   m_Name: MineralTESTV2
   m_TagString: Untagged
@@ -687,6 +688,22 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4641969589919408753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046991975177724950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedbc3b09034cf745967c25c7f624b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mineralMeshs:
+  - {fileID: 3237405968437155778}
+  - {fileID: 1517387650449577669}
+  - {fileID: 963007680088195885}
 --- !u!1001 &1189762890326361325
 PrefabInstance:
   m_ObjectHideFlags: 0
