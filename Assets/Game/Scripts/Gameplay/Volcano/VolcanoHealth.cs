@@ -34,6 +34,9 @@ public class VolcanoHealth : MonoBehaviour
     [SerializeField] private BoxCollider _triggerCollider;
 
     public bool isSecretVolcano = false;
+    public bool isEndVolcano = false;
+
+    [SerializeField] private MMF_Player endGameFeel;
     #endregion
 
     #region Properties
@@ -50,28 +53,33 @@ public class VolcanoHealth : MonoBehaviour
             {
                 OnDamageTaken.Invoke();
                 _damagedMMF.PlayFeedbacks();
-                if (GameManager.Instance.playerMovementScript.CurrentState == MovementState.flying)
-                {
-                    for (int i = 0; i < MineralsToSpawn; i++)
-                    {
-                        GameManager.Instance.MineralPool.GetObject(this.transform.position + new Vector3(0,10,0)).GetComponent<Rigidbody>()
-                            .linearVelocity =
-                                new Vector3((mineralSpawnDirection.x + Random.Range(-2, 2)), mineralSpawnDirection.y,
-                                    mineralSpawnDirection.z + Random.Range(-2, 2)).normalized * mineralLaunchMagnitude;
-
-                    }
-                }
+               
             }
             currentHealth = value;
 
             if (CurrentHealth <= 0)
             {
+
+                if (isEndVolcano)
+                {
+                    endGameFeel?.PlayFeedbacks();
+                }
+                
+                
+                for (int i = 0; i < MineralsToSpawn; i++)
+                {
+                    GameManager.Instance.MineralPool.GetObject(this.transform.position + new Vector3(0,10,0)).GetComponent<Rigidbody>()
+                            .linearVelocity =
+                        new Vector3((mineralSpawnDirection.x + Random.Range(-2, 2)), mineralSpawnDirection.y,
+                            mineralSpawnDirection.z + Random.Range(-2, 2)).normalized * mineralLaunchMagnitude;
+
+                }
                 if(isSecretVolcano)
                 {
                     isSecretVolcano=false;
                     GameManager.Instance.playerGameObject.GetComponent<ToggleSunglasses>().Toggle(true);
                 }
-
+                
                 toBeDisabled.SetActive(false);
                 projectileManager.enabled = false;
                 StartCoroutine(RespawnLater());
@@ -109,9 +117,10 @@ public class VolcanoHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.layer == 3 && GameManager.Instance.playerMovementScript.CurrentState == MovementState.flying)
         {
-            CurrentHealth -= DamageTaken;
+            CurrentHealth -= (int)(GameManager.Instance.playerMovementScript.playerRB.mass *
+                                   GameManager.Instance.playerMovementScript.playerRB.linearVelocity.magnitude);
             StartCoroutine(InvulCoroutine);
             
             
@@ -171,6 +180,13 @@ public class VolcanoHealth : MonoBehaviour
     private IEnumerator RespawnLater()
     {
         yield return new WaitForSeconds(respawnDelay);
+        WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+        while (Vector3.Distance(GameManager.Instance.playerGameObject.transform.position, this.transform.position) <
+               15f)
+        {
+            yield return waitForEndOfFrame;
+        }
+        
         toBeDisabled.SetActive(true);
         projectileManager.enabled = true;
         CurrentHealth = maxHealth;

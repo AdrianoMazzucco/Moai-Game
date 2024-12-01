@@ -71,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
         if (other.gameObject.layer == 17)
         {
             CurrentHealth -= FireBallDamageValue;
+            GameManager.Instance.playerMovementScript.playerRB.AddForce(new Vector3(0,100f,0),ForceMode.Impulse);
         }
     }
     

@@ -124,6 +124,7 @@ public class MineralCountScript : MonoBehaviour
         if(currentMineralCount > mineralsRequiredforShrine)
         {
             currentMineralCount = 0;
+            UpdateMineralCount();
             mineralsLostOnHit += changeToMineralsDropped;
             if(mineralsLostOnHit <= 0) 
             {
