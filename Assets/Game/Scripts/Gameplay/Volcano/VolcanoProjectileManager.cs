@@ -86,10 +86,10 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     public void FireVolcano(int _burstCount,Vector3 center,float inner,float outer,float _duration)
     {
-        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns - _gameManager.volcanoSpawnTimeOffset);
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
         GameObject projectile;
         Vector3 endPos;
-        for (int i = 0; i < _burstCount; i++)
+        for (int i = 0; i < _burstCount + _gameManager.volcanoSpawnCountModifier; i++)
         {
             fireMMF?.PlayFeedbacks();
             Vector2 direction = Util.GetRandomPointBetweenTwoRadii(inner, outer);
@@ -127,14 +127,14 @@ public class VolcanoProjectileManager : MonoBehaviour
 
     IEnumerator FirePojectile()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns - _gameManager.volcanoSpawnTimeOffset);
+        WaitForSeconds waitTime = new WaitForSeconds(timeBetweenSpawns);
         GameObject projectile;
         Vector3 endPos;
         while (true)
         {
             yield return waitTime;
             
-            for (int i = 0; i < BurstCount; i++)
+            for (int i = 0; i < BurstCount + _gameManager.volcanoSpawnCountModifier; i++)
             {
                 fireMMF?.PlayFeedbacks();
                 Vector2 direction = Util.GetRandomPointBetweenTwoRadii(innerRadius, outerRadius);
