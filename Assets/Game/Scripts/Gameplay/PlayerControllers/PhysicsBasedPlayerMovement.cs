@@ -144,9 +144,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private TerrainCollider t1Col;
     
     [SerializeField] private Terrain t2;
-    [SerializeField] private Terrain t2Col;
+    [SerializeField] private TerrainCollider t2Col;
 
     [SerializeField] private PhysicsMaterial _physicsMaterial;
+    public Material goldMat;
+    public Renderer goldMatRenderer;
     private void OnEnable()
     {
         chargeAttack.performed += StartCharge;
@@ -395,7 +397,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         CurrentState = MovementState.flying;
        
        // chargeAmount = 0;
-        // playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
+        playerRB.AddForce(transform.forward * 45f, ForceMode.Impulse);
        
     }
 

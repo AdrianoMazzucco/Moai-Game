@@ -115,6 +115,11 @@ public class MineralCountScript : MonoBehaviour
         //if (healthCountDisplay != null)
         //    healthCountDisplay.text = "HP: " + currentHP;
 
+        if (mineralsLostOnHit == 0)
+        {
+            playerController.goldMatRenderer.material = playerController.goldMat;
+        }
+
         if (playerController != null)
             playerController.UpdateStats(currentMineralCount);
     }

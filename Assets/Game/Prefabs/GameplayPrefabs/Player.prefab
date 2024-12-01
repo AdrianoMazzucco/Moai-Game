@@ -8846,6 +8846,8 @@ MonoBehaviour:
   t2: {fileID: 8471417518932243888, guid: 4c7de63953f90554f8269929e662aa42, type: 3}
   t2Col: {fileID: 8471417518932243888, guid: 4c7de63953f90554f8269929e662aa42, type: 3}
   _physicsMaterial: {fileID: 13400000, guid: 9028ba6187d2e4e4f86441c4ee58af4c, type: 2}
+  goldMat: {fileID: 2100000, guid: 1e557c0aff271964b85d684fc926a957, type: 2}
+  goldMatRenderer: {fileID: 2578961465634038681}
 --- !u!114 &7570318550050928338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15318,7 +15320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1191096
+      value: -4.366181
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16156,6 +16158,11 @@ PrefabInstance:
 --- !u!137 &2273179893552908216 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4396642182433536433, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
+  m_PrefabInstance: {fileID: 6732890425813959159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2578961465634038681 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -91681808587120018, guid: 64e1fa775cd6ed9489c5f8bb79e540b8, type: 3}
   m_PrefabInstance: {fileID: 6732890425813959159}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4721441215927122655 stripped
