@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bCheckForPlayer: 0
+  variance: 10
   BurstCount: 6
   timeBetweenSpawns: 5
   projectileAirTime: 5
@@ -248,6 +249,8 @@ MonoBehaviour:
   verticalJumpHeight: 30
   projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
   projectileEase: 2
+  spawnPos: {x: 0, y: 0, z: 0}
+  fireMMF: {fileID: 0}
 --- !u!1 &8314717335518636879
 GameObject:
   m_ObjectHideFlags: 0

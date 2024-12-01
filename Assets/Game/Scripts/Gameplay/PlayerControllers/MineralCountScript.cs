@@ -60,6 +60,7 @@ public class MineralCountScript : MonoBehaviour
         if (collider.gameObject.GetComponent<MineralStateMachine>())
         {
             currentMineralCount++;
+            currentMineralCount = math.clamp(currentMineralCount, 0, 50);
             GameManager.Instance.MineralPool.Release(collider.gameObject);
             MineralPickup.Invoke();
             UpdateMineralCount();
