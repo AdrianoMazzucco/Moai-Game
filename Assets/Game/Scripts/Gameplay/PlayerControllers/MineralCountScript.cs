@@ -57,7 +57,7 @@ public class MineralCountScript : MonoBehaviour
 
     private void OnTriggerEnter (Collider collider)
     {
-        if (collider.gameObject.GetComponent<MineralStateMachine>())
+        if (collider.gameObject.GetComponent<MineralStateMachine>() && currentMineralCount < totalMineralCount)
         {
             currentMineralCount++;
             currentMineralCount = math.clamp(currentMineralCount, 0, 50);
@@ -136,5 +136,10 @@ public class MineralCountScript : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void CoolShrine()
+    {
+        mineralsLostOnHit = 0;
     }
 }
