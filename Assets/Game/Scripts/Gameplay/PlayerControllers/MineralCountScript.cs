@@ -117,11 +117,7 @@ public class MineralCountScript : MonoBehaviour
         OnUpgradeCountChangeTXT.Invoke("" + GameManager.Instance.volcanoSpawnCountModifier);
 
 
-        if (mineralsLostOnHit == 0)
-        {
-            toDisableForBoss.SetActive(false);
-        }
-        
+      
         if (mineralCountDisplay != null)
             mineralCountDisplay.text = "Minerals: " + currentMineralCount;
 
@@ -130,6 +126,8 @@ public class MineralCountScript : MonoBehaviour
 
         if (mineralsLostOnHit == 0)
         {
+            
+            toDisableForBoss.SetActive(false);
             playerController.goldMatRenderer.material = playerController.goldMat;
             playerController.goldMatRenderer2.material = playerController.goldMat;
         }
@@ -143,8 +141,9 @@ public class MineralCountScript : MonoBehaviour
         if(currentMineralCount > mineralsRequiredforShrine)
         {
             currentMineralCount = 0;
-            UpdateMineralCount();
+           
             mineralsLostOnHit += changeToMineralsDropped;
+            UpdateMineralCount();
             if(mineralsLostOnHit <= 0) 
             {
                 mineralsLostOnHit = 0;

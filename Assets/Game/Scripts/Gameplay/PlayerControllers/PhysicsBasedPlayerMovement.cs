@@ -389,7 +389,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             if (bisGrounded)
             {
                 playerAnimator.SetBool("isVertical",true);
-                playerRB.linearVelocity *= chargeEndVelocityMult;
+              
 
             }
            
@@ -405,6 +405,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             CurrentState = MovementState.walking;
             playerAnimator.SetBool("isVertical",false);
             _physicsMaterial.bounciness = 0f;
+            playerRB.linearVelocity *= chargeEndVelocityMult;
         }
 
         if (playerRB.linearVelocity.magnitude < 2f)
