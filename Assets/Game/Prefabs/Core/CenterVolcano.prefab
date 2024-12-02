@@ -604,6 +604,62 @@ Transform:
   - {fileID: 1198012136027666378}
   m_Father: {fileID: 2127717241686329462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4073844212826255812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6350753989510936963}
+  - component: {fileID: 1976578037406480846}
+  m_Layer: 0
+  m_Name: FinalFightVolcanoShots
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6350753989510936963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073844212826255812}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2127717241686329462}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976578037406480846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073844212826255812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ad5b4ef4d8c2a4fb86146aab8b3354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bCheckForPlayer: 1
+  variance: 10
+  BurstCount: 1
+  timeBetweenSpawns: 6
+  projectileAirTime: 4
+  innerRadius: 20
+  outerRadius: 100
+  verticalJumpHeight: 30
+  projectileGameObject: {fileID: 7354822700672924703, guid: 76d76be0c94d0864b802aaa8a4c37826, type: 3}
+  projectileEase: 2
+  spawnPos: {x: 0, y: 0, z: 0}
+  fireMMF: {fileID: 0}
 --- !u!1 &5232358002727541878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6153,6 +6209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6350753989510936963}
   - {fileID: 1288076406549523914}
   - {fileID: 328514587876861379}
   m_Father: {fileID: 0}
@@ -6170,10 +6227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bCheckForPlayer: 1
-  variance: 30
+  variance: 20
   BurstCount: 3
-  timeBetweenSpawns: 16
-  projectileAirTime: 6
+  timeBetweenSpawns: 12
+  projectileAirTime: 4
   innerRadius: 15
   outerRadius: 370
   verticalJumpHeight: 100

@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normals_Texture:
-        m_Texture: {fileID: 2800000, guid: ead3be67941d84de8806e2bdbc4a2d24, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Surface_Foam_Texture:
@@ -51,22 +51,22 @@ Material:
     m_Ints: []
     m_Floats:
     - WORLD_SPACE_UV: 0
-    - _Depth_Fade_Distance: 0.94
+    - _Depth_Fade_Distance: 2.84
     - _Depth_Range: 0.76
     - _Distortion_Amount: 1.62
     - _Foam_Blend: 0.135
     - _HorizonDistance: 20
-    - _Horizon_Distance: 1.2
+    - _Horizon_Distance: 3.1
     - _Intersection_Foam_Blend: 1
     - _Intersection_Foam_Color_Blend: 0.608
     - _Intersection_Foam_Cutoff: 0.397
-    - _Intersection_Foam_Depth: 0.28
+    - _Intersection_Foam_Depth: 0.25
     - _Intersection_Foam_Direction: 0.131
     - _Intersection_Foam_Fade: 0.566
     - _Intersection_Foam_Speed: 0.055
     - _Intersection_Foam_Tiling: 25.3
-    - _Lighting_Hardness: 0.194
-    - _Lighting_Smoothness: 0.861
+    - _Lighting_Hardness: 0.753
+    - _Lighting_Smoothness: 0.729
     - _Normals_Scale: 0.2
     - _Normals_Speed: 0.2
     - _Normals_Strength: 1
@@ -74,9 +74,9 @@ Material:
     - _QueueOffset: 0
     - _RefractionScale: 1
     - _RefractionStrength: 0.005
-    - _Refraction_Scale: 0.01
-    - _Refraction_Speed: 0.189
-    - _Refraction_Strength: 0.0008
+    - _Refraction_Scale: 0.031
+    - _Refraction_Speed: 0.102
+    - _Refraction_Strength: 0.0052
     - _RefreactionSpeed: 0.03
     - _Steps: 102.79
     - _Surface_Foam_Color_Blend: 1
@@ -85,8 +85,8 @@ Material:
     - _Surface_Foam_Distortion: 1.35
     - _Surface_Foam_Speed: 0.091
     - _Surface_Foam_Tiling: 100
-    - _Wave_Length: 1
-    - _Wave_Speed: 0.378
+    - _Wave_Length: 1.79
+    - _Wave_Speed: 0.533
     - _Wave_Steepness: 0
     m_Colors:
     - _Deep_Color: {r: 0.0748042, g: 0.24651876, b: 0.38679248, a: 1}
@@ -94,10 +94,10 @@ Material:
     - _HorizonColor: {r: 0.9811321, g: 0.6448582, b: 0.24528302, a: 1}
     - _Horizon_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Intersection_Foam_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Shallow_Color: {r: 0.3837028, g: 0.73129255, b: 0.95699996, a: 1}
-    - _Specular_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Shallow_Color: {r: 0.38370278, g: 0.73129255, b: 0.95699996, a: 0.50980395}
+    - _Specular_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Surface_Foam_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0.6117647}
-    - _Wave_Directions: {r: 0, g: 0.5, b: 1, a: 0.2}
+    - _Wave_Directions: {r: 0, g: 0.5, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &625770628947090296
