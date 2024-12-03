@@ -18,6 +18,7 @@ public class MineralStateMachineContext
     private bool _isSucked;
     private bool _isUpright;
     private bool _isGrounded;
+    public bool _willNotDestroyFromIdle = false;
 
     private AnimationClip _mineralIdle;
 
@@ -29,7 +30,7 @@ public class MineralStateMachineContext
     //*Pass all member variables above into StateMachineContext below
     public MineralStateMachineContext(Rigidbody rigidbody, Collider rootCollider, Transform transform, Animation animation, 
         float slowDownSpeed, float stopSpeed, float slowDownDrag, float dragIncrement, float timeToTransition,
-        bool isKineticTransitionCooldown, bool isSucked, bool isUpright, bool isGrounded,
+        bool isKineticTransitionCooldown, bool isSucked, bool isUpright, bool isGrounded, bool willNotDestroyFromIdle,
         AnimationClip mineralIdle)
     {
         //Assigns all variables to the context
@@ -47,6 +48,7 @@ public class MineralStateMachineContext
         _isUpright = isUpright;
         _isGrounded = isGrounded;
         _mineralIdle = mineralIdle;
+        _willNotDestroyFromIdle = willNotDestroyFromIdle;
         //*Add all passed through variables here that are in the Base State
 
     }
@@ -64,5 +66,7 @@ public class MineralStateMachineContext
     public bool IsSucked => _isSucked;
     public bool IsUpright => _isUpright;
     public bool IsGrounded => _isGrounded;
+
+    public bool WillNotDestroyFromIdle => _willNotDestroyFromIdle;
     public AnimationClip MineralIdle => _mineralIdle;
 }

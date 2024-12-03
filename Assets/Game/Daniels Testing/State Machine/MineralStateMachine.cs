@@ -26,6 +26,7 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
     [SerializeField] private bool _isSucked;
     [SerializeField] private bool _isGrounded;
     [SerializeField] private bool _isUpright;
+    [SerializeField] private bool _willNotDestroyFromIdle;
     [SerializeField] private AnimationClip _mineralIdle;
     //[SerializeField] private AddMoreComponentsHere _addMoreComponentsHere;
 
@@ -34,7 +35,7 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
         ValidateConstraints();
         _context = new MineralStateMachineContext(_rigidbody, _rootCollider, _transform, _animation,
             _slowDownSpeed, _stopSpeed, _startDrag, _dragIncrement, _timeToTransition, _isKineticTransitionCooldown,
-            _isSucked, _isUpright, _isGrounded, _mineralIdle);
+            _isSucked, _isUpright, _isGrounded, _willNotDestroyFromIdle, _mineralIdle);
         //*Pass all private member variables above through _context
 
         InitializeStates();
@@ -63,5 +64,15 @@ public class MineralStateMachine : BaseStateMachine <MineralStateMachine. EState
         //Replace NewGenericState with each new state
 
         CurrentState = States[EStateMineral.ActivePhysics];
+    }
+
+    public void SetToNotDestroyFromIdle(bool b)
+    {
+        _context._willNotDestroyFromIdle = b;
+    }
+
+    public void OnDisable()
+    {
+        _context._willNotDestroyFromIdle = false;
     }
 }

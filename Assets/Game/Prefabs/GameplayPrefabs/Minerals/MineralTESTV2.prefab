@@ -223,7 +223,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.75
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3237405968437155778
 GameObject:
@@ -491,7 +491,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1120353372537273099
 Rigidbody:
@@ -503,7 +503,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1.75
   m_Drag: 0.2
-  m_AngularDrag: 0.2
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -536,8 +536,8 @@ MonoBehaviour:
   _rootCollider: {fileID: 5982352831642897064}
   _transform: {fileID: 4505617714668995550}
   _animation: {fileID: 1139049689295724176}
-  _slowDownSpeed: 1
-  _stopSpeed: 0.5
+  _slowDownSpeed: 2
+  _stopSpeed: 1
   _startDrag: 1
   _dragIncrement: 0.25
   _timeToTransition: 3
@@ -545,6 +545,7 @@ MonoBehaviour:
   _isSucked: 0
   _isGrounded: 0
   _isUpright: 0
+  _willNotDestroyFromIdle: 0
   _mineralIdle: {fileID: 7400000, guid: 17d6c21b03046794f95e4092efd79316, type: 2}
 --- !u!111 &1139049689295724176
 Animation:

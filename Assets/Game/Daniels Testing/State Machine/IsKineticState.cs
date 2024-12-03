@@ -9,6 +9,8 @@ public class IsKineticState : MineralBaseState
     public bool isSucked;
     public float DespawnTimer = 10f;
     private float timer = 0f;
+    private bool willNotDestroyFromIdle;
+
     public IsKineticState(MineralStateMachineContext context, MineralStateMachine.EStateMineral
         estate) : base(context, estate)
     {
@@ -22,7 +24,9 @@ public class IsKineticState : MineralBaseState
 
         //Debug.Log("Made it to Kinematic State");
         anim = Context.Animation;
-        
+
+        willNotDestroyFromIdle = Context.WillNotDestroyFromIdle;
+
         mineralIdle = Context.MineralIdle;
         //Debug.Log(Context.MineralIdle);
 
@@ -40,19 +44,25 @@ public class IsKineticState : MineralBaseState
 
         if (timer > DespawnTimer)
         {
-            timer = 0;
-            GameManager.Instance.MineralPool.Release(Context.Rigidbody.gameObject);
+
+            //Debug.Log(willNotDestroyFromIdle);
+
+            if (willNotDestroyFromIdle == false)
+            {
+                timer = 0;
+                GameManager.Instance.MineralPool.Release(Context.Rigidbody.gameObject);
+            }
         }
 
         if (Input.GetMouseButtonDown(1)) // 0 is for the left mouse button
         {
             isSucked = true;
-            Debug.Log("isSucked is now: " + isSucked);
+            //Debug.Log("isSucked is now: " + isSucked);
         }
         else if (Input.GetMouseButtonUp(1)) 
         {
             isSucked = false;
-            Debug.Log("isSucked is now: " + isSucked);
+            //Debug.Log("isSucked is now: " + isSucked);
         }
         
     }
@@ -61,7 +71,7 @@ public class IsKineticState : MineralBaseState
         
         if (isSucked == true || isGrounded == false)
         {
-            Debug.Log("we gonna switch to physics again");
+            //Debug.Log("we gonna switch to physics again");
             anim.Stop();
             Context.Rigidbody.isKinematic = false;
 

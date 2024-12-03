@@ -75,10 +75,10 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private float minimumMovementForceMultiplier = 30;
     [SerializeField] private float maximumMovementForceMultiplier = 60;
     
-    [ReadOnly, SerializeField] private float SuckMovementForceMultiplier = 10;
-    [SerializeField] private float SuckmultiplierMovementForceMultiplier = 1;
-    [SerializeField] private float SuckminimumMovementForceMultiplier = 15;
-    [SerializeField] private float SuckmaximumMovementForceMultiplier = 30;
+    [ReadOnly, SerializeField] private float suckMovementForceMultiplier = 10;
+    [SerializeField] private float suckMultiplierMovementForceMultiplier = 1;
+    [SerializeField] private float suckMinimumMovementForceMultiplier = 15;
+    [SerializeField] private float suckMaximumMovementForceMultiplier = 30;
 
     [ReadOnly, SerializeField] private float airMovementForceMultiplier = 15;
     [SerializeField] private float multiplierAirMovementForceMultiplier = 1;
@@ -104,6 +104,11 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private float multiplierSuckRadius = 1;
     [SerializeField] private float minimumSuckRadius = 10;
     [SerializeField] private float maximumSuckRadius = 20;
+
+    [ReadOnly, SerializeField] private float suckForce = 10;
+    [SerializeField] private float suckForceMultiplier = 1;
+    [SerializeField] private float suckMinimumForceMultiplier = 15;
+    [SerializeField] private float suckMaximumForceMultiplier = 30;
 
     [ReadOnly, SerializeField] private float minimumJumpForce = 10;
     [SerializeField] private float multiplierMinimumJumpForce = 1;
@@ -505,7 +510,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             {
                 Vector3 direction = transform.position - hitCollider.transform.position;
               
-                hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction);
+                hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(direction * suckForce);
             }
         }
         Vector2 inputDirection = movement.ReadValue<Vector2>();
@@ -524,7 +529,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             directionTotal.Normalize();
             if (bisGrounded)
             {
-                directionTotal *= SuckMovementForceMultiplier;
+                directionTotal *= suckMovementForceMultiplier;
             }
             else
             {
@@ -576,6 +581,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         movementForceMultiplier = minimumMovementForceMultiplier + multiplierMovementForceMultiplier * _mineralCount;
         if (movementForceMultiplier > maximumMovementForceMultiplier) { movementForceMultiplier = maximumMovementForceMultiplier; }
 
+        suckMovementForceMultiplier = suckMinimumMovementForceMultiplier + suckMinimumMovementForceMultiplier * _mineralCount;
+        if (suckMovementForceMultiplier > suckMaximumMovementForceMultiplier) { suckMovementForceMultiplier = suckMaximumMovementForceMultiplier; }
+
         airMovementForceMultiplier = minimumAirMovementForceMultiplier + multiplierAirMovementForceMultiplier * _mineralCount;
         if (airMovementForceMultiplier > maximumAirMovementForceMultiplier) { airMovementForceMultiplier = maximumAirMovementForceMultiplier; }
 
@@ -584,6 +592,9 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
 
         maxSpeed = minimumMaxSpeed + multiplierMaxSpeed * _mineralCount;
         if (maxSpeed > maximumMaxSpeed) { maxSpeed = maximumMaxSpeed; }
+
+        suckForce = suckMinimumForceMultiplier + suckForceMultiplier  * _mineralCount;
+        if (suckForceMultiplier > suckMaximumForceMultiplier) { suckForceMultiplier = suckMaximumForceMultiplier;  }
 
         minimumJumpForce = minimumMinimumJumpForce + multiplierMinimumJumpForce * _mineralCount;
         if (minimumJumpForce > maximumJumpForce) { minimumJumpForce = maximumJumpForce; }

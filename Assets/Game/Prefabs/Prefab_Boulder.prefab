@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2407995304443036297}
   - component: {fileID: 9032716557204977160}
   - component: {fileID: 195624306497049360}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7403,7 +7403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 262293957202056876, guid: db4a0b59829eea242b33474b33922ebc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 588571748692745530, guid: db4a0b59829eea242b33474b33922ebc, type: 3}
       propertyPath: looping

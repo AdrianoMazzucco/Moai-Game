@@ -40,6 +40,8 @@ public class ActivePhysicsState : MineralBaseState
     public override void ExitState() { }
     public override void UpdateState() 
     {
+        
+        
         // Register the initial velocity when it is first applied (non-zero velocity)
         if (!speedRegistered && Context.Rigidbody.linearVelocity.magnitude > 0)
         {
@@ -48,17 +50,35 @@ public class ActivePhysicsState : MineralBaseState
 
             
         }
-        
-        
 
-        
+        if (timeToTransition <= 0)
+        {
+            timeToTransition = 0;
+            transitionTimerActive = false;
+            isKineticTransitionCooldown = true;
+            //Debug.Log("Timer Done");
+        }
 
-        
     }
     public override void FixedUpdateState() 
     {
+
+        
+            //Debug.Log("accessed timer");
+            //calculates current velocity, sets new previous velocity
+            currentSpeed = ((Context.Transform.position - previous).magnitude) / Time.deltaTime;
+            previous = Context.Transform.position;
+
+            if (transitionTimerActive && timeToTransition > 0)
+            {
+                //Debug.Log(timeToTransition);
+                timeToTransition -= Time.fixedDeltaTime;
+
+            }
+                
+        
         //if we are slower than the slow down speed, but faster than the stop speed, adds increase drag
-        if (speedRegistered && currentSpeed <= Context.SlowDownSpeed && currentSpeed >= Context.StopSpeed)
+        if ( currentSpeed <= Context.SlowDownSpeed && currentSpeed >= Context.StopSpeed)
         {
             if (Context.StartDrag != Context.Rigidbody.linearDamping)
             {
@@ -68,30 +88,9 @@ public class ActivePhysicsState : MineralBaseState
             }
 
         }
+       
 
-        if (speedRegistered || isSucked)
-        {
-            //Debug.Log("accessed timer");
-            //calculates current velocity, sets new previous velocity
-            currentSpeed = ((Context.Transform.position - previous).magnitude) / Time.deltaTime;
-            previous = Context.Transform.position;
-
-            if (transitionTimerActive && timeToTransition > 0)
-            {
-                //Debug.Log(timeToTransition);
-                timeToTransition -= Time.deltaTime;
-
-                if (timeToTransition <= 0)
-                {
-                    timeToTransition = 0;
-                    transitionTimerActive = false;
-                    isKineticTransitionCooldown = true;
-                    //Debug.Log("Timer Done");
-                }
-            }
-        }
-
-        if (speedRegistered && currentSpeed <= Context.StopSpeed)
+        if (currentSpeed <= Context.StopSpeed)
         {
 
             // Calculate the target rotation to make the GameObject's Y-axis point upward
@@ -117,13 +116,13 @@ public class ActivePhysicsState : MineralBaseState
     }
     public override MineralStateMachine.EStateMineral GetNextState() 
     {
-        //Debug.Log(isKineticTransitionCooldown);
-        //Debug.Log(isUpright);
-        //Debug.Log(isGrounded);
+        Debug.Log("isKineticTransitionCooldown is "+ isKineticTransitionCooldown);
+        Debug.Log("isUpright is "+ isUpright);
+        Debug.Log("isGrounded is "+ isGrounded);
         //Debug.Log(isSucked);
 
-
-        if (isKineticTransitionCooldown && isUpright && isGrounded && !isSucked)
+        //if (isKineticTransitionCooldown && isUpright && isGrounded && !isSucked)
+        if (isKineticTransitionCooldown && isUpright && isGrounded)
         {
             speedRegistered = false;
             Context.Rigidbody.isKinematic = true;
@@ -131,23 +130,25 @@ public class ActivePhysicsState : MineralBaseState
             isUpright = false;
             isKineticTransitionCooldown = false;
 
-            Debug.Log("We transitioning to next state");
+            //Debug.Log("We transitioning to next state");
             return MineralStateMachine.EStateMineral.IsKinetic;
         }        
         return StateKey; 
     }
     public override void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        /*
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Lava"))
         {
             isGrounded = true;
-            Debug.Log("isGrounded " + isGrounded);
+            //Debug.Log("isGrounded " + isGrounded);
         }
-
+        */
         if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
         {
             isSucked = true;
-            Debug.Log("isSucked is " + isSucked);
+            timeToTransition = Context.TimeToTransition;
+            //Debug.Log("isSucked is " + isSucked);
         }
 
     }
@@ -166,17 +167,27 @@ public class ActivePhysicsState : MineralBaseState
         }
         */
 
-    }
-    public override void OnTriggerExit(Collider other) 
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Lava"))
+        {
+            isGrounded = true;
+        }
+        else
         {
             isGrounded = false;
         }
+
+    }
+    public override void OnTriggerExit(Collider other) 
+    {
+        /*
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Lava"))
+        {
+            isGrounded = false;
+        }
+        */
         if (other.gameObject.layer == LayerMask.NameToLayer("Suck"))
         {
             isSucked = false;
-            Debug.Log("isSucked is " + isSucked);
         }
 
     }
@@ -194,7 +205,7 @@ public class ActivePhysicsState : MineralBaseState
                 timeToTransition = 0;
                 transitionTimerActive = false;
                 isKineticTransitionCooldown = true;
-                Debug.Log(timeToTransition);
+               //Debug.Log(timeToTransition);
             }
         }
     }

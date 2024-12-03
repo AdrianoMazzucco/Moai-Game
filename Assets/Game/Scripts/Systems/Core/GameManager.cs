@@ -56,7 +56,9 @@ public class GameManager : MMSingleton<GameManager>
         MineralPool = ObjectPool.Create(mineralRuby);
 
 
-        MineralPool.GetObject(new Vector3(122.679352f, 3.46000004f, 767.54425f));
+        MineralPool.GetObject(new Vector3(122.679352f, 3.46000004f, 767.54425f)).GetComponent<MineralStateMachine>().SetToNotDestroyFromIdle(true);
+
+
     }
 
     private void OnDisable()
