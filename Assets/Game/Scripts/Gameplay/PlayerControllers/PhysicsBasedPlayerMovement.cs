@@ -140,7 +140,8 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
     [SerializeField] private ParticleSystem particleTrail1;
     [SerializeField] private ParticleSystem particleTrail2;
     [SerializeField] private GameObject suckParticle;
-
+    [SerializeField] private GameObject chargeParticles;
+    
     [Header("Feel")] 
     [SerializeField] private MMF_Player SuckFeel;
     [SerializeField] private MMF_Player WalkFeel;
@@ -394,7 +395,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             if (bisGrounded)
             {
                 playerAnimator.SetBool("isVertical",true);
-              
+                
 
             }
            
@@ -411,6 +412,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             playerAnimator.SetBool("isVertical",false);
             _physicsMaterial.bounciness = 0f;
             playerRB.linearVelocity *= chargeEndVelocityMult;
+            chargeParticles.SetActive(false);
         }
 
         if (playerRB.linearVelocity.magnitude < 2f)
@@ -438,6 +440,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
             playerAnimator.ResetTrigger("Walk");
             chargeAmount = 0f;
             _physicsMaterial.bounciness = 0.8f;
+          
         }
     }
 
@@ -448,6 +451,7 @@ public class PhysicsBasedPlayerMovement : MonoBehaviour , IDestructable
         CurrentState = MovementState.flying;
        
        // chargeAmount = 0;
+       chargeParticles.SetActive(true);
         playerRB.AddForce(transform.forward * 45f, ForceMode.Impulse);
        
     }
