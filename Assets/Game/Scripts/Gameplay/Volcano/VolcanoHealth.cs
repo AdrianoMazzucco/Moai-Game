@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using MoreMountains.Feedbacks;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -37,6 +38,11 @@ public class VolcanoHealth : MonoBehaviour
     public bool isEndVolcano = false;
 
     [SerializeField] private MMF_Player endGameFeel;
+
+
+    private Rigidbody _rigidbody;
+    private Vector3 initPosition;
+    
     #endregion
 
     #region Properties
@@ -79,9 +85,13 @@ public class VolcanoHealth : MonoBehaviour
                     isSecretVolcano=false;
                     GameManager.Instance.playerGameObject.GetComponent<ToggleSunglasses>().Toggle(true);
                 }
-                
-                toBeDisabled.SetActive(false);
+
+                _rigidbody.isKinematic = false;
+                _rigidbody.AddForce(GameManager.Instance.playerMovementScript.playerRB.linearVelocity * 1000f,ForceMode.Impulse);
                 projectileManager.enabled = false;
+                
+                StartCoroutine(DelayedDespawn());
+               
                 StartCoroutine(RespawnLater());
             }
         }
@@ -113,6 +123,8 @@ public class VolcanoHealth : MonoBehaviour
     private void Start()
     {
         InvulCoroutine = Invincibility();
+        _rigidbody = this.GetComponent<Rigidbody>();
+        initPosition = this.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,7 +152,9 @@ public class VolcanoHealth : MonoBehaviour
     #endregion
     #region Functions
 
-
+    
+    
+    
     private void SetInvul(bool b)
     {
         if (b)
@@ -162,6 +176,13 @@ public class VolcanoHealth : MonoBehaviour
 
     private IEnumerator InvulCoroutine ;
 
+
+    private IEnumerator DelayedDespawn()
+    {
+        yield return new WaitForSeconds(3f);
+        toBeDisabled.SetActive(false);
+    }
+    
     private IEnumerator Invincibility()
     {
         float time = 0;
@@ -188,8 +209,13 @@ public class VolcanoHealth : MonoBehaviour
         }
         
         toBeDisabled.SetActive(true);
+        _rigidbody.isKinematic = true;
         projectileManager.enabled = true;
         CurrentHealth = maxHealth;
+        transform.position = initPosition;
+        transform.rotation = quaternion.identity;
+        toBeDisabled.transform.rotation = quaternion.identity;
+        ;
     }
 
 
